@@ -6,8 +6,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useColorScheme } from "react-native";
 
 import Colors from "../constants/Colors";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import HomeScreen from "../screens/HomeScreen";
+import DiscoverScreen from "../screens/DiscoverScreen";
+import MemoriesScreen from "../screens/MemoriesScreen";
+import WishlistScreen from "../screens/WishlistScreen";
 
 const BottomTab = createBottomTabNavigator();
 
@@ -19,8 +21,9 @@ export default function BottomTabNavigator() {
       initialRouteName="TabOne"
       screenOptions={{ tabBarActiveTintColor: Colors[colorScheme].tint }}
     >
+
       <BottomTab.Screen
-        name="TabOne"
+        name="Home"
         component={TabOneNavigator}
         options={{
           headerShown: false,
@@ -29,8 +32,9 @@ export default function BottomTabNavigator() {
           ),
         }}
       />
+
       <BottomTab.Screen
-        name="TabTwo"
+        name="Discover"
         component={TabTwoNavigator}
         options={{
           headerShown: false,
@@ -39,6 +43,29 @@ export default function BottomTabNavigator() {
           ),
         }}
       />
+
+      <BottomTab.Screen
+      name="Memories"
+      component={TabThreeNavigator}
+      options={{
+        headerShown: false,
+        tabBarIcon: ({ color }) => (
+          <TabBarIcon name="ios-code" color={color} />
+        ),
+      }}
+    />
+
+    <BottomTab.Screen
+      name="Wishlist"
+      component={TabFourNavigator}
+      options={{
+        headerShown: false,
+        tabBarIcon: ({ color }) => (
+          <TabBarIcon name="ios-code" color={color} />
+        ),
+      }}
+    />
+
     </BottomTab.Navigator>
   );
 }
@@ -57,9 +84,9 @@ function TabOneNavigator() {
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: "Tab One Title" }}
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ headerTitle: "Home" }}
       />
     </TabOneStack.Navigator>
   );
@@ -71,10 +98,38 @@ function TabTwoNavigator() {
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: "Tab Two Title" }}
+        name="DiscoverScreen"
+        component={DiscoverScreen}
+        options={{ headerTitle: "Discover" }}
       />
     </TabTwoStack.Navigator>
+  );
+}
+
+const TabThreeStack = createStackNavigator();
+
+function TabThreeNavigator() {
+  return (
+    <TabThreeStack.Navigator>
+      <TabThreeStack.Screen
+        name="MemoriesScreen"
+        component={MemoriesScreen}
+        options={{ headerTitle: "Memories" }}
+      />
+    </TabThreeStack.Navigator>
+  );
+}
+
+const TabFourStack = createStackNavigator();
+
+function TabFourNavigator() {
+  return (
+    <TabFourStack.Navigator>
+      <TabFourStack.Screen
+        name="WishlistScreen"
+        component={WishlistScreen}
+        options={{ headerTitle: "Wishlist" }}
+      />
+    </TabFourStack.Navigator>
   );
 }
