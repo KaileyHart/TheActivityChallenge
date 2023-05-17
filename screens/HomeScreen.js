@@ -2,12 +2,16 @@ import { StyleSheet } from "react-native";
 
 // import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
+import { ListItem, SearchBar } from "react-native-elements";
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home</Text>
-      <Text>Search bar</Text>
+      {/* <SearchBar
+        placeholder="Type Here..."
+         onChangeText={this.update} 
+        value={search} /> */}
       <Text>Filter Button</Text>
 
       <Text>Trending Activities</Text>
