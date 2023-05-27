@@ -8,11 +8,13 @@ export default function GenerateRandomActivityButton() {
 
   const [randomActivity, setRandomActivity] = useState("");
 
+
   useEffect(() => {
 
     generateRandomActivity();
 
   }, []);
+
 
   const generateRandomActivity = () => {
 
@@ -20,17 +22,17 @@ export default function GenerateRandomActivityButton() {
 
     axios
       .get('https://www.boredapi.com/api/activity')
-      .then(res => {
-        setRandomActivity(res.data);
-        console.log(res.data);
+      .then(result => {
+        setRandomActivity(result.data);
+        console.log(result.data);
       })
-      .catch(err => console.log(err));
+      .catch(error => console.log(error));
 
   };
 
 
   return (
-    <View style={styles.container}>
+    <View>
 
       <Button
         title="Generate Activity"
