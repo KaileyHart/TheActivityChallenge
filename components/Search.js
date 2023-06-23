@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { SearchBar } from 'react-native-elements';
+import db from '../controllers/users-controller.js'
 // import axios from 'axios';
+
+
 
 
 export default function Search() {
