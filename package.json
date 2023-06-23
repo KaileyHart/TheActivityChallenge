@@ -6,12 +6,14 @@
     "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/stack": "^6.3.4",
+    "axios": "^1.4.0",
     "expo": "^48.0.7",
     "expo-asset": "~8.9.1",
     "expo-constants": "~14.2.1",
     "expo-font": "~11.1.1",
     "expo-linking": "~4.0.1",
     "expo-splash-screen": "~0.18.1",
+    "expo-sqlite": "~11.1.1",
     "expo-status-bar": "~1.4.2",
     "expo-web-browser": "~12.1.1",
     "google-search-results-nodejs": "^2.1.0",
@@ -30,6 +32,7 @@
   },
   "scripts": {
     "start": "expo start",
+    "start-node": "node example.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"

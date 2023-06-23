@@ -4,6 +4,7 @@ import {
   Text as DefaultText,
   useColorScheme,
   View as DefaultView,
+  Button as DefaultButton,
 } from "react-native";
 
 import Colors from "../constants/Colors";
@@ -34,4 +35,15 @@ export function View(props) {
   );
 
   return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
+}
+
+
+export function Button(props) {
+  const { style, lightColor, darkColor, ...otherProps } = props;
+  const backgroundColor = useThemeColor(
+    { light: lightColor, dark: darkColor },
+    "background"
+  );
+
+  return <DefaultButton style={[{ backgroundColor }, style]} {...otherProps} />;
 }
