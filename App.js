@@ -6,6 +6,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useLoadedAssets } from "./hooks/useLoadedAssets";
 import Navigation from "./navigation";
 import { useColorScheme } from "react-native";
+// import style from './Index.module.css';
 
 export default function App() {
   const isLoadingComplete = useLoadedAssets();

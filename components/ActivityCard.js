@@ -22,11 +22,14 @@ export default function ActivityCard() {
     setActivityPrice(0);
     setActivityParticipants(1);
     setActivityAccessibility(0);
+    generateActivities();
 
   }, []);
 
 
   const generateActivities = () => {
+
+    // ? Loop through all of the activities list and look for specific types to create a list for the user to actually scroll through?
 
     setActivity("");
     setActivityTitle("");
@@ -41,7 +44,13 @@ export default function ActivityCard() {
     axios
       .get(`https://www.boredapi.com/api/activity?type=${activityType}`)
       .then(result => {
-        console.log(result.data);
+        // console.log(result.data);
+        setActivity(result.data.activity);
+        setActivityTitle(result.data.activity);
+        setActivityType(result.data.type);
+        setActivityPrice(result.data.price);
+        setActivityParticipants(result.data.participants);
+        setActivityAccessibility(result.data.accessibility);
       })
       .catch(error => {
         console.log(error);
@@ -52,11 +61,13 @@ export default function ActivityCard() {
   return (
     <View>
 
-      {randomActivity.activity ? (
+      {activity ? (
         <React.Fragment>
-          <Text>{randomActivity.activity}</Text>
-          <Text> {randomActivity.participants}</Text>
-          <Text> {randomActivity.type}</Text>
+          <Text>{activityTitle}</Text>
+          <Text>Type:  {activityType}</Text>
+          <Text>Participants: {activityParticipants}</Text>
+          <Text>Price: {activityPrice}</Text>
+          <Text>Accessibility: {ActivityAccessibility}</Text>
         </React.Fragment>
       ) : null}
 
