@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Button } from "react-native";
 import { Text, View } from "../components/Themed";
+import { Card, CardMedia, CardContent, Typography, CardHeader  } from '@mui/material';
 import axios from 'axios';
 
 
@@ -62,13 +63,18 @@ export default function ActivityCard() {
     <View>
 
       {activity ? (
-        <React.Fragment>
-          <Text>{activityTitle}</Text>
-          <Text>Type:  {activityType}</Text>
-          <Text>Participants: {activityParticipants}</Text>
-          <Text>Price: {activityPrice}</Text>
-          <Text>Accessibility: {ActivityAccessibility}</Text>
-        </React.Fragment>
+        <Card style={styles.card}> 
+          <CardContent>
+            <Typography variant="h6">
+              <strong>{activityTitle}</strong>
+            </Typography>
+            <Typography variant="body2"><strong>Type: </strong>{activityType}</Typography>
+            <Typography variant="body2"><strong>Participants: </strong>{activityParticipants}</Typography>
+            <Typography variant="body2"><strong>Price: </strong>{activityPrice}</Typography>
+            <Typography variant="body2"><strong>Accessibility: </strong>{ActivityAccessibility}</Typography>
+         </CardContent>
+        </Card>
+       
       ) : null}
 
     </View>
@@ -94,4 +100,9 @@ const styles = StyleSheet.create({
     width: "40%",
   },
 
+  card: {
+    width: "80%",
+    margin: "0 auto"
+
+  }
 });
