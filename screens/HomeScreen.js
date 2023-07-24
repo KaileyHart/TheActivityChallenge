@@ -12,22 +12,32 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
 
-      <Text style={styles.title}>Home</Text>
-
       <View style={styles.search}>
         <Search></Search>
         <GenerateRandomActivityButton />
       </View>
 
       <Text>Filter Button</Text>
-      <Typography variant="h5"><strong>Trending Activities</Typography>
+     
+      <Typography style={styles.cardListHeader}variant="h5" ><strong>Relaxing Activities</strong></Typography>
       <View>
-        <ActivityCard/>
+        <ActivityCard type="relaxation"/>
       </View>
-      <Typography variant="h5"><strong>List of activities</strong></Typography>
 
-      <Typography variant="h5"><strong>Happening Near You</strong></Typography>
-      <Typography variant="h5"><strong>List of activities</strong></Typography>
+      <Typography style={styles.cardListHeader} variant="h5"><strong>Free Activities</strong></Typography>
+      <View>
+        <ActivityCard price="0.0"/>
+      </View>
+
+      <Typography style={styles.cardListHeader} variant="h5"><strong>Kid Friendly Activities</strong></Typography>
+      <View>
+        <ActivityCard kidFriendly="true"/>
+      </View>
+
+      <Typography style={styles.cardListHeader} variant="h5"><strong>Difficult Challenges</strong></Typography>
+      <View>
+        <ActivityCard accessibility="1.0"/>
+      </View>
 
     </View>
   );
@@ -59,5 +69,9 @@ const styles = StyleSheet.create({
     height: 1,
     width: "80%",
   },
+
+  cardListHeader: {
+    padding: "20px"
+  }
 
 });
