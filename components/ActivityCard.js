@@ -15,6 +15,7 @@ export default function ActivityCard(props) {
   const [activityParticipants, setActivityParticipants] = useState(1);
   const [activityAccessibility, setActivityAccessibility] = useState(0);
   const [activityDataList, setActivityDataList] = useState([]);
+  const [activities, setActivities] = useState([]);
   
 
   useEffect(() => {
@@ -42,16 +43,28 @@ export default function ActivityCard(props) {
     
     // generateMultipleActivities();
    
-    if (activityDataList !== "" || activityDataList !== undefined || activityDataList !== null && activityType !== "" && activityDataList !== undefined || activityDataList !== null) {
+    if (activityDataList !== "" || activityDataList !== undefined || activityDataList !== null && activityType !== "" && activityType !== undefined || activityType !== null) {
 
       let newArrayByType = activityDataList.filter(activityData => activityData.type === activityType);
 
-      console.log(newArrayByType);
-      console.log(activityType);
+      // console.log(newArrayByType);
+      // console.log(activityType);
+      console.log("activities",[...newArrayByType]);
+      setActivities([...newArrayByType]);
+
+      
+
+      // activityDataList
 
     };
 
   }, [activityDataJSON, activityType]);
+
+
+  useEffect(() => {
+    console.log("activities" ,activities);
+
+  }, [ activities]);
 
 
   const generateActivities = () => {
@@ -118,20 +131,30 @@ export default function ActivityCard(props) {
   return (
     <View style={styles.cards}>
 
-      {activity ? (
-        <Card style={styles.card}> 
-          <CardContent>
-            <Typography variant="h6">
-              <strong>{activityTitle}</strong>
-            </Typography>
-            <Typography variant="body2"><strong>Type: </strong>{activityType}</Typography>
-            <Typography variant="body2"><strong>Participants: </strong>{activityParticipants}</Typography>
-            <Typography variant="body2"><strong>Price: </strong>{activityPrice}</Typography>
-            <Typography variant="body2"><strong>Accessibility: </strong>{activityAccessibility}</Typography>
-         </CardContent>
-        </Card>
+      {activities !== "" || activities !== undefined || activities !== null ?
+      
+        <View> 
+
+        {activities.map((activity) => (
        
-      ) : null}
+          <Card style={styles.card}> 
+            <Text> {activity.activity}</Text>
+            <CardContent>
+              <Typography variant="h6">
+                <strong>{activity.activity}</strong>
+              </Typography>
+              <Typography variant="body2"><strong>Type: </strong>{activity.type}</Typography>
+              <Typography variant="body2"><strong>Participants: </strong>{activity.participants}</Typography>
+              <Typography variant="body2"><strong>Price: </strong>{activity.price}</Typography>
+              <Typography variant="body2"><strong>Accessibility: </strong>{activity.accessibility}</Typography>
+            </CardContent>
+          </Card>
+
+        ))}
+
+        </View>
+        
+        : null}
 
     </View>
   );
