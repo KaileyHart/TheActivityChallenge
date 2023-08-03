@@ -28,7 +28,7 @@ export default function BottomTabNavigator() {
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon name="home" color={color} />
           ),
         }}
       />
@@ -39,7 +39,7 @@ export default function BottomTabNavigator() {
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon name="search" color={color} />
           ),
         }}
       />
@@ -50,7 +50,7 @@ export default function BottomTabNavigator() {
       options={{
         headerShown: false,
         tabBarIcon: ({ color }) => (
-          <TabBarIcon name="ios-code" color={color} />
+          <TabBarIcon name="book" color={color} />
         ),
       }}
     />
@@ -61,7 +61,7 @@ export default function BottomTabNavigator() {
       options={{
         headerShown: false,
         tabBarIcon: ({ color }) => (
-          <TabBarIcon name="ios-code" color={color} />
+          <TabBarIcon name="heart" color={color} />
         ),
       }}
     />

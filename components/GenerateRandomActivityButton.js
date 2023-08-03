@@ -30,6 +30,7 @@ export default function GenerateRandomActivityButton() {
 
   };
 
+  // TODO: Replace random activity with activity card? Pass a prop to determine if it should be random, or of a specific type.
 
   return (
     <View>
@@ -41,6 +42,7 @@ export default function GenerateRandomActivityButton() {
       />
 
       {randomActivity.activity ? (
+
         <React.Fragment>
           <Text>{randomActivity.activity}</Text>
           <Text> {randomActivity.type}</Text>

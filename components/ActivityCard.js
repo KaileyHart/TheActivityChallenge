@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Button } from "react-native";
 import { Text, View } from "../components/Themed";
+import { Card, CardMedia, CardContent, Typography, CardHeader  } from '@mui/material';
 import axios from 'axios';
+import activityDataJSON from "/assets/json/activities.json";
 
 
-export default function ActivityCard() {
+export default function ActivityCard(props) {
 
   const [activity, setActivity] = useState("");
   const [activityTitle, setActivityTitle] = useState("");
   const [activityType, setActivityType] = useState("");
   const [activityPrice, setActivityPrice] = useState(0);
   const [activityParticipants, setActivityParticipants] = useState(1);
-  const [ActivityAccessibility, setActivityAccessibility] = useState(0);
-
+  const [activityAccessibility, setActivityAccessibility] = useState(0);
+  const [activityDataList, setActivityDataList] = useState([]);
+  const [activities, setActivities] = useState([]);
+  
 
   useEffect(() => {
 
@@ -22,43 +26,135 @@ export default function ActivityCard() {
     setActivityPrice(0);
     setActivityParticipants(1);
     setActivityAccessibility(0);
+    
+    generateActivities();
+  
+    if (Object.keys(activityDataJSON).length !== 0 && Object.keys(activityDataJSON.activityData).length !== 0) {
 
+      setActivityDataList(activityDataJSON.activityData);
+      // console.log(activityDataJSON.activityData);
+
+    };
+  
   }, []);
+
+
+  useEffect(() => {
+    
+    // generateMultipleActivities();
+   
+    if (activityDataList !== "" || activityDataList !== undefined || activityDataList !== null && activityType !== "" && activityType !== undefined || activityType !== null) {
+
+      let newArrayByType = activityDataList.filter(activityData => activityData.type === activityType);
+
+      // console.log(newArrayByType);
+      // console.log(activityType);
+      console.log("activities",[...newArrayByType]);
+      setActivities([...newArrayByType]);
+
+      
+
+      // activityDataList
+
+    };
+
+  }, [activityDataJSON, activityType]);
+
+
+  useEffect(() => {
+    console.log("activities" ,activities);
+
+  }, [ activities]);
 
 
   const generateActivities = () => {
 
+    let getFilter = "";
+    let newActivityType = "";
+    let newActivityPrice = 0;
+    let newActivityAccessibility = ""; 
+
+    // ? Loop through all of the activities list and look for specific types to create a list for the user to actually scroll through?
+    
+    if (props.type !== "" || props.type !== undefined || props.type !== null) {
+      getFilter = `type=${props.type}`
+      newActivityType = props.type;
+    } else {
+      newActivityType = "";
+    };
+
+    if (props.price !== "" || props.price !== undefined || props.price !== null) {
+      getFilter = `price=${props.price}`
+      newActivityPrice = props.price;
+    } else {
+      newActivityPrice = 0;
+    };
+
+    if (props.accessibility !== "" || props.accessibility !== undefined || props.accessibility !== null) {
+      getFilter = `accessibility=${props.accessibility}`
+      newActivityAccessibility = props.accessibility;
+    } else {
+      newActivityAccessibility = 0;
+    };
+
+
     setActivity("");
     setActivityTitle("");
-    setActivityType("");
-    setActivityPrice(0);
+    setActivityType(newActivityType);
+    setActivityPrice(newActivityPrice);
     setActivityParticipants(1);
-    setActivityAccessibility(0);
+    setActivityAccessibility(newActivityAccessibility);
 
     // * Map through an array of the activity types.
     // ? Might need to do this in a useEffect? 
 
+    // TODO: The getFilter only works for the last item.
+    // console.log(getFilter);
+
     axios
-      .get(`https://www.boredapi.com/api/activity?type=${activityType}`)
+      .get(`https://www.boredapi.com/api/activity?${getFilter}`)
       .then(result => {
-        console.log(result.data);
+        // console.log(result.data);
+        setActivity(result.data.activity);
+        setActivityTitle(result.data.activity);
+        setActivityType(result.data.type);
+        setActivityPrice(result.data.price);
+        setActivityParticipants(result.data.participants);
+        setActivityAccessibility(result.data.accessibility);
       })
       .catch(error => {
         console.log(error);
       });
-  }
+  };
 
 
   return (
-    <View>
+    <View style={styles.cards}>
 
-      {randomActivity.activity ? (
-        <React.Fragment>
-          <Text>{randomActivity.activity}</Text>
-          <Text> {randomActivity.participants}</Text>
-          <Text> {randomActivity.type}</Text>
-        </React.Fragment>
-      ) : null}
+      {activities !== "" || activities !== undefined || activities !== null ?
+      
+        <View> 
+
+        {activities.map((activity) => (
+       
+          <Card style={styles.card}> 
+            <Text> {activity.activity}</Text>
+            <CardContent>
+              <Typography variant="h6">
+                <strong>{activity.activity}</strong>
+              </Typography>
+              <Typography variant="body2"><strong>Type: </strong>{activity.type}</Typography>
+              <Typography variant="body2"><strong>Participants: </strong>{activity.participants}</Typography>
+              <Typography variant="body2"><strong>Price: </strong>{activity.price}</Typography>
+              <Typography variant="body2"><strong>Accessibility: </strong>{activity.accessibility}</Typography>
+            </CardContent>
+          </Card>
+
+        ))}
+
+        </View>
+        
+        : null}
 
     </View>
   );
@@ -83,4 +179,13 @@ const styles = StyleSheet.create({
     width: "40%",
   },
 
+  card: {
+    width: "80%"
+  },
+
+  cards: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });
