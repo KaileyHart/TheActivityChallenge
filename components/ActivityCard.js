@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { View } from "../components/Themed";
 import { Card, CardContent, Typography, CardHeader  } from '@mui/material';
 import activityDataJSON from "/assets/json/activities.json";
-// import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 
 
 export default function ActivityCard(props) {
@@ -85,7 +85,7 @@ export default function ActivityCard(props) {
     <View style={styles.cards}>
       {activities !== "" || activities !== undefined || activities !== null ?
       
-        <View> 
+      <ScrollView horizontal={true}>
 
         {activities.map((activity) => (
        
@@ -105,7 +105,7 @@ export default function ActivityCard(props) {
 
         ))}
 
-        </View>
+        </ScrollView>
         
         : null}
     </View>
@@ -132,7 +132,8 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    width: "80%"
+    width: "80%",
+    margin: "8px"
   },
 
   cards: {

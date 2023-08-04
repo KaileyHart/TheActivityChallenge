@@ -23,7 +23,7 @@ export default function HomeScreen() {
         <Typography style={styles.cardListHeader} variant="h5" ><strong>Relaxing Activities</strong></Typography>
         
         <View>
-            <ActivityCard type="relaxation"/>
+          <ActivityCard type="relaxation"/>
         </View>
 
         <Typography style={styles.cardListHeader} variant="h5"><strong>Free Activities</strong></Typography>
