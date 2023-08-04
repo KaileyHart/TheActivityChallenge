@@ -1,38 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Button } from "react-native";
-import { Text, View } from "../components/Themed";
-import { Card, CardMedia, CardContent, Typography, CardHeader  } from '@mui/material';
-import axios from 'axios';
+import { StyleSheet } from "react-native";
+import { View } from "../components/Themed";
+import { Card, CardContent, Typography, CardHeader  } from '@mui/material';
 import activityDataJSON from "/assets/json/activities.json";
+// import { ScrollView } from "react-native-gesture-handler";
 
 
 export default function ActivityCard(props) {
 
-  const [activity, setActivity] = useState("");
-  const [activityTitle, setActivityTitle] = useState("");
-  const [activityType, setActivityType] = useState("");
-  const [activityPrice, setActivityPrice] = useState(0);
-  const [activityParticipants, setActivityParticipants] = useState(1);
-  const [activityAccessibility, setActivityAccessibility] = useState(0);
   const [activityDataList, setActivityDataList] = useState([]);
   const [activities, setActivities] = useState([]);
-  
+
+  const activityType = props.type !== "" && props.type !== undefined && props.type !== null ? props.type : "";
+  const activityPrice = props.price !== "" && props.price !== undefined && props.price !== null ? props.price : "";
+  const activityKidFriendliness = props.kidFriendly !== "" && props.kidFriendly !== undefined && props.kidFriendly !== null ? props.kidFriendly : "";
+  // const activityParticipants = props.participants !== "" && props.participants !== undefined && props.participants !== null ? props.participants : "";
+  const activityDuration = props.duration !== "" && props.duration !== undefined && props.duration !== null ? props.duration : "";
 
   useEffect(() => {
 
-    setActivity("");
-    setActivityTitle("");
-    setActivityType("");
-    setActivityPrice(0);
-    setActivityParticipants(1);
-    setActivityAccessibility(0);
-    
-    generateActivities();
-  
     if (Object.keys(activityDataJSON).length !== 0 && Object.keys(activityDataJSON.activityData).length !== 0) {
 
-      setActivityDataList(activityDataJSON.activityData);
-      // console.log(activityDataJSON.activityData);
+      setActivityDataList([...activityDataJSON.activityData]);
 
     };
   
@@ -40,97 +29,60 @@ export default function ActivityCard(props) {
 
 
   useEffect(() => {
-    
-    // generateMultipleActivities();
    
-    if (activityDataList !== "" || activityDataList !== undefined || activityDataList !== null && activityType !== "" && activityType !== undefined || activityType !== null) {
+    if (activityDataList !== "" || activityDataList !== undefined || activityDataList !== null) {
 
-      let newArrayByType = activityDataList.filter(activityData => activityData.type === activityType);
+      let newActivitiesArray = [];
+      let newArrayByType = [];
+      let newArrayByPrice = [];
+      let newArrayByKidFriendliness = [];
+      let newArrayByDuration = [];
+     
+      if (activityType !== "" && activityType !== undefined && activityType !== null) {
 
-      // console.log(newArrayByType);
-      // console.log(activityType);
-      console.log("activities",[...newArrayByType]);
-      setActivities([...newArrayByType]);
+        newArrayByType = activityDataList.filter(activityData => activityData.type === activityType);
 
-      
+      } else if (activityPrice !== "" && activityPrice !== undefined && activityPrice !== null) {
 
-      // activityDataList
+        newArrayByPrice = activityDataList.filter(activityData => activityData.price == activityPrice);
+
+      } else if (activityKidFriendliness !== "" && activityKidFriendliness !== undefined && activityKidFriendliness !== null) {
+
+        newArrayByKidFriendliness = activityDataList.filter(activityData => activityData.kidFriendly == activityKidFriendliness);
+
+      } else if (activityDuration !== "" && activityDuration !== undefined && activityDuration !== null) {
+
+        newArrayByDuration = activityDataList.filter(activityData => activityData.duration == activityDuration);
+
+      };
+
+      if (newArrayByType.length > 0) {
+
+        newActivitiesArray = [...newArrayByType];
+
+      } else if (newArrayByPrice.length > 0) {
+
+        newActivitiesArray = [...newArrayByPrice];
+
+      } else if (newArrayByKidFriendliness.length > 0) {
+
+        newActivitiesArray = [...newArrayByKidFriendliness];
+
+      } else if (newArrayByDuration.length > 0) {
+
+        newActivitiesArray = [...newArrayByDuration];
+
+      };
+
+      setActivities([...newActivitiesArray]);
 
     };
 
-  }, [activityDataJSON, activityType]);
-
-
-  useEffect(() => {
-    console.log("activities" ,activities);
-
-  }, [ activities]);
-
-
-  const generateActivities = () => {
-
-    let getFilter = "";
-    let newActivityType = "";
-    let newActivityPrice = 0;
-    let newActivityAccessibility = ""; 
-
-    // ? Loop through all of the activities list and look for specific types to create a list for the user to actually scroll through?
-    
-    if (props.type !== "" || props.type !== undefined || props.type !== null) {
-      getFilter = `type=${props.type}`
-      newActivityType = props.type;
-    } else {
-      newActivityType = "";
-    };
-
-    if (props.price !== "" || props.price !== undefined || props.price !== null) {
-      getFilter = `price=${props.price}`
-      newActivityPrice = props.price;
-    } else {
-      newActivityPrice = 0;
-    };
-
-    if (props.accessibility !== "" || props.accessibility !== undefined || props.accessibility !== null) {
-      getFilter = `accessibility=${props.accessibility}`
-      newActivityAccessibility = props.accessibility;
-    } else {
-      newActivityAccessibility = 0;
-    };
-
-
-    setActivity("");
-    setActivityTitle("");
-    setActivityType(newActivityType);
-    setActivityPrice(newActivityPrice);
-    setActivityParticipants(1);
-    setActivityAccessibility(newActivityAccessibility);
-
-    // * Map through an array of the activity types.
-    // ? Might need to do this in a useEffect? 
-
-    // TODO: The getFilter only works for the last item.
-    // console.log(getFilter);
-
-    axios
-      .get(`https://www.boredapi.com/api/activity?${getFilter}`)
-      .then(result => {
-        // console.log(result.data);
-        setActivity(result.data.activity);
-        setActivityTitle(result.data.activity);
-        setActivityType(result.data.type);
-        setActivityPrice(result.data.price);
-        setActivityParticipants(result.data.participants);
-        setActivityAccessibility(result.data.accessibility);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
+  }, [activityDataList]);
 
 
   return (
     <View style={styles.cards}>
-
       {activities !== "" || activities !== undefined || activities !== null ?
       
         <View> 
@@ -138,7 +90,6 @@ export default function ActivityCard(props) {
         {activities.map((activity) => (
        
           <Card style={styles.card}> 
-            <Text> {activity.activity}</Text>
             <CardContent>
               <Typography variant="h6">
                 <strong>{activity.activity}</strong>
@@ -146,7 +97,9 @@ export default function ActivityCard(props) {
               <Typography variant="body2"><strong>Type: </strong>{activity.type}</Typography>
               <Typography variant="body2"><strong>Participants: </strong>{activity.participants}</Typography>
               <Typography variant="body2"><strong>Price: </strong>{activity.price}</Typography>
+              <Typography variant="body2"><strong>kidFriendly: </strong>{activity.kidFriendly === true ? "Yes" : "No"}</Typography>
               <Typography variant="body2"><strong>Accessibility: </strong>{activity.accessibility}</Typography>
+              <Typography variant="body2"><strong>Duration: </strong>{activity.duration}</Typography>
             </CardContent>
           </Card>
 
@@ -155,7 +108,6 @@ export default function ActivityCard(props) {
         </View>
         
         : null}
-
     </View>
   );
 };
@@ -165,7 +117,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
 
   title: {
