@@ -14,6 +14,7 @@ export default function ActivityCard(props) {
   const activityType = props.type !== "" && props.type !== undefined && props.type !== null ? props.type : "";
   const activityPrice = props.price !== "" && props.price !== undefined && props.price !== null ? props.price : "";
   const activityKidFriendliness = props.kidFriendly !== "" && props.kidFriendly !== undefined && props.kidFriendly !== null ? props.kidFriendly : "";
+
   // const activityParticipants = props.participants !== "" && props.participants !== undefined && props.participants !== null ? props.participants : "";
   const activityDuration = props.duration !== "" && props.duration !== undefined && props.duration !== null ? props.duration : "";
 
@@ -48,13 +49,17 @@ export default function ActivityCard(props) {
 
       } else if (activityKidFriendliness !== "" && activityKidFriendliness !== undefined && activityKidFriendliness !== null) {
 
-        newArrayByKidFriendliness = activityDataList.filter(activityData => activityData.kidFriendly == activityKidFriendliness);
+        // ? For some reason this doesn't work.
+        // newArrayByKidFriendliness = activityDataList.filter(activityData => activityData.kidFriendly == activityKidFriendliness);
+        newArrayByKidFriendliness = activityDataList.filter(activityData => activityData.kidFriendly == true);
 
       } else if (activityDuration !== "" && activityDuration !== undefined && activityDuration !== null) {
 
         newArrayByDuration = activityDataList.filter(activityData => activityData.duration == activityDuration);
 
       };
+      
+      console.log(newArrayByKidFriendliness);
 
       if (newArrayByType.length > 0) {
 
@@ -133,7 +138,7 @@ const styles = StyleSheet.create({
 
   card: {
     width: "80%",
-    margin: "8px"
+    margin: "10px"
   },
 
   cards: {
