@@ -89,12 +89,12 @@ export default function ActivityCard(props) {
   return (
     <View style={styles.cards}>
       {activities !== "" || activities !== undefined || activities !== null ?
-      
+  
       <ScrollView horizontal={true}>
 
         {activities.map((activity) => (
        
-          <Card style={styles.card}> 
+          <Card key={activity.key} style={styles.card}> 
             <CardContent>
               <Typography variant="h6">
                 <strong>{activity.activity}</strong>

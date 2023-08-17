@@ -9,12 +9,12 @@ import { useColorScheme } from "react-native";
 // import style from './Index.module.css';
 
 export default function App() {
-  const isLoadingComplete = useLoadedAssets();
+  // const isLoadingComplete = useLoadedAssets();
   const colorScheme = useColorScheme();
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
+  // if (!isLoadingComplete) {
+  //   return null;
+  // } else {
     return (
       
       <SafeAreaProvider>
@@ -25,5 +25,5 @@ export default function App() {
       </SafeAreaProvider>
      
     );
-  }
+  // }
 }
