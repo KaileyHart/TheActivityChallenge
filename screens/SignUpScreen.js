@@ -4,11 +4,11 @@ import { Text, View } from "../components/Themed";
 
 export default function SignUpScreen({navigation}) {
 
-  const [txtFirstName, setTxtFirstName] = React.useState("");
-  const [txtLastName, setTxtLastName] = React.useState("");
-  const [txtEmail, setTxtEmail] = React.useState("");
-  const [txtPassword, setTxtPassword] = React.useState("");
-  const [dateBirthday, setDateBirthday] = React.useState("");
+  const [txtFirstName, setTxtFirstName] = useState("");
+  const [txtLastName, setTxtLastName] = useState("");
+  const [txtEmail, setTxtEmail] = useState("");
+  const [txtPassword, setTxtPassword] = useState("");
+  const [dateBirthday, setDateBirthday] = useState("");
 
   return (
     <View style={styles.screenContainer}>

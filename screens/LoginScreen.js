@@ -4,8 +4,8 @@ import { Text, View } from "../components/Themed";
 
 export default function LoginScreen({navigation}) {
 
-  const [txtEmail, setTxtEmail] = React.useState("");
-  const [txtPassword, setTxtPassword] = React.useState("");
+  const [txtEmail, setTxtEmail] = useState("");
+  const [txtPassword, setTxtPassword] = useState("");
 
   return (
 

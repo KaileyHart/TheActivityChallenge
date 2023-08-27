@@ -29,8 +29,8 @@ function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
     
-    {/* Commenting this out for now until authentication is functioning. */}
-    {/* https://stackoverflow.com/a/74916067 */}
+    {/* // * Commenting this out for now until authentication is functioning. */}
+    {/* // * https://stackoverflow.com/a/74916067 */}
     { /* <Stack.Screen name="IntroScreen" component={IntroScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} /> 

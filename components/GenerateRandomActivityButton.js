@@ -35,11 +35,8 @@ export default function GenerateRandomActivityButton() {
   return (
     <View>
 
-      <Button
-        title="Generate Activity"
-        data-category="recreational"
-        onPress={() => generateRandomActivity()}
-      />
+      <button style={styles.blackButton} data-category="recreational" onPress={() => generateRandomActivity()}
+      >GENERATE ACTIVITY</button>
 
       {randomActivity.activity ? (
 
@@ -54,22 +51,23 @@ export default function GenerateRandomActivityButton() {
 };
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
-
   title: {
     fontSize: 20,
     fontWeight: "bold",
   },
-
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "40%",
+  blackButton: {
+    backgroundColor: "black",
+    color: "white",
+    fontWeight: 700,
+    borderRadius: "20px",
+    padding: "10px",
+    marginTop: "25px",
+    marginBottom: "10px",
+    width: "100%",
   },
-
 });

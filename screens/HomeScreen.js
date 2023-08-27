@@ -14,9 +14,15 @@ export default function HomeScreen({navigation}) {
 
       <ScrollView> 
 
+        <View style={styles.titleContainer}> 
+
+          <Text style={styles.title}>HOME</Text>
+
+        </View>
+
         <View style={styles.search}>
 
-          {/* <Search></Search> */} 
+          <Search></Search>
 
           <GenerateRandomActivityButton />
 
@@ -52,29 +58,23 @@ export default function HomeScreen({navigation}) {
 };
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1
   },
-
-  search: {
-    width: "80%",
-     alignItems: "center"
+  titleContainer: {
+    display: "flex",
+    justifyContent: "left",
+    margin: 25,
   },
-
   title: {
     fontSize: 20,
     fontWeight: "bold",
   },
-
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  search: {
+    width: "100%",
+    alignItems: "center"
   },
-
   cardListHeader: {
     padding: "20px"
   }
-
 });
