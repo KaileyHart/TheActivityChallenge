@@ -1,10 +1,4 @@
-// If you are not familiar with React Navigation, check out the "Fundamentals" guide:
-// https://reactnavigation.org/docs/getting-started
-import {
-  DarkTheme,
-  DefaultTheme,
-  NavigationContainer,
-} from "@react-navigation/native";
+import {DarkTheme, DefaultTheme, NavigationContainer} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import NotFoundScreen from "../screens/NotFoundScreen";
@@ -13,13 +7,15 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import IntroScreen from "../screens/IntroScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import LoginScreen from "../screens/LoginScreen";
+import HomeScreen from "../screens/HomeScreen";
+import DiscoverScreen from "../screens/DiscoverScreen";
+import MemoriesScreen from "../screens/MemoriesScreen";
+import WishlistScreen from "../screens/WishlistScreen";
+
 
 export default function Navigation({ colorScheme }) {
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-    >
+    <NavigationContainer linking={LinkingConfiguration} theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -32,24 +28,27 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-
-      <Stack.Screen
-        name="IntroScreen"
-        component={IntroScreen}
-      />
+    
+    {/* Commenting this out for now until authentication is functioning. */}
+    {/* https://stackoverflow.com/a/74916067 */}
+    { /* <Stack.Screen name="IntroScreen" component={IntroScreen} />
+        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} /> 
+      */}
 
       <Stack.Screen name="Root" component={BottomTabNavigator} />
-      <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-      <Stack.Screen name="LoginScreen" component={LoginScreen} />
-      
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="DiscoverScreen" component={DiscoverScreen} />
 
-
+      <Stack.Screen name="MemoriesScreen" component={MemoriesScreen} />
+      <Stack.Screen name="WishlistScreen" component={WishlistScreen} />
 
     {/*<Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />*/}
+
     </Stack.Navigator>
   );
 }

@@ -5,17 +5,21 @@ import Search from "../components/Search";
 import GenerateRandomActivityButton from "../components/GenerateRandomActivityButton";
 import ActivityCard from "../components/ActivityCard";
 import {Typography  } from '@mui/material';
-// import { Appbar } from 'react-native-paper';
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
 
   return (
     <View style={styles.container}>
+
       <ScrollView> 
+
         <View style={styles.search}>
-          <Search></Search>
+
+          {/* <Search></Search> */} 
+
           <GenerateRandomActivityButton />
+
         </View>
 
         <Text>Filter Button</Text>
@@ -42,6 +46,7 @@ export default function HomeScreen() {
         </View>
 
       </ScrollView> 
+
     </View>
   );
 };

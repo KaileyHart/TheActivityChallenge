@@ -1,34 +1,28 @@
 import { StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-// import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, Button, View } from "../components/Themed";
-import SignUpScreen from "./SignUpScreen";
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Text, View } from "../components/Themed";
 
 export default function IntroScreen({navigation}) {
+
   return (
-    <View style={styles.container}>
+    <View style={styles.screenContainer}>
 
     <View style={styles.container2}>
+
       <Text style={styles.title}>THE ACTIVITY<br/>CHALLENGE <Ionicons style={styles.icon} name="images"></Ionicons></Text>
-      <button style={styles.blackButton} onClick={() => navigation.navigate('SignUpScreen' )}>GET STARTED</button>
+      
+      <button style={styles.blackButton} onClick={() => navigation.navigate('SignUpScreen')}>GET STARTED</button>
+      
     </View>
-    <Text style={styles.signInText}>SIGN IN</Text>
 
-    {/* <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      /> */}
-
-    {/* <EditScreenInfo path="/screens/Login.tsx" /> */}
+    <button style={styles.loginButton} onClick={() => navigation.navigate('LoginScreen')}>Login</button>
 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screenContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -52,7 +46,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%"
   },
-  
   blackButton: {
     backgroundColor: "black",
     color: "white",
@@ -61,8 +54,10 @@ const styles = StyleSheet.create({
     padding: "10px",
     width: "90%",
   },
-  signInText: {
+  loginButton: {
     fontWeight: 700,
-    marginTop: "30px"
+    marginTop: "30px",
+    backgroundColor: "transparent",
+    border: "none",
   }
 });
