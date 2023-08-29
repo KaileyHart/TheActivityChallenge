@@ -1,11 +1,7 @@
-// Learn more about createBottomTabNavigator:
-// https://reactnavigation.org/docs/bottom-tab-navigator
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useColorScheme } from "react-native";
 
-import Colors from "../constants/Colors";
 import HomeScreen from "../screens/HomeScreen";
 import DiscoverScreen from "../screens/DiscoverScreen";
 import MemoriesScreen from "../screens/MemoriesScreen";
@@ -14,21 +10,28 @@ import WishlistScreen from "../screens/WishlistScreen";
 const BottomTab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
 
   return (
     <BottomTab.Navigator
       initialRouteName="TabOne"
-      screenOptions={{ tabBarActiveTintColor: Colors[colorScheme].tint }}
-    >
+      screenOptions={() => ({
+        tabBarInactiveTintColor: "white",
+        tabBarActiveTintColor: "#A0A0A0",
+        headerShown: false,
+        tabBarStyle: {
+          height: 60,
+          padding: 10,
+          backgroundColor: "black",
+      },
+    })}>
 
       <BottomTab.Screen
         name="Home"
         component={TabOneNavigator}
         options={{
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="home" color={color} />
+          tabBarIcon: ({focused, color}) => (
+            <TabBarIcon name="home" color={focused ? "#A0A0A0" : "white"} />
           ),
         }}
       />
@@ -38,8 +41,8 @@ export default function BottomTabNavigator() {
         component={TabTwoNavigator}
         options={{
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="search" color={color} />
+          tabBarIcon: ({focused, color}) => (
+            <TabBarIcon name="search" color={focused ? "#A0A0A0" : "white"} />
           ),
         }}
       />
@@ -49,8 +52,8 @@ export default function BottomTabNavigator() {
       component={TabThreeNavigator}
       options={{
         headerShown: false,
-        tabBarIcon: ({ color }) => (
-          <TabBarIcon name="book" color={color} />
+        tabBarIcon: ({focused, color}) => (
+          <TabBarIcon name="book" color={focused ? "#A0A0A0" : "white"} />
         ),
       }}
     />
@@ -60,24 +63,20 @@ export default function BottomTabNavigator() {
       component={TabFourNavigator}
       options={{
         headerShown: false,
-        tabBarIcon: ({ color }) => (
-          <TabBarIcon name="heart" color={color} />
+        tabBarIcon: ({focused, color}) => (
+          <TabBarIcon name="heart" color={focused ? "#A0A0A0" : "white"} />
         ),
       }}
     />
 
     </BottomTab.Navigator>
   );
-}
+};
 
-// You can explore the built-in icon families and icons on the web at:
-// https://icons.expo.fyi/
 function TabBarIcon(props) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <Ionicons size={25}  {...props} />;
 }
 
-// Each tab has its own navigation stack, you can read more about this pattern here:
-// https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 const TabOneStack = createStackNavigator();
 
 function TabOneNavigator() {

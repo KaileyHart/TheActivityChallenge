@@ -13,7 +13,9 @@ export default function NotFoundScreen({ navigation }) {
         style={styles.link}
       >
 
-        <Text style={styles.linkText}>Go to home screen!</Text>
+        {/* <Text style={styles.linkText}>Go to home screen!</Text> */}
+
+        <button onPress={() => navigation.goBack()}>Dismiss</button>
 
       </TouchableOpacity>
 
