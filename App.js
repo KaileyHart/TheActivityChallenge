@@ -5,19 +5,21 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useLoadedAssets } from "./hooks/useLoadedAssets";
 import Navigation from "./navigation";
+import TopNavigator from "./navigation/TopNavigator";
 import { useColorScheme } from "react-native";
 // import style from './Index.module.css';
 
 export default function App() {
-  const isLoadingComplete = useLoadedAssets();
+  // const isLoadingComplete = useLoadedAssets();
   const colorScheme = useColorScheme();
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
+  // if (!isLoadingComplete) {
+  //   return null;
+  // } else {
     return (
       
       <SafeAreaProvider>
+      <TopNavigator />
       
         <Navigation colorScheme={colorScheme} />
         <StatusBar />
@@ -25,5 +27,7 @@ export default function App() {
       </SafeAreaProvider>
      
     );
-  }
+  // }
 }
+
+

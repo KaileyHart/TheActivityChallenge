@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { View } from "../components/Themed";
 import { Card, CardContent, Typography, CardHeader  } from '@mui/material';
 import activityDataJSON from "/assets/json/activities.json";
-// import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 
 
 export default function ActivityCard(props) {
@@ -14,6 +14,7 @@ export default function ActivityCard(props) {
   const activityType = props.type !== "" && props.type !== undefined && props.type !== null ? props.type : "";
   const activityPrice = props.price !== "" && props.price !== undefined && props.price !== null ? props.price : "";
   const activityKidFriendliness = props.kidFriendly !== "" && props.kidFriendly !== undefined && props.kidFriendly !== null ? props.kidFriendly : "";
+
   // const activityParticipants = props.participants !== "" && props.participants !== undefined && props.participants !== null ? props.participants : "";
   const activityDuration = props.duration !== "" && props.duration !== undefined && props.duration !== null ? props.duration : "";
 
@@ -48,13 +49,17 @@ export default function ActivityCard(props) {
 
       } else if (activityKidFriendliness !== "" && activityKidFriendliness !== undefined && activityKidFriendliness !== null) {
 
-        newArrayByKidFriendliness = activityDataList.filter(activityData => activityData.kidFriendly == activityKidFriendliness);
+        // ? For some reason this doesn't work.
+        // newArrayByKidFriendliness = activityDataList.filter(activityData => activityData.kidFriendly == activityKidFriendliness);
+        newArrayByKidFriendliness = activityDataList.filter(activityData => activityData.kidFriendly == true);
 
       } else if (activityDuration !== "" && activityDuration !== undefined && activityDuration !== null) {
 
         newArrayByDuration = activityDataList.filter(activityData => activityData.duration == activityDuration);
 
       };
+      
+      console.log(newArrayByKidFriendliness);
 
       if (newArrayByType.length > 0) {
 
@@ -84,12 +89,12 @@ export default function ActivityCard(props) {
   return (
     <View style={styles.cards}>
       {activities !== "" || activities !== undefined || activities !== null ?
-      
-        <View> 
+  
+      <ScrollView horizontal={true}>
 
         {activities.map((activity) => (
        
-          <Card style={styles.card}> 
+          <Card key={activity.key} style={styles.card}> 
             <CardContent>
               <Typography variant="h6">
                 <strong>{activity.activity}</strong>
@@ -105,7 +110,7 @@ export default function ActivityCard(props) {
 
         ))}
 
-        </View>
+        </ScrollView>
         
         : null}
     </View>
@@ -132,7 +137,8 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    width: "80%"
+    width: "80%",
+    margin: "10px"
   },
 
   cards: {
