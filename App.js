@@ -5,6 +5,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useLoadedAssets } from "./hooks/useLoadedAssets";
 import Navigation from "./navigation";
+import TopNavigator from "./navigation/TopNavigator";
 import { useColorScheme } from "react-native";
 // import style from './Index.module.css';
 
@@ -18,6 +19,7 @@ export default function App() {
     return (
       
       <SafeAreaProvider>
+      <TopNavigator />
       
         <Navigation colorScheme={colorScheme} />
         <StatusBar />
@@ -27,3 +29,5 @@ export default function App() {
     );
   // }
 }
+
+
