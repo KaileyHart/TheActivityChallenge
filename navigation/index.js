@@ -44,7 +44,11 @@ function RootNavigator() {
       */}
 
       <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        screenOptions={{ headerShown: false }}
+      />
       <Stack.Screen name="DiscoverScreen" component={DiscoverScreen} />
       <Stack.Screen name="MemoriesScreen" component={MemoriesScreen} />
       <Stack.Screen name="WishlistScreen" component={WishlistScreen} />
