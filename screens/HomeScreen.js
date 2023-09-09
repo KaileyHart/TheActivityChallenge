@@ -19,32 +19,32 @@ export default function HomeScreen({ navigation }) {
         {/* // TODO: Create Filter */}
         {/* <Text>Filter Button</Text> */}
 
-        <Typography style={styles.cardListHeader} variant="h5">
-          <Ionicons name="musical-notes" size={20} color="white" />
+        <Typography style={styles.cardListHeader}>
+          <Ionicons name="musical-notes" size={15} color="white" />
           <strong> Relaxing Activities</strong>
         </Typography>
         <View>
           <ActivityCard type="relaxation" />
         </View>
 
-        <Typography style={styles.cardListHeader} variant="h5">
-          <Ionicons name="wallet" size={20} color="white" />
+        <Typography style={styles.cardListHeader}>
+          <Ionicons name="wallet" size={15} color="white" />
           <strong> Free Activities</strong>
         </Typography>
         <View>
           <ActivityCard price="0.0" />
         </View>
 
-        <Typography style={styles.cardListHeader} variant="h5">
-          <Ionicons name="happy" size={20} color="white" />
+        <Typography style={styles.cardListHeader}>
+          <Ionicons name="happy" size={15} color="white" />
           <strong> Kid Friendly Activities</strong>
         </Typography>
         <View>
           <ActivityCard kidFriendly="true" />
         </View>
 
-        <Typography style={styles.cardListHeader} variant="h5">
-          <Ionicons name="today" size={20} color="white" />
+        <Typography style={styles.cardListHeader}>
+          <Ionicons name="today" size={15} color="white" />
           <strong> Multiple Day Activities</strong>
         </Typography>
         <View>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     marginTop: "10px",
     marginBottom: "10px",
     color: "white",
-    fontSize: "50",
+    fontSize: "30",
     backgroundColor: "black",
   },
 });

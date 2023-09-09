@@ -112,7 +112,7 @@ export default function ActivityCard(props) {
           {activities.map((activity) => (
             <Card key={activity.key} style={styles.card}>
               <CardContent>
-                <Typography variant="h6">
+                <Typography variant="body1">
                   <strong>{activity.activity}</strong>
                 </Typography>
                 <Typography variant="body2">

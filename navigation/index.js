@@ -13,6 +13,7 @@ import SplashScreen from "../screens/SplashScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import LoginScreen from "../screens/LoginScreen";
 import HomeScreen from "../screens/HomeScreen";
+import AccountSettingsScreen from "../screens/AccountSettingsScreen";
 import WishlistScreen from "../screens/WishlistScreen";
 
 const Stack = createStackNavigator();
@@ -41,12 +42,21 @@ function RootNavigator() {
         <Stack.Screen name="LoginScreen" component={LoginScreen} /> 
       */}
 
+      {/* 
+        <Stack.Screen
+         name="AccountSettingsScreen"
+        component={AccountSettingsScreen}
+       />   
+      */}
+
       <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
+
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
         screenOptions={{ headerShown: false }}
       />
+
       <Stack.Screen name="WishlistScreen" component={WishlistScreen} />
 
       {/* <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: "Oops!" }}/> */}

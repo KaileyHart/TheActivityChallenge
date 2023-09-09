@@ -16,18 +16,12 @@ export default function App() {
   // if (!isLoadingComplete) {
   //   return null;
   // } else {
-    return (
-      
-      <SafeAreaProvider>
-      <TopNavigator />
-      
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-     
-      </SafeAreaProvider>
-     
-    );
+  return (
+    <SafeAreaProvider>
+      <TopNavigator navigation={navigation} />
+      <Navigation colorScheme={colorScheme} />
+      <StatusBar />
+    </SafeAreaProvider>
+  );
   // }
 }
-
-
