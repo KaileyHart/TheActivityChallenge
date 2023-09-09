@@ -1,58 +1,92 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Button } from "react-native";
 import { Text, View } from "../components/Themed";
-import axios from 'axios';
-
+import { Card, CardContent, Typography, CardHeader } from "@mui/material";
+// import ActivityCard from "../components/ActivityCard";
+import axios from "axios";
 
 export default function GenerateRandomActivityButton() {
-
   const [randomActivity, setRandomActivity] = useState("");
 
-
   useEffect(() => {
-
     generateRandomActivity();
-
   }, []);
 
-
   const generateRandomActivity = () => {
-
     setRandomActivity("");
 
     axios
-      .get('https://www.boredapi.com/api/activity')
-      .then(result => {
+      .get("https://www.boredapi.com/api/activity")
+      .then((result) => {
         setRandomActivity(result.data);
         console.log(result.data);
       })
-      .catch(error => console.log(error));
-
+      .catch((error) => console.log(error));
   };
 
   // TODO: Replace random activity with activity card? Pass a prop to determine if it should be random, or of a specific type.
 
   return (
-    <View>
+    <View style={styles.screenContainer}>
+      <button
+        style={styles.blackButton}
+        data-category="recreational"
+        onPress={() => generateRandomActivity()}
+      >
+        GENERATE ACTIVITY
+      </button>
 
-      <button style={styles.blackButton} data-category="recreational" onPress={() => generateRandomActivity()}
-      >GENERATE ACTIVITY</button>
+      {/* // TODO: Make this dynamic with ActivityCard.js */}
 
       {randomActivity.activity ? (
-
         <React.Fragment>
-          <Text>{randomActivity.activity}</Text>
-          <Text> {randomActivity.type}</Text>
+          <View style={styles.cardContainer}>
+            <Card key={randomActivity.key} style={styles.card}>
+              <CardContent>
+                <Typography variant="h6">
+                  <strong>{randomActivity.activity}</strong>
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Type: </strong>
+                  {randomActivity.type}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Participants: </strong>
+                  {randomActivity.participants}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Price: </strong>
+                  {randomActivity.price}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>kidFriendly: </strong>
+                  {randomActivity.kidFriendly === true ? "Yes" : "No"}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Accessibility: </strong>
+                  {randomActivity.accessibility}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Duration: </strong>
+                  {randomActivity.duration}
+                </Typography>
+              </CardContent>
+            </Card>
+          </View>
         </React.Fragment>
       ) : null}
-
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
+  screenContainer: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  cardContainer: {
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -68,6 +102,10 @@ const styles = StyleSheet.create({
     padding: "10px",
     marginTop: "25px",
     marginBottom: "10px",
-    width: "100%",
+    width: "90%",
+  },
+  card: {
+    width: "90%",
+    margin: "10px",
   },
 });

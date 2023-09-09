@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Button } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { Text, View } from "../components/Themed";
 import Search from "../components/Search";
-import GenerateRandomActivityButton from "../components/GenerateRandomActivityButton";
 import ActivityCard from "../components/ActivityCard";
 import { Typography } from "@mui/material";
 import { ScrollView } from "react-native-gesture-handler";
@@ -11,38 +11,41 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <View style={styles.search}>
+        <View style={styles.searchContainer}>
           <Search></Search>
-
-          <GenerateRandomActivityButton />
+          <button style={styles.searchButton}>Search</button>
         </View>
 
-        <Text>Filter Button</Text>
+        {/* // TODO: Create Filter */}
+        {/* <Text>Filter Button</Text> */}
 
         <Typography style={styles.cardListHeader} variant="h5">
-          <strong>Relaxing Activities</strong>
+          <Ionicons name="musical-notes" size={20} color="white" />
+          <strong> Relaxing Activities</strong>
         </Typography>
-
         <View>
           <ActivityCard type="relaxation" />
         </View>
 
         <Typography style={styles.cardListHeader} variant="h5">
-          <strong>Free Activities</strong>
+          <Ionicons name="wallet" size={20} color="white" />
+          <strong> Free Activities</strong>
         </Typography>
         <View>
           <ActivityCard price="0.0" />
         </View>
 
         <Typography style={styles.cardListHeader} variant="h5">
-          <strong>Kid Friendly Activities</strong>
+          <Ionicons name="happy" size={20} color="white" />
+          <strong> Kid Friendly Activities</strong>
         </Typography>
         <View>
           <ActivityCard kidFriendly="true" />
         </View>
 
         <Typography style={styles.cardListHeader} variant="h5">
-          <strong>Multiple Day Activities</strong>
+          <Ionicons name="today" size={20} color="white" />
+          <strong> Multiple Day Activities</strong>
         </Typography>
         <View>
           <ActivityCard duration="days" />
@@ -65,11 +68,31 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  search: {
-    width: "100%",
-    alignItems: "center",
+  searchContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "95%",
+    margin: "10px",
+    marginTop: "20px",
+  },
+  searchButton: {
+    padding: "10px",
+    border: "1px solid",
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: "black",
+    color: "white",
+  },
+  cardListHeaderIcon: {
+    color: "white",
   },
   cardListHeader: {
-    padding: "20px",
+    padding: "10px",
+    marginTop: "10px",
+    marginBottom: "10px",
+    color: "white",
+    fontSize: "50",
+    backgroundColor: "black",
   },
 });
