@@ -8,16 +8,26 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 export default function TopNavigator({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>
-        THE ACTIVITY
-        <br />
-        CHALLENGE <Ionicons style={styles.icon} name="images"></Ionicons>
-      </Text>
+      <button
+        style={styles.profileButton}
+        onClick={() => navigation.navigate("HomeScreen")}
+      >
+        <Text style={styles.logo}>
+          THE ACTIVITY
+          <br />
+          CHALLENGE <Ionicons style={styles.icon} name="images"></Ionicons>
+        </Text>
+      </button>
 
-      <Ionicons
-        style={styles.userAccountIcon}
-        name="person-circle-outline"
-      ></Ionicons>
+      <button
+        style={styles.profileButton}
+        onClick={() => navigation.navigate("AccountSettingsScreen")}
+      >
+        <Ionicons
+          style={styles.userAccountIcon}
+          name="person-circle-outline"
+        ></Ionicons>
+      </button>
     </View>
   );
 }
@@ -40,5 +50,11 @@ const styles = StyleSheet.create({
   userAccountIcon: {
     color: "white",
     fontSize: 30,
+  },
+  profileButton: {
+    backgroundColor: "black",
+    color: "inherit",
+    border: "none",
+    cursor: "pointer",
   },
 });
