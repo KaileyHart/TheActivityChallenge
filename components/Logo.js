@@ -5,29 +5,14 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 // TODO: Navigate to home after clicking logo -- 09/04/2023
 // TODO: Navigate to account settings after clicking user account icon -- 09/04/2023
 
-export default function TopNavigator({ navigation }) {
+export default function Logo({ navigation }) {
   return (
     <View style={styles.container}>
-      <button
-        style={styles.profileButton}
-        onClick={() => navigation.navigate("HomeScreen")}
-      >
-        <Text style={styles.logo}>
-          THE ACTIVITY
-          <br />
-          CHALLENGE <Ionicons style={styles.icon} name="images"></Ionicons>
-        </Text>
-      </button>
-
-      <button
-        style={styles.profileButton}
-        onClick={() => navigation.navigate("AccountSettingsScreen")}
-      >
-        <Ionicons
-          style={styles.userAccountIcon}
-          name="person-circle-outline"
-        ></Ionicons>
-      </button>
+      <Text style={styles.logo}>
+        THE ACTIVITY
+        <br />
+        CHALLENGE <Ionicons style={styles.icon} name="images"></Ionicons>
+      </Text>
     </View>
   );
 }

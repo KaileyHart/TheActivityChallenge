@@ -89,7 +89,7 @@ export default function ActivityCard(props) {
         );
       }
 
-      console.log(newArrayByKidFriendliness);
+      // console.log(newArrayByKidFriendliness);
 
       if (newArrayByType.length > 0) {
         newActivitiesArray = [...newArrayByType];

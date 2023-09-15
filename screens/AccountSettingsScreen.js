@@ -7,6 +7,7 @@ export default function AccountSettingsScreen({ navigation }) {
   return (
     <View style={styles.screenContainer}>
       <ScrollView>
+        <Text>Account Settings</Text>
         <button
           style={styles.blackButton}
           onClick={() => navigation.navigate("AccountDetailsScreen")}
@@ -23,7 +24,7 @@ export default function AccountSettingsScreen({ navigation }) {
 
         <button
           style={styles.blackButton}
-          onClick={() => navigation.navigate("HelpScreen")}
+          onClick={() => navigation.navigate("Home")}
         >
           HELP
         </button>
