@@ -30,8 +30,7 @@ export default function GenerateRandomActivityButton() {
     <View style={styles.screenContainer}>
       <button
         style={styles.blackButton}
-        data-category="recreational"
-        onPress={() => generateRandomActivity()}
+        onClick={() => generateRandomActivity()}
       >
         GENERATE ACTIVITY
       </button>

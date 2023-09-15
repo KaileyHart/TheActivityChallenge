@@ -11,6 +11,7 @@ export default function AccountDetailsScreen({ navigation }) {
 
   return (
     <View style={styles.screenContainer}>
+      <Text>Account Details</Text>
       <TextInput
         style={styles.input}
         onChangeText={setTxtFirstName}
@@ -46,6 +47,7 @@ export default function AccountDetailsScreen({ navigation }) {
         placeholder="Birthday (Optional)"
       />
 
+      {/* Maybe just show a modal that says saved? */}
       <button
         style={styles.blackButton}
         onClick={() => navigation.navigate("HomeScreen")}
@@ -53,10 +55,7 @@ export default function AccountDetailsScreen({ navigation }) {
         SAVE
       </button>
 
-      <button
-        style={styles.blackButton}
-        onClick={() => navigation.navigate("HomeScreen")}
-      >
+      <button style={styles.blackButton} onClick={() => navigation.goBack()}>
         CANCEL
       </button>
     </View>
