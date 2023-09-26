@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Button } from "react-native";
 import { Text, View } from "../components/Themed";
 import { ScrollView } from "react-native-gesture-handler";
+import { firebase_auth } from "../FirebaseConfig";
 
 export default function AccountSettingsScreen({ navigation }) {
   return (
@@ -17,7 +18,7 @@ export default function AccountSettingsScreen({ navigation }) {
 
         <button
           style={styles.blackButton}
-          onClick={() => navigation.navigate("LoginScreen")}
+          onClick={() => firebase_auth.signOut()}
         >
           LOG OUT
         </button>

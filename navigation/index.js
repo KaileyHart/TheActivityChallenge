@@ -27,6 +27,9 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 
 // * General Components
 import Logo from "../components/Logo";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebase_auth } from "../FirebaseConfig";
+import { User } from "firebase/auth";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -166,12 +169,18 @@ function BottomTab({ navigation }) {
 }
 
 export default function Navigation({ navigation }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    onAuthStateChanged(firebase_auth, (user) => {
+      setUser(user);
+    });
+  }, []);
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {isLoggedIn === true ? (
+        {user ? (
           <Stack.Group>
             <Stack.Screen
               name="BottomTab"

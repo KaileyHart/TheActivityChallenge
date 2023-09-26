@@ -1,48 +1,111 @@
-import React, {useState, useEffect} from 'react';
-import { StyleSheet,TextInput  } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  KeyboardAvoidingView,
+  Alert,
+  SafeAreaView,
+} from "react-native";
 import { Text, View } from "../components/Themed";
+import { firebase_auth } from "../FirebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-export default function SignUpScreen({navigation}) {
-
-  const [txtFirstName, setTxtFirstName] = useState("");
-  const [txtLastName, setTxtLastName] = useState("");
+export default function SignUpScreen({ navigation }) {
+  // const [txtFirstName, setTxtFirstName] = useState("");
+  // const [txtLastName, setTxtLastName] = useState("");
   const [txtEmail, setTxtEmail] = useState("");
   const [txtPassword, setTxtPassword] = useState("");
-  const [dateBirthday, setDateBirthday] = useState("");
+
+  const [isLoading, setIsLoading] = useState(true);
+  const auth = firebase_auth;
+
+  // TODO: Add First and Last name when the user signs up.
+  const signUp = async () => {
+    setIsLoading(true);
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        txtEmail,
+        txtPassword
+      );
+    } catch (error) {
+      console.log(error);
+      alert("Sign up failed: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <View style={styles.screenContainer}>
-
-      <View style={styles.titleContainer}> 
-
-        <Text style={styles.title}>LET'S GET <br/>STARTED!</Text>
-
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>
+          LET'S GET <br />
+          STARTED!
+        </Text>
       </View>
 
       <View style={styles.mainContainer}>
+        {/*<TextInput
+          style={styles.input}
+          onChangeText={setTxtFirstName}
+          value={txtFirstName}
+          placeholder="First Name"
+        />*/}
 
-        <TextInput style={styles.input}  onChangeText={setTxtFirstName} value={txtFirstName} placeholder="First Name"/>
+        {/*<TextInput
+          style={styles.input}
+          onChangeText={setTxtLastName}
+          value={txtLastName}
+          placeholder="Last Name"
+        />*/}
 
-        <TextInput style={styles.input}  onChangeText={setTxtLastName} value={txtLastName} placeholder="Last Name"/>
+        <TextInput
+          style={styles.input}
+          onChangeText={setTxtEmail}
+          value={txtEmail}
+          placeholder="Email"
+          autoCapitalize="none"
+        />
 
-        <TextInput style={styles.input}  onChangeText={setTxtEmail} value={txtEmail} placeholder="Email"/>
+        <TextInput
+          style={styles.input}
+          onChangeText={setTxtPassword}
+          value={txtPassword}
+          placeholder="Password"
+          autoCapitalize="none"
+          secureTextEntry={true}
+        />
 
-        <TextInput style={styles.input}  onChangeText={setTxtPassword} value={txtPassword} placeholder="Password"/>
+        {/* <TextInput
+          style={styles.input}
+          onChangeText={setDateBirthday}
+          value={dateBirthday}
+          placeholder="Birthday (Optional)"
+  /> */}
 
-        <TextInput style={styles.input}  onChangeText={setDateBirthday} value={dateBirthday} placeholder="Birthday (Optional)"/>
+        <button style={styles.blackButton} onClick={signUp}>
+          CREATE ACCOUNT
+        </button>
 
-        <button style={styles.blackButton} onClick={() => navigation.navigate('HomeScreen')}>CREATE ACCOUNT</button>
-
-        <Text style={styles.infoText}>By signing up, you agree to our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong></Text>
-        
+        <Text style={styles.infoText}>
+          By signing up, you agree to our <strong>Terms of Service</strong> and{" "}
+          <strong>Privacy Policy</strong>
+        </Text>
       </View>
 
       <View style={styles.signInContainer}>
-      
-        <Text>Already have an account? <button style={styles.signInButton} onClick={() => navigation.navigate('LoginScreen')}><strong>Login</strong></button></Text>
-        
+        <Text>
+          Already have an account?{" "}
+          <button
+            style={styles.signInButton}
+            onClick={() => navigation.navigate("LoginScreen")}
+          >
+            <strong>Login</strong>
+          </button>
+        </Text>
       </View>
-
     </View>
   );
 }
@@ -52,8 +115,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     width: "100%",
-    padding: "25px"
-  },  
+    padding: "25px",
+  },
   titleContainer: {
     display: "flex",
     justifyContent: "left",
@@ -74,7 +137,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 20,
-    width: "90%"
+    width: "90%",
   },
   blackButton: {
     backgroundColor: "black",
@@ -99,5 +162,5 @@ const styles = StyleSheet.create({
   signInButton: {
     backgroundColor: "transparent",
     border: "none",
-  }
+  },
 });
