@@ -3,6 +3,7 @@ import { StyleSheet, TextInput } from "react-native";
 import { Text, View } from "../components/Themed";
 import { firebase_auth } from "../FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { Input } from "react-native-elements";
 
 export default function LoginScreen({ navigation }) {
   const [txtEmail, setTxtEmail] = useState("");
@@ -36,14 +37,16 @@ export default function LoginScreen({ navigation }) {
       </View>
 
       <View style={styles.mainContainer}>
-        <TextInput
+        <Input
           style={styles.input}
           onChangeText={setTxtEmail}
           value={txtEmail}
           placeholder="Email"
           autoCapitalize="none"
+          label="Email"
         />
 
+        <label>Password</label>
         <TextInput
           style={styles.input}
           onChangeText={setTxtPassword}

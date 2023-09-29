@@ -38,7 +38,7 @@ export default function GenerateRandomActivityButton() {
       {/* // TODO: Make this dynamic with ActivityCard.js */}
 
       {randomActivity.activity ? (
-        <React.Fragment>
+        <View>
           <View style={styles.cardContainer}>
             <Card key={randomActivity.key} style={styles.card}>
               <CardContent>
@@ -72,7 +72,7 @@ export default function GenerateRandomActivityButton() {
               </CardContent>
             </Card>
           </View>
-        </React.Fragment>
+        </View>
       ) : null}
     </View>
   );
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   cardContainer: {
-    display: "flex",
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -104,7 +104,9 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   card: {
-    width: "90%",
+    display: "flex",
+    flex: 1,
+    height: "auto",
     margin: "10px",
   },
 });

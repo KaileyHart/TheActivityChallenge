@@ -9,6 +9,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // import { Text, View } from "../components/Themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebase_auth } from "../FirebaseConfig";
 
 // * Auth Screens
 import SplashScreen from "../screens/SplashScreen";
@@ -27,9 +29,6 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 
 // * General Components
 import Logo from "../components/Logo";
-import { onAuthStateChanged } from "firebase/auth";
-import { firebase_auth } from "../FirebaseConfig";
-import { User } from "firebase/auth";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -86,11 +85,7 @@ function BottomTab({ navigation }) {
           headerRight: () => (
             <button
               style={styles.logoButton}
-              onClick={() =>
-                navigation.navigate("AccountSettingsScreen", {
-                  owner: "Michaś",
-                })
-              }
+              onClick={() => navigation.navigate("AccountSettingsScreen")}
             >
               <Ionicons
                 style={styles.userAccountIcon}
@@ -118,11 +113,7 @@ function BottomTab({ navigation }) {
           headerRight: () => (
             <button
               style={styles.logoButton}
-              onClick={() =>
-                navigation.navigate("AccountDetailsScreen", {
-                  owner: "Michaś",
-                })
-              }
+              onClick={() => navigation.navigate("AccountSettingsScreen")}
             >
               <Ionicons
                 style={styles.userAccountIcon}
@@ -150,11 +141,7 @@ function BottomTab({ navigation }) {
           headerRight: () => (
             <button
               style={styles.logoButton}
-              onClick={() =>
-                navigation.navigate("AccountDetailsScreen", {
-                  owner: "Michaś",
-                })
-              }
+              onClick={() => navigation.navigate("AccountSettingsScreen")}
             >
               <Ionicons
                 style={styles.userAccountIcon}
@@ -174,6 +161,7 @@ export default function Navigation({ navigation }) {
   useEffect(() => {
     onAuthStateChanged(firebase_auth, (user) => {
       setUser(user);
+      console.log(user);
     });
   }, []);
 
@@ -190,6 +178,7 @@ export default function Navigation({ navigation }) {
             <Stack.Screen
               name="ActivityDetailScreen"
               component={ActivityDetailScreen}
+              user={user}
               options={{
                 headerTitle: (props) => (
                   <button
@@ -206,11 +195,7 @@ export default function Navigation({ navigation }) {
                 headerRight: () => (
                   <button
                     style={styles.logoButton}
-                    onClick={() =>
-                      navigation.navigate("ActivityDetailScreen", {
-                        owner: "Michaś",
-                      })
-                    }
+                    onClick={() => navigation.navigate("ActivityDetailScreen")}
                   >
                     <Ionicons
                       style={styles.userAccountIcon}
@@ -239,11 +224,7 @@ export default function Navigation({ navigation }) {
                 headerRight: () => (
                   <button
                     style={styles.logoButton}
-                    onClick={() =>
-                      navigation.navigate("AccountSettingsScreen", {
-                        owner: "Michaś",
-                      })
-                    }
+                    onClick={() => navigation.navigate("AccountSettingsScreen")}
                   >
                     <Ionicons
                       style={styles.userAccountIcon}
@@ -272,11 +253,7 @@ export default function Navigation({ navigation }) {
                 headerRight: () => (
                   <button
                     style={styles.logoButton}
-                    onClick={() =>
-                      navigation.navigate("AccountDetailsScreen", {
-                        owner: "Michaś",
-                      })
-                    }
+                    onClick={() => navigation.navigate("AccountDetailsScreen")}
                   >
                     <Ionicons
                       style={styles.userAccountIcon}

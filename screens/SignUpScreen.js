@@ -10,25 +10,27 @@ import {
 import { Text, View } from "../components/Themed";
 import { firebase_auth } from "../FirebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 
 export default function SignUpScreen({ navigation }) {
-  // const [txtFirstName, setTxtFirstName] = useState("");
-  // const [txtLastName, setTxtLastName] = useState("");
+  const [txtUsername, setTxtUsername] = useState("");
   const [txtEmail, setTxtEmail] = useState("");
   const [txtPassword, setTxtPassword] = useState("");
 
   const [isLoading, setIsLoading] = useState(true);
   const auth = firebase_auth;
 
-  // TODO: Add First and Last name when the user signs up.
   const signUp = async () => {
     setIsLoading(true);
     try {
-      const response = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         txtEmail,
         txtPassword
       );
+      await updateProfile(userCredential.user, {
+        displayName: `${txtUsername}`,
+      });
     } catch (error) {
       console.log(error);
       alert("Sign up failed: " + error.message);
@@ -47,20 +49,16 @@ export default function SignUpScreen({ navigation }) {
       </View>
 
       <View style={styles.mainContainer}>
-        {/*<TextInput
+        <Text>Username</Text>
+        <TextInput
           style={styles.input}
-          onChangeText={setTxtFirstName}
-          value={txtFirstName}
-          placeholder="First Name"
-        />*/}
+          onChangeText={setTxtUsername}
+          value={txtUsername}
+          placeholder="Username"
+          label="Username"
+        />
 
-        {/*<TextInput
-          style={styles.input}
-          onChangeText={setTxtLastName}
-          value={txtLastName}
-          placeholder="Last Name"
-        />*/}
-
+        <Text>Email</Text>
         <TextInput
           style={styles.input}
           onChangeText={setTxtEmail}
@@ -69,6 +67,7 @@ export default function SignUpScreen({ navigation }) {
           autoCapitalize="none"
         />
 
+        <Text>Password</Text>
         <TextInput
           style={styles.input}
           onChangeText={setTxtPassword}
