@@ -21,22 +21,32 @@ export default function SignUpScreen({ navigation }) {
   const auth = firebase_auth;
 
   const signUp = async () => {
+
     setIsLoading(true);
+
     try {
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         txtEmail,
         txtPassword
       );
+
       await updateProfile(userCredential.user, {
         displayName: `${txtUsername}`,
       });
+
     } catch (error) {
+
       console.log(error);
       alert("Sign up failed: " + error.message);
+
     } finally {
+
       setIsLoading(false);
-    }
+
+    };
+
   };
 
   return (
@@ -82,7 +92,7 @@ export default function SignUpScreen({ navigation }) {
           onChangeText={setDateBirthday}
           value={dateBirthday}
           placeholder="Birthday (Optional)"
-  /> */}
+        /> */}
 
         <button style={styles.blackButton} onClick={signUp}>
           CREATE ACCOUNT

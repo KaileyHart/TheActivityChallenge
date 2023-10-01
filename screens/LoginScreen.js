@@ -6,44 +6,69 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { Input } from "react-native-elements";
 
 export default function LoginScreen({ navigation }) {
+
   const [txtEmail, setTxtEmail] = useState("");
   const [txtPassword, setTxtPassword] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
   const auth = firebase_auth;
 
   const logIn = async () => {
+
     setIsLoading(true);
+
     try {
+
       const response = await signInWithEmailAndPassword(
         auth,
         txtEmail,
         txtPassword
       );
+
     } catch (error) {
-      console.log(error);
+
+      console.log("Error: ", error);
+
       alert("Sign in failed: " + error.message);
+
     } finally {
+
       setIsLoading(false);
-    }
+
+    };
+
   };
 
   return (
     <View style={styles.screenContainer}>
+
       <View style={styles.titleContainer}>
+
         <Text style={styles.title}>
           WELCOME BACK! <br />
           SIGN IN
         </Text>
+
       </View>
 
       <View style={styles.mainContainer}>
-        <Input
+
+        {/*<Input
           style={styles.input}
           onChangeText={setTxtEmail}
           value={txtEmail}
           placeholder="Email"
           autoCapitalize="none"
           label="Email"
+        /> */}
+
+        <label>Email</label>
+        <TextInput
+          style={styles.input}
+          onChangeText={setTxtEmail}
+          value={txtEmail}
+          placeholder="Email"
+          autoCapitalize="none"
         />
 
         <label>Password</label>
@@ -56,11 +81,12 @@ export default function LoginScreen({ navigation }) {
           secureTextEntry={true}
         />
 
-        <Text style={styles.infoText}>Forgot Password?</Text>
+        <Text style={styles.infoText}  onClick={() => navigation.navigate("ForgotPasswordScreen")}>Forgot Password?</Text>
 
         <button style={styles.blackButton} onClick={logIn}>
           LOGIN
         </button>
+
       </View>
 
       <View style={styles.signInContainer}>
@@ -74,6 +100,7 @@ export default function LoginScreen({ navigation }) {
           </button>
         </Text>
       </View>
+      
     </View>
   );
 }

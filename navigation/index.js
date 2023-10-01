@@ -9,13 +9,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // import { Text, View } from "../components/Themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { onAuthStateChanged } from "firebase/auth";
+
 import { firebase_auth } from "../FirebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 
 // * Auth Screens
 import SplashScreen from "../screens/SplashScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import LoginScreen from "../screens/LoginScreen";
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 
 // * General Screens
 import HomeScreen from "../screens/HomeScreen";
@@ -314,6 +316,11 @@ export default function Navigation({ navigation }) {
               component={LoginScreen}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+            name="ForgotPasswordScreen"
+            component={ForgotPasswordScreen}
+            options={{ headerShown: false }}
+          />
           </Stack.Group>
         )}
       </Stack.Navigator>
