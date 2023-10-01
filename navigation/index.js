@@ -16,6 +16,7 @@ import { firebase_auth } from "../FirebaseConfig";
 import SplashScreen from "../screens/SplashScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import LoginScreen from "../screens/LoginScreen";
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 
 // * General Screens
 import HomeScreen from "../screens/HomeScreen";
@@ -314,6 +315,11 @@ export default function Navigation({ navigation }) {
               component={LoginScreen}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+            name="ForgotPasswordScreen"
+            component={ForgotPasswordScreen}
+            options={{ headerShown: false }}
+          />
           </Stack.Group>
         )}
       </Stack.Navigator>
