@@ -1,31 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TextInput } from "react-native";
 import { Text, View } from "../components/Themed";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebase_auth } from "../FirebaseConfig";
 
 export default function AccountDetailsScreen({ navigation }) {
-  const [txtFirstName, setTxtFirstName] = useState("");
-  const [txtLastName, setTxtLastName] = useState("");
+  const [txtUsername, setTxtUsername] = useState("");
   const [txtEmail, setTxtEmail] = useState("");
-  const [txtPassword, setTxtPassword] = useState("");
-  const [dateBirthday, setDateBirthday] = useState("");
+  // const [txtPassword, setTxtPassword] = useState("");
+  // const [dateBirthday, setDateBirthday] = useState("");
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    onAuthStateChanged(firebase_auth, (user) => {
+      setUser(user);
+      setTxtUsername(user.displayName);
+      setTxtEmail(user.email);
+      // setTxtPassword(user.password);
+    });
+  }, []);
 
   return (
     <View style={styles.screenContainer}>
       <Text>Account Details</Text>
+      <Text>Username</Text>
       <TextInput
         style={styles.input}
-        onChangeText={setTxtFirstName}
-        value={txtFirstName}
-        placeholder="First Name"
+        onChangeText={setTxtUsername}
+        value={txtUsername}
+        placeholder="Username"
       />
 
-      <TextInput
-        style={styles.input}
-        onChangeText={setTxtLastName}
-        value={txtLastName}
-        placeholder="Last Name"
-      />
-
+      <Text>Email</Text>
       <TextInput
         style={styles.input}
         onChangeText={setTxtEmail}
@@ -33,19 +40,19 @@ export default function AccountDetailsScreen({ navigation }) {
         placeholder="Email"
       />
 
-      <TextInput
+      {/*<TextInput
         style={styles.input}
         onChangeText={setTxtPassword}
         value={txtPassword}
         placeholder="Password"
-      />
+      />/}
 
-      <TextInput
+      {/*<TextInput
         style={styles.input}
         onChangeText={setDateBirthday}
         value={dateBirthday}
         placeholder="Birthday (Optional)"
-      />
+      />*/}
 
       {/* Maybe just show a modal that says saved? */}
       <button

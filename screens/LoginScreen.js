@@ -1,10 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TextInput } from "react-native";
 import { Text, View } from "../components/Themed";
+import { firebase_auth } from "../FirebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { Input } from "react-native-elements";
 
 export default function LoginScreen({ navigation }) {
   const [txtEmail, setTxtEmail] = useState("");
   const [txtPassword, setTxtPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const auth = firebase_auth;
+
+  const logIn = async () => {
+    setIsLoading(true);
+    try {
+      const response = await signInWithEmailAndPassword(
+        auth,
+        txtEmail,
+        txtPassword
+      );
+    } catch (error) {
+      console.log(error);
+      alert("Sign in failed: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <View style={styles.screenContainer}>
@@ -16,26 +37,28 @@ export default function LoginScreen({ navigation }) {
       </View>
 
       <View style={styles.mainContainer}>
-        <TextInput
+        <Input
           style={styles.input}
           onChangeText={setTxtEmail}
           value={txtEmail}
           placeholder="Email"
+          autoCapitalize="none"
+          label="Email"
         />
 
+        <label>Password</label>
         <TextInput
           style={styles.input}
           onChangeText={setTxtPassword}
           value={txtPassword}
           placeholder="Password"
+          autoCapitalize="none"
+          secureTextEntry={true}
         />
 
         <Text style={styles.infoText}>Forgot Password?</Text>
 
-        <button
-          style={styles.blackButton}
-          onClick={() => navigation.navigate("HomeScreen")}
-        >
+        <button style={styles.blackButton} onClick={logIn}>
           LOGIN
         </button>
       </View>
