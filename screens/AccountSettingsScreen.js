@@ -5,28 +5,22 @@ import { ScrollView } from "react-native-gesture-handler";
 import { firebase_auth } from "../FirebaseConfig";
 
 export default function AccountSettingsScreen({ navigation }) {
+
   return (
     <View style={styles.screenContainer}>
+
       <ScrollView>
-        <Text>Account Settings</Text>
-        <button
-          style={styles.blackButton}
-          onClick={() => navigation.navigate("AccountDetailsScreen")}
-        >
-          ACCOUNT DETAILS
+
+        <Text style={styles.title}>Account Settings</Text>
+        <button style={styles.blackButton}onClick={() => navigation.navigate("AccountDetailsScreen")}>
+          EDIT ACCOUNT DETAILS
         </button>
 
-        <button
-          style={styles.blackButton}
-          onClick={() => firebase_auth.signOut()}
-        >
+        <button style={styles.blackButton} onClick={() => firebase_auth.signOut()}>
           LOG OUT
         </button>
 
-        <button
-          style={styles.blackButton}
-          onClick={() => navigation.navigate("Home")}
-        >
+        <button style={styles.blackButton} onClick={() => navigation.navigate("Home")}>
           HELP
         </button>
 

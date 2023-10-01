@@ -17,7 +17,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import SplashScreen from "../screens/SplashScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import LoginScreen from "../screens/LoginScreen";
-import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 
 // * General Screens
 import HomeScreen from "../screens/HomeScreen";
@@ -29,13 +28,16 @@ import AccountDetailsScreen from "../screens/AccountDetailsScreen";
 import DeleteAccountScreen from "../screens/DeleteAccountScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 
+// ? Is it okay for a component to be in both stack groups? -- 10/01/2023 KH
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
+
 // * General Components
 import Logo from "../components/Logo";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// TODO: Do we really have to repeat the header options for every screen? -- 09/15/2023 KH
+// ? Do we really have to repeat the header options for every screen? -- 09/15/2023 KH
 
 function BottomTab({ navigation }) {
   return (
@@ -298,6 +300,11 @@ export default function Navigation({ navigation }) {
                 ),
               }}
             />
+            <Stack.Screen
+            name="ForgotPasswordScreen"
+            component={ForgotPasswordScreen}
+            options={{ headerShown: false }}
+          />
           </Stack.Group>
         ) : (
           <Stack.Group>

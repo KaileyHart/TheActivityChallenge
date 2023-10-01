@@ -13,6 +13,7 @@ export default function DeleteAccountScreen({ navigation }) {
 
   // const auth = firebase_auth;
 
+  // TODO: This is repeated code. -- 10/01/2023 KH
   useEffect(() => {
 
     onAuthStateChanged(firebase_auth, (user) => {
@@ -33,6 +34,7 @@ export default function DeleteAccountScreen({ navigation }) {
     .catch((error) => {
 
       // * I'm not sure if this is working correctly. -- 10/01/2023 KH
+      // * https://firebase.google.com/docs/auth/web/manage-users#re-authenticate_a_user -- 10/01/2023 KH
       if (recentLoginRequired === true) {
 
         alert("Error deleting user: " + error.message);
