@@ -8,7 +8,6 @@ import { sendPasswordResetEmail } from "firebase/auth";
 export default function ForgotPasswordScreen({ navigation }) {
 
   const [txtEmail, setTxtEmail] = useState("");
-//   const [isLoading, setIsLoading] = useState(true);
 
   const auth = firebase_auth;
 
@@ -60,12 +59,12 @@ export default function ForgotPasswordScreen({ navigation }) {
 
       <View style={styles.signInContainer}>
           <button
-            style={styles.signInButton}
+            style={styles.blackButton}
             onClick={() => navigation.goBack()}>
             <strong>Cancel</strong>
           </button>
       </View>
-      
+
     </View>
   );
 }
