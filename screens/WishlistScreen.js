@@ -4,9 +4,13 @@ import { Text, View } from "../components/Themed";
 export default function WishlistScreen() {
 
   return (
+
     <View style={styles.container}>
+
       <Text style={styles.title}>Wishlist</Text>
+      
     </View>
+
   );
 }
 

@@ -8,12 +8,7 @@ export default function NotFoundScreen({ navigation }) {
 
       <Text style={styles.title}>This screen doesn't exist.</Text>
 
-      <TouchableOpacity
-        onPress={() => navigation.replace("Root")}
-        style={styles.link}
-      >
-
-        {/* <Text style={styles.linkText}>Go to home screen!</Text> */}
+      <TouchableOpacity onPress={() => navigation.replace("Root")} style={styles.link}>
 
         <button onPress={() => navigation.goBack()}>Dismiss</button>
 

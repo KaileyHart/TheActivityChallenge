@@ -11,23 +11,23 @@ export default function ForgotPasswordScreen({ navigation }) {
 
   const auth = firebase_auth;
 
-  const resetPassword = async (event, txtEmail) => {
+  const resetPassword = async ( txtEmail) => {
 
     try {
         
-        event.preventDefault();
-        await sendPasswordResetEmail(auth, txtEmail);
-        alert("Password reset email sent successfully!");
-        // console.log("Password reset email sent successfully!");
+      await sendPasswordResetEmail(auth, txtEmail);
+      alert("Password reset email sent successfully!");
+      // console.log("Password reset email sent successfully!");
 
     } catch (error) {
 
-        alert("Reset Password Failed: " + error.message);
-        // console.log(error);
+      alert("Reset Password Failed: " + error.message);
+      // console.log(error);
 
     };
 
   };
+
 
   return (
     <View style={styles.screenContainer}>
@@ -51,18 +51,18 @@ export default function ForgotPasswordScreen({ navigation }) {
           autoCapitalize="none"
         />
 
-        <button style={styles.blackButton} onClick={(event)=> resetPassword(event, txtEmail)}>
+        <button style={styles.blackButton} onClick={(event)=> resetPassword( txtEmail)}>
           SEND RESET EMAIL
         </button>
 
       </View>
 
       <View style={styles.signInContainer}>
-          <button
-            style={styles.blackButton}
-            onClick={() => navigation.goBack()}>
-            <strong>Cancel</strong>
+
+          <button style={styles.blackButton} onClick={() => navigation.goBack()}>
+            CANCEL
           </button>
+
       </View>
 
     </View>

@@ -11,8 +11,6 @@ export default function DeleteAccountScreen({ navigation }) {
 
   const [user, setUser] = useState({});
 
-  // const auth = firebase_auth;
-
   // TODO: This is repeated code. -- 10/01/2023 KH
   useEffect(() => {
 
@@ -28,7 +26,7 @@ export default function DeleteAccountScreen({ navigation }) {
     await deleteUser(user)
     .then(() => {
 
-      console.log('Successfully deleted user');
+      // console.log('Successfully deleted user');
 
     })
     .catch((error) => {
@@ -44,7 +42,7 @@ export default function DeleteAccountScreen({ navigation }) {
 
         reauthenticateWithCredential(user, credential).then(() => {
 
-          console.log("Reauthenticated");
+          // console.log("Reauthenticated");
 
         }).catch((error) => {
 
@@ -67,14 +65,11 @@ export default function DeleteAccountScreen({ navigation }) {
     <View style={styles.screenContainer}>
 
       <Text>We are sorry to see you go. Are you sure you want to delete your acocunt?</Text>
-      <Text>
-        You will not be able to access your account again if you proceed. All of
-        your saved information will be lost.
-      </Text>
+      
+      <Text>You will not be able to access your account again if you proceed. All of
+        your saved information will be lost.</Text>
 
-      <button
-        style={styles.blackButton}
-        onClick={() => deleteUserAccount()}>
+      <button style={styles.blackButton} onClick={() => deleteUserAccount()}>
         DELETE ACCOUNT
       </button>
 

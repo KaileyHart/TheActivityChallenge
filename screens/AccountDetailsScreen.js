@@ -10,7 +10,7 @@ export default function AccountDetailsScreen({ navigation }) {
   const [txtEmail, setTxtEmail] = useState("");
   const [user, setUser] = useState({});
 
-    // TODO: This is repeated code. -- 10/01/2023 KH
+  // TODO: This is repeated code. -- 10/01/2023 KH
   useEffect(() => {
 
     onAuthStateChanged(firebase_auth, (user) => {
@@ -32,7 +32,7 @@ export default function AccountDetailsScreen({ navigation }) {
       });
 
       alert("Update Successful!");
-      navigation.goBack()
+      navigation.goBack();
 
     } catch (error) {
 
