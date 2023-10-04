@@ -7,6 +7,8 @@ import ActivityCard from "../components/ActivityCard";
 import { Typography } from "@mui/material";
 import { ScrollView } from "react-native-gesture-handler";
 
+import { addDoc, collection } from "firebase/firestore"; 
+
 export default function HomeScreen({ navigation }) {
 
   return (

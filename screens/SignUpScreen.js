@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {StyleSheet, TextInput} from "react-native";
 import { Text, View } from "../components/Themed";
-import { firebase_auth } from "../FirebaseConfig";
+import { firebase_auth, firebase_db } from "../FirebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
+import { setDoc, doc, addDoc, collection } from "firebase/firestore"; 
 
 export default function SignUpScreen({ navigation }) {
 
@@ -12,6 +13,7 @@ export default function SignUpScreen({ navigation }) {
   const [txtPassword, setTxtPassword] = useState("");
 
   const auth = firebase_auth;
+  const db = firebase_db;
 
   const signUp = async () => {
 
@@ -22,6 +24,20 @@ export default function SignUpScreen({ navigation }) {
       await updateProfile(userCredential.user, {
         displayName: `${txtUsername}`,
       });
+
+      let userUID = userCredential.user.uid;
+
+      let userData = {
+        uid: userUID,
+        displayName: userCredential.user.displayName,
+        authProvider: "local",
+        email: userCredential.user.email, 
+        active: true,
+        wishlistActivities: []
+      };
+
+      // * Add user to user and user infomation to database. 
+      await setDoc(doc(db, "users", userUID), userData);
 
     } catch (error) {
 

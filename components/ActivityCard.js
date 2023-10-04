@@ -4,33 +4,27 @@ import { View } from "../components/Themed";
 import { Card, CardContent, Typography, CardHeader } from "@mui/material";
 import activityDataJSON from "/assets/json/activities.json";
 import { ScrollView } from "react-native-gesture-handler";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
+import { firebase_auth, firebase_db } from "../FirebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, setDoc,updateDoc , getDoc, collection } from "firebase/firestore";
 
 export default function ActivityCard(props) {
+
   const [activityDataList, setActivityDataList] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [user, setUser] = useState({});
 
-  const activityType =
-    props.type !== "" && props.type !== undefined && props.type !== null
-      ? props.type
-      : "";
-  const activityPrice =
-    props.price !== "" && props.price !== undefined && props.price !== null
-      ? props.price
-      : "";
-  const activityKidFriendliness =
-    props.kidFriendly !== "" &&
-    props.kidFriendly !== undefined &&
-    props.kidFriendly !== null
-      ? props.kidFriendly
-      : "";
+  const auth = firebase_auth;
+  const db = firebase_db;
 
+  const activityType = props.type !== "" && props.type !== undefined && props.type !== null ? props.type : "";
+  const activityPrice = props.price !== "" && props.price !== undefined && props.price !== null ? props.price : "";
+  const activityKidFriendliness = props.kidFriendly !== "" && props.kidFriendly !== undefined && props.kidFriendly !== null ? props.kidFriendly : "";
+  const activityDuration = props.duration !== "" && props.duration !==undefined && props.duration !== null ?props.duration : "";
   // const activityParticipants = props.participants !== "" && props.participants !== undefined && props.participants !== null ? props.participants : "";
-  const activityDuration =
-    props.duration !== "" &&
-    props.duration !== undefined &&
-    props.duration !== null
-      ? props.duration
-      : "";
+
 
   useEffect(() => {
     if (
@@ -40,6 +34,7 @@ export default function ActivityCard(props) {
       setActivityDataList([...activityDataJSON.activityData]);
     }
   }, []);
+
 
   useEffect(() => {
     if (
@@ -105,45 +100,103 @@ export default function ActivityCard(props) {
     }
   }, [activityDataList]);
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      console.log(user);
+    });
+  }, []);
+
+
+  const addToUserWishlist = async (wishlistID) => {
+
+    try { 
+
+      const docRef = doc(db, "users", user.uid); 
+
+      const wishlistActivitiesData = {
+        activity: wishlistID
+      };
+      
+      updateDoc(docRef, wishlistActivitiesData, {merge:true})
+      .then(docRef => {
+          console.log("A New Document Field has been added to an existing document");
+      })
+      .catch(error => {
+          console.log(error);
+      });
+      
+    } catch (error) {
+
+      console.log("Error: ", error);
+
+    };
+
+  };
+
+
   return (
     <View style={styles.cards}>
+
       {activities !== "" || activities !== undefined || activities !== null ? (
+
         <ScrollView horizontal={true}>
+
           {activities.map((activity) => (
+
             <Card key={activity.key} style={styles.card}>
+
               <CardContent>
+
+              {/* // TODO: Set icon to be filled (heart) after the user adds it. */}
+              <button onClick={() => addToUserWishlist(activity.key)}>
+                <Ionicons style={styles.icon} name="heart-outline"></Ionicons>
+              </button>
+
                 <Typography variant="body1">
                   <strong>{activity.activity}</strong>
                 </Typography>
+
                 <Typography variant="body2">
                   <strong>Type: </strong>
                   {activity.type}
                 </Typography>
+
                 <Typography variant="body2">
                   <strong>Participants: </strong>
                   {activity.participants}
                 </Typography>
+
                 <Typography variant="body2">
                   <strong>Price: </strong>
                   {activity.price}
                 </Typography>
+
                 <Typography variant="body2">
                   <strong>kidFriendly: </strong>
                   {activity.kidFriendly === true ? "Yes" : "No"}
                 </Typography>
+
                 <Typography variant="body2">
                   <strong>Accessibility: </strong>
                   {activity.accessibility}
                 </Typography>
+
                 <Typography variant="body2">
                   <strong>Duration: </strong>
                   {activity.duration}
                 </Typography>
+
               </CardContent>
+
             </Card>
+
           ))}
+
         </ScrollView>
+
       ) : null}
+
     </View>
   );
 }
