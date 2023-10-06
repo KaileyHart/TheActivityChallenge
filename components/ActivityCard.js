@@ -166,7 +166,7 @@ export default function ActivityCard(props) {
               <CardContent>
 
               {/* // TODO: Set icon to be filled (heart) after the user adds it. */}
-              <button onClick={() => {readUserWishlist(\activit.key); addToUserWishlist(activity.key);}}>
+              <button onClick={() => {readUserWishlist(activity.key); addToUserWishlist(activity.key);}}>
                 <Ionicons style={styles.icon} name="heart-outline"></Ionicons>
               </button>
 
