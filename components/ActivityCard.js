@@ -6,9 +6,13 @@ import activityDataJSON from "/assets/json/activities.json";
 import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
+
+import firebase from 'firebase/app'
+// import "firebase/compat/firestore";
+// import { firestore } from "firebase/firestore";
 import { firebase_auth, firebase_db } from "../FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, setDoc,updateDoc , getDoc, collection } from "firebase/firestore";
+import { doc, setDoc,updateDoc , getDoc, collection , arrayUnion} from "firebase/firestore";
 
 export default function ActivityCard(props) {
 
@@ -112,25 +116,38 @@ export default function ActivityCard(props) {
 
     try { 
 
-      const docRef = doc(db, "users", user.uid); 
-
-      const wishlistActivitiesData = {
-        activity: wishlistID
-      };
+      const docRef = doc(db, "users", user.uid);
       
-      updateDoc(docRef, wishlistActivitiesData, {merge:true})
-      .then(docRef => {
+      updateDoc(docRef, {
+        wishlistActivities: arrayUnion(`${wishlistID}`)
+        })
+        .then(docRef => {
           console.log("A New Document Field has been added to an existing document");
-      })
-      .catch(error => {
-          console.log(error);
-      });
+        })
+        .catch(error => {
+            console.log(error);
+        });
       
     } catch (error) {
 
       console.log("Error: ", error);
 
     };
+
+  };
+
+// TODO: Reas the user wishlist in order to determine which activities should display a filled in heart versus the other one.  10/06/2023 Kh
+  const readUserWishlist = async () => {
+
+  const docRef = doc(db, "users", "wishlistActivities");
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  };
 
   };
 
@@ -149,7 +166,7 @@ export default function ActivityCard(props) {
               <CardContent>
 
               {/* // TODO: Set icon to be filled (heart) after the user adds it. */}
-              <button onClick={() => addToUserWishlist(activity.key)}>
+              <button onClick={() => {readUserWishlist(\activit.key); addToUserWishlist(activity.key);}}>
                 <Ionicons style={styles.icon} name="heart-outline"></Ionicons>
               </button>
 
