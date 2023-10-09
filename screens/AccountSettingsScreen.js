@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Button } from "react-native";
+import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import { ScrollView } from "react-native-gesture-handler";
 import { firebase_auth } from "../FirebaseConfig";
@@ -12,6 +12,7 @@ export default function AccountSettingsScreen({ navigation }) {
       <ScrollView>
 
         <Text style={styles.title}>Account Settings</Text>
+
         <button style={styles.blackButton}onClick={() => navigation.navigate("AccountDetailsScreen")}>
           EDIT ACCOUNT DETAILS
         </button>
@@ -24,13 +25,12 @@ export default function AccountSettingsScreen({ navigation }) {
           HELP
         </button>
 
-        <button
-          style={styles.blackButton}
-          onClick={() => navigation.navigate("DeleteAccountScreen")}
-        >
+        <button style={styles.blackButton} onClick={() => navigation.navigate("DeleteAccountScreen")}>
           DELETE ACCOUNT
         </button>
+
       </ScrollView>
+      
     </View>
   );
 }

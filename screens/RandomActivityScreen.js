@@ -8,13 +8,20 @@ import { Typography } from "@mui/material";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function RandomActivityScreen({ navigation }) {
+
   return (
     <View style={styles.container}>
+
       <ScrollView>
+
         <View style={styles.search}>
+        
           <GenerateRandomActivityButton />
+
         </View>
+
       </ScrollView>
+
     </View>
   );
 }

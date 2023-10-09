@@ -3,29 +3,28 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { Text, View } from "../components/Themed";
 
 export default function SplashScreen({ navigation }) {
+  
   return (
     <View style={styles.screenContainer}>
+
       <View style={styles.container2}>
+
         <Text style={styles.title}>
           THE ACTIVITY
           <br />
           CHALLENGE <Ionicons style={styles.icon} name="images"></Ionicons>
         </Text>
 
-        <button
-          style={styles.blackButton}
-          onClick={() => navigation.navigate("SignUpScreen")}
-        >
+        <button style={styles.blackButton} onClick={() => navigation.navigate("SignUpScreen")}>
           GET STARTED
         </button>
+
       </View>
 
-      <button
-        style={styles.loginButton}
-        onClick={() => navigation.navigate("LoginScreen")}
-      >
+      <button style={styles.loginButton} onClick={() => navigation.navigate("LoginScreen")}>
         Login
       </button>
+      
     </View>
   );
 }

@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Button } from "react-native";
-import { Text, View } from "../components/Themed";
-import Search from "../components/Search";
+import { StyleSheet } from "react-native";
+import { View } from "../components/Themed";
 import GenerateRandomActivityButton from "../components/GenerateRandomActivityButton";
-import ActivityCard from "../components/ActivityCard";
-import { Typography } from "@mui/material";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function ActivityDetailScreen({ navigation }) {
+
   return (
     <View style={styles.container}>
+
       <ScrollView>
+
         <View style={styles.search}>
+
           <GenerateRandomActivityButton />
+          
         </View>
+
       </ScrollView>
+
     </View>
   );
 }

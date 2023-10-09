@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Button } from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Text, View } from "../components/Themed";
+import { View } from "../components/Themed";
 import Search from "../components/Search";
 import ActivityCard from "../components/ActivityCard";
 import { Typography } from "@mui/material";
 import { ScrollView } from "react-native-gesture-handler";
 
+
 export default function HomeScreen({ navigation }) {
+
   return (
     <View style={styles.container}>
+
       <ScrollView>
+
         <View style={styles.searchContainer}>
-          <Search></Search>
+
+          <Search/>
+
           <button style={styles.searchButton}>Search</button>
+
         </View>
 
         {/* // TODO: Create Filter */}
@@ -47,10 +54,13 @@ export default function HomeScreen({ navigation }) {
           <Ionicons name="today" size={15} color="white" />
           <strong> Multiple Day Activities</strong>
         </Typography>
+
         <View>
           <ActivityCard duration="days" />
         </View>
+
       </ScrollView>
+      
     </View>
   );
 }

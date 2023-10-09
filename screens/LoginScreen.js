@@ -1,39 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, TextInput } from "react-native";
 import { Text, View } from "../components/Themed";
 import { firebase_auth } from "../FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Input } from "react-native-elements";
+// import { Input } from "react-native-elements";
 
 export default function LoginScreen({ navigation }) {
 
   const [txtEmail, setTxtEmail] = useState("");
   const [txtPassword, setTxtPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
 
   const auth = firebase_auth;
 
   const logIn = async () => {
 
-    setIsLoading(true);
-
     try {
 
-      const response = await signInWithEmailAndPassword(
-        auth,
-        txtEmail,
-        txtPassword
-      );
+      await signInWithEmailAndPassword(auth, txtEmail, txtPassword);
 
     } catch (error) {
 
-      console.log("Error: ", error);
-
+      // console.log("Error: ", error);
       alert("Sign in failed: " + error.message);
-
-    } finally {
-
-      setIsLoading(false);
 
     };
 
@@ -90,15 +78,16 @@ export default function LoginScreen({ navigation }) {
       </View>
 
       <View style={styles.signInContainer}>
+
         <Text>
           Don't have an account yet?{" "}
-          <button
-            style={styles.signInButton}
-            onClick={() => navigation.navigate("SignUpScreen")}
-          >
+
+          <button style={styles.signInButton} onClick={() => navigation.navigate("SignUpScreen")}>
             <strong>Sign up</strong>
           </button>
+          
         </Text>
+
       </View>
       
     </View>

@@ -1,49 +1,48 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  TextInput,
-  ScrollView,
-  KeyboardAvoidingView,
-  Alert,
-  SafeAreaView,
-} from "react-native";
+import {StyleSheet, TextInput} from "react-native";
 import { Text, View } from "../components/Themed";
-import { firebase_auth } from "../FirebaseConfig";
+import { firebase_auth, firebase_db } from "../FirebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
+import { setDoc, doc, addDoc, collection } from "firebase/firestore"; 
 
 export default function SignUpScreen({ navigation }) {
+
   const [txtUsername, setTxtUsername] = useState("");
   const [txtEmail, setTxtEmail] = useState("");
   const [txtPassword, setTxtPassword] = useState("");
 
-  const [isLoading, setIsLoading] = useState(true);
   const auth = firebase_auth;
+  const db = firebase_db;
 
   const signUp = async () => {
 
-    setIsLoading(true);
-
     try {
 
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        txtEmail,
-        txtPassword
-      );
+      const userCredential = await createUserWithEmailAndPassword(auth, txtEmail, txtPassword);
 
       await updateProfile(userCredential.user, {
         displayName: `${txtUsername}`,
       });
 
+      let userUID = userCredential.user.uid;
+
+      let userData = {
+        uid: userUID,
+        displayName: userCredential.user.displayName,
+        authProvider: "local",
+        email: userCredential.user.email, 
+        active: true,
+        wishlistActivities: []
+      };
+
+      // * Add user to user and user infomation to database. 
+      await setDoc(doc(db, "users", userUID), userData);
+
     } catch (error) {
 
-      console.log(error);
+      // console.log(error);
       alert("Sign up failed: " + error.message);
-
-    } finally {
-
-      setIsLoading(false);
 
     };
 
@@ -51,14 +50,18 @@ export default function SignUpScreen({ navigation }) {
 
   return (
     <View style={styles.screenContainer}>
+
       <View style={styles.titleContainer}>
+
         <Text style={styles.title}>
           LET'S GET <br />
           STARTED!
         </Text>
+
       </View>
 
       <View style={styles.mainContainer}>
+
         <Text>Username</Text>
         <TextInput
           style={styles.input}
@@ -102,19 +105,23 @@ export default function SignUpScreen({ navigation }) {
           By signing up, you agree to our <strong>Terms of Service</strong> and{" "}
           <strong>Privacy Policy</strong>
         </Text>
+
       </View>
 
       <View style={styles.signInContainer}>
+
         <Text>
+
           Already have an account?{" "}
-          <button
-            style={styles.signInButton}
-            onClick={() => navigation.navigate("LoginScreen")}
-          >
+          
+          <button style={styles.signInButton} onClick={() => navigation.navigate("LoginScreen")}>
             <strong>Login</strong>
           </button>
+
         </Text>
+
       </View>
+
     </View>
   );
 }
