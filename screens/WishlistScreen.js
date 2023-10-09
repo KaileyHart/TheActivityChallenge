@@ -1,32 +1,70 @@
+import React from "react";
 import { StyleSheet } from "react-native";
-import { Text, View } from "../components/Themed";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { View } from "../components/Themed";
+import ActivityCard from "../components/ActivityCard";
+import { Typography } from "@mui/material";
+import { ScrollView } from "react-native-gesture-handler";
 
-export default function WishlistScreen() {
+export default function WishlistScreen({ navigation }) {
 
   return (
-
     <View style={styles.container}>
 
-      <Text style={styles.title}>Wishlist</Text>
+      <ScrollView>
+
+        <Typography style={styles.cardListHeader}>
+          <Ionicons name="heart" size={15} color="white" />
+          <strong> Your Activities</strong>
+        </Typography>
+        <View>
+          <ActivityCard activitySaved={true} />
+        </View>
+
+      </ScrollView>
       
     </View>
-
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+  },
+  titleContainer: {
+    display: "flex",
+    justifyContent: "left",
+    margin: 25,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  searchContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "95%",
+    margin: "10px",
+    marginTop: "20px",
+  },
+  searchButton: {
+    padding: "10px",
+    border: "1px solid",
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: "black",
+    color: "white",
+  },
+  cardListHeaderIcon: {
+    color: "white",
+  },
+  cardListHeader: {
+    padding: "10px",
+    marginTop: "10px",
+    marginBottom: "10px",
+    color: "white",
+    fontSize: "30",
+    backgroundColor: "black",
   },
 });
