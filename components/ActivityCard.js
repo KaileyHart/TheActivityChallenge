@@ -15,7 +15,9 @@ export default function ActivityCard(props) {
   const [activityDataList, setActivityDataList] = useState([]);
   const [activities, setActivities] = useState([]);
   const [user, setUser] = useState({});
+  const [docRef, setDocRef] = useState("");
   const [existingWishlistActivities, setExistingWishlistActivities] = useState([]);
+  const [scrollHorizontal, setScrollHorizontal] = useState(true);
 
   const auth = firebase_auth;
   const db = firebase_db;
@@ -68,19 +70,27 @@ export default function ActivityCard(props) {
 
         newArrayByDuration = activityDataList.filter((activityData) => activityData.duration == activityDuration);
 
-      } else if (activitySaved === true) {
+      } else if (activitySaved == true) {
+
+        setScrollHorizontal(false);
 
         if (existingWishlistActivities) {
 
-          for (let i = 0; existingWishlistActivities.length > 0; i++) {
+          for (let i = 0; existingWishlistActivities.length > i; i++) {
 
-            newArrayBySaved.push(activityDataList.filter((activityData) => activityData.key == existingWishlistActivities[i]));
+            for (let j = 0; activityDataList.length > j; j++) {
+
+              if (activityDataList[j].key == existingWishlistActivities[i]) {
+
+                newArrayBySaved.push(activityDataList[j]);
+
+              };
+
+            };
 
           };
 
-        }else {
-          console.log("Else");
-        }
+        };
 
       };
 
@@ -108,9 +118,6 @@ export default function ActivityCard(props) {
 
       };
 
-      console.log("newActivitiesArray", newActivitiesArray);
-      console.log("newArrayBySaved", newArrayBySaved);
-
       setActivities([...newActivitiesArray]);
 
     };
@@ -123,6 +130,7 @@ export default function ActivityCard(props) {
     onAuthStateChanged(auth, (user) => {
 
       setUser(user);
+      setDocRef(doc(db, "users", user.uid));
 
     });
 
@@ -131,12 +139,12 @@ export default function ActivityCard(props) {
 
   useEffect(() => {
 
-    if (user) {
+    if (user !== "" || user !== undefined || user !== null) {
 
-      readUserWishlist(user);
+      readUserWishlist();
 
     };
-  
+
   }, [user]);
 
 
@@ -145,8 +153,6 @@ export default function ActivityCard(props) {
     if (actionType === "add") {
 
       try { 
-
-        const docRef = doc(db, "users", user.uid);
         
         updateDoc(docRef, {
           wishlistActivities: arrayUnion(`${wishlistID}`)
@@ -155,7 +161,7 @@ export default function ActivityCard(props) {
             console.log("A New Document Field has been added to an existing document");
           })
           .catch(error => {
-              console.log(error);
+              console.log("Error:", error);
           });
 
           let newExistingWishlistActivities = [...existingWishlistActivities];
@@ -174,19 +180,16 @@ export default function ActivityCard(props) {
 
     } else if (actionType === "remove") {
 
-      // TODO: Update to remove an item in the wishlist. 
       try { 
-
-        const docRef = doc(db, "users", user.uid);
         
         updateDoc(docRef, {
           wishlistActivities: arrayRemove(`${wishlistID}`)
           })
           .then(docRef => {
-            console.log("A New Document Field has been added to an existing document");
+            console.log("An existing document field has been removed");
           })
           .catch(error => {
-              console.log(error);
+              console.log("Error:", error);
           });
 
           let newExistingWishlistActivities = [...existingWishlistActivities];
@@ -209,23 +212,24 @@ export default function ActivityCard(props) {
 
   };
 
-  // TODO: Read the user wishlist in order to determine which activities should display a filled in heart versus the other one.  10/06/2023 Kh
+
   const readUserWishlist = async (user) => {
 
     try {
 
-      console.log("user", user);
+      if (docRef) {
 
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-    
-      if (docSnap.exists()) {
+        const docSnap = await getDoc(docRef);
+      
+        if (docSnap.exists()) {
 
-        setExistingWishlistActivities(docSnap.data().wishlistActivities);
+          setExistingWishlistActivities(docSnap.data().wishlistActivities);
 
-      } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
+        } else {
+
+          console.log("This document does not exist");
+
+        };
 
       };
 
@@ -238,36 +242,34 @@ export default function ActivityCard(props) {
   };
 
   return (
-    <View style={styles.cards}>
+    <View style={scrollHorizontal === true ? styles.horizontalCards : styles.verticalCards}>
 
       {activities !== "" || activities !== undefined || activities !== null ? (
 
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={scrollHorizontal}>
 
           {activities.map((activity) => (
-
+          
             <Card key={activity.key} style={styles.card}>
-
+          
               <CardContent>
 
-              {/* // TODO: Set icon to be filled (heart) after the user adds it. */}
-
-                {existingWishlistActivities.includes((activity.key)) ? 
-
-                  <button onClick={() => { updateUserWishlist(user, activity.key, "remove");}}>
-                    <Ionicons style={styles.icon} name="heart"></Ionicons>
-                  </button>
-                  
-                  : 
-
-                  <button onClick={() => { updateUserWishlist(user, activity.key, "add");}}>
-                    <Ionicons style={styles.icon} name="heart-outline"></Ionicons>  
-                  </button>
-
-                }
-
-                <Typography variant="body1">
+                <Typography variant="body1" style={styles.activityName}>
                   <strong>{activity.activity}</strong>
+
+                  {existingWishlistActivities.includes((activity.key)) ? 
+
+                    <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "remove");}}>
+                      <Ionicons style={styles.icon} name="heart"></Ionicons>
+                    </button>
+                    
+                    : 
+  
+                    <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "add");}}>
+                      <Ionicons style={styles.icon} name="heart-outline"></Ionicons>  
+                    </button>
+  
+                  }
                 </Typography>
 
                 <Typography variant="body2">
@@ -334,7 +336,27 @@ const styles = StyleSheet.create({
     height: "auto",
     margin: "10px",
   },
-  cards: {
+  horizontalCards: {
     display: "flex",
   },
+  verticalCards: {
+    display: "flex",
+    alignItems: "center"
+  },
+  activityName: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "10px"
+  },
+  heartButton: {
+    backgroundColor: "white",
+    border: "none",
+    height: "40px",
+    width: "40px"
+  },
+  icon: {
+    fontSize: "20px",
+    alignItems: "flex-start"
+  }
 });

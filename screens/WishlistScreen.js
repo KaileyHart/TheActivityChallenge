@@ -14,11 +14,16 @@ export default function WishlistScreen({ navigation }) {
       <ScrollView>
 
         <Typography style={styles.cardListHeader}>
+
           <Ionicons name="heart" size={15} color="white" />
-          <strong> Your Activities</strong>
+          <strong> Your Saved Activities</strong>
+
         </Typography>
+
         <View>
+
           <ActivityCard activitySaved={true} />
+
         </View>
 
       </ScrollView>
