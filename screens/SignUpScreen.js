@@ -62,7 +62,7 @@ export default function SignUpScreen({ navigation }) {
 
       <View style={styles.mainContainer}>
 
-        <Text>Username</Text>
+        {/* <Text>Username</Text> */}
         <TextInput
           style={styles.input}
           onChangeText={setTxtUsername}
@@ -71,7 +71,7 @@ export default function SignUpScreen({ navigation }) {
           label="Username"
         />
 
-        <Text>Email</Text>
+        {/* <Text>Email</Text> */}
         <TextInput
           style={styles.input}
           onChangeText={setTxtEmail}
@@ -80,7 +80,7 @@ export default function SignUpScreen({ navigation }) {
           autoCapitalize="none"
         />
 
-        <Text>Password</Text>
+        {/* <Text>Password</Text> */}
         <TextInput
           style={styles.input}
           onChangeText={setTxtPassword}

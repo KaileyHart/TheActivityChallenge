@@ -29,7 +29,7 @@ export default function ActivityCard(props) {
   const activityDuration = props.duration !== "" && props.duration !== undefined && props.duration !== null ? props.duration : "";
   const activitySaved = props.activitySaved !== "" && props.activitySaved !== undefined && props.activitySaved !== null ? props.activitySaved : false;
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   useEffect(() => {
 

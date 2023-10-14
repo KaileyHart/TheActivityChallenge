@@ -50,7 +50,7 @@ export default function LoginScreen({ navigation }) {
           label="Email"
         /> */}
 
-        <label>Email</label>
+        {/* <label>Email</label> */}
         <TextInput
           style={styles.input}
           onChangeText={setTxtEmail}
@@ -59,7 +59,7 @@ export default function LoginScreen({ navigation }) {
           autoCapitalize="none"
         />
 
-        <label>Password</label>
+        {/* <label>Password</label> */}
         <TextInput
           style={styles.input}
           onChangeText={setTxtPassword}
