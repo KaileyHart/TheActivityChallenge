@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { View } from "../components/Themed";
+import { Text, View } from "../components/Themed";
 import { Card, CardContent, Typography } from "@mui/material";
 import activityDataJSON from "/assets/json/activities.json";
 import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
+import { useNavigation } from '@react-navigation/native';
 import { firebase_auth, firebase_db } from "../FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, updateDoc, getDoc, arrayUnion, arrayRemove} from "firebase/firestore";
@@ -27,8 +28,8 @@ export default function ActivityCard(props) {
   const activityKidFriendliness = props.kidFriendly !== "" && props.kidFriendly !== undefined && props.kidFriendly !== null ? props.kidFriendly : "";
   const activityDuration = props.duration !== "" && props.duration !== undefined && props.duration !== null ? props.duration : "";
   const activitySaved = props.activitySaved !== "" && props.activitySaved !== undefined && props.activitySaved !== null ? props.activitySaved : false;
-  // const activityParticipants = props.participants !== "" && props.participants !== undefined && props.participants !== null ? props.participants : "";
 
+  const navigation = useNavigation();
 
   useEffect(() => {
 
@@ -43,6 +44,7 @@ export default function ActivityCard(props) {
 
   useEffect(() => {
 
+    // TODO: There is probably a way to do this without creating separate arrays for each activity type. 
     if (activityDataList !== "" || activityDataList !== undefined || activityDataList !== null) {
 
       let newActivitiesArray = [];
@@ -93,8 +95,6 @@ export default function ActivityCard(props) {
         };
 
       };
-
-      // console.log(newArrayByKidFriendliness);
 
       if (newArrayByType.length > 0) {
 
@@ -241,6 +241,7 @@ export default function ActivityCard(props) {
 
   };
 
+
   return (
     <View style={scrollHorizontal === true ? styles.horizontalCards : styles.verticalCards}>
 
@@ -249,13 +250,14 @@ export default function ActivityCard(props) {
         <ScrollView horizontal={scrollHorizontal}>
 
           {activities.map((activity) => (
-          
+        
             <Card key={activity.key} style={styles.card}>
           
               <CardContent>
 
                 <Typography variant="body1" style={styles.activityName}>
-                  <strong>{activity.activity}</strong>
+
+                  <Text onClick={() => navigation.navigate('ActivityDetailScreen', {activity: activity})}><strong>{activity.activity}</strong></Text>
 
                   {existingWishlistActivities.includes((activity.key)) ? 
 

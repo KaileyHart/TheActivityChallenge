@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { View } from "../components/Themed";
-import GenerateRandomActivityButton from "../components/GenerateRandomActivityButton";
+import { Text, View } from "../components/Themed";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function ActivityDetailScreen({ navigation }) {
+export default function ActivityDetailScreen({ route }) {
+
+  // TODO: Add Wishlist button
+  // TODO: Add an image
+
+  const {activity} = route.params;
 
   return (
-    <View style={styles.container}>
+    <View style={styles.screenContainer}>
 
       <ScrollView>
 
-        <View style={styles.search}>
+        <View>
 
-          <GenerateRandomActivityButton />
+        <Text style={styles.title}>{activity.activity}</Text>
+        <p>This type of activity is <strong>{activity.type}</strong>. It has {activity.accessibility} and it can take {activity.duration} to complete. It's {activity.kidFriendly === true ? "" : "not"} great to complete with kids. It's availability score is {activity.availability}. You need at least {activity.participants > 1 ? `${activity.participants} people` : `${activity.participants} person`} to complete this activity. It's typical cost is {activity.price}.</p>
           
         </View>
 
@@ -24,8 +29,11 @@ export default function ActivityDetailScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screenContainer: {
     flex: 1,
+    justifyContent: "space-between",
+    width: "100%",
+    padding: "25px",
   },
   titleContainer: {
     display: "flex",
@@ -36,7 +44,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  cardListHeader: {
-    padding: "20px",
+  blackButton: {
+    backgroundColor: "black",
+    color: "white",
+    fontWeight: 700,
+    borderRadius: "20px",
+    padding: "10px",
+    marginTop: "25px",
+    marginBottom: "10px",
+    width: "90%",
   },
 });

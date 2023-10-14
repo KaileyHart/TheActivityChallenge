@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { View } from "../components/Themed";
+import { Text, View } from "../components/Themed";
 import ActivityCard from "../components/ActivityCard";
 import { Typography } from "@mui/material";
 import { ScrollView } from "react-native-gesture-handler";
@@ -12,6 +12,10 @@ export default function WishlistScreen({ navigation }) {
     <View style={styles.container}>
 
       <ScrollView>
+
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Wishlist Activities</Text>
+      </View>
 
         <Typography style={styles.cardListHeader}>
 
@@ -39,7 +43,9 @@ const styles = StyleSheet.create({
   titleContainer: {
     display: "flex",
     justifyContent: "left",
-    margin: 25,
+    marginLeft: 25,
+    marginTop: 15,
+    marginBottom: 15
   },
   title: {
     fontSize: 20,

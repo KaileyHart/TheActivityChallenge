@@ -46,11 +46,11 @@ function BottomTab({ navigation }) {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "HomeScreen") {
+          if (route.name === "Home") {
             iconName = "home";
-          } else if (route.name === "RandomActivityScreen") {
+          } else if (route.name === "Generate Activity") {
             iconName = "shuffle-outline";
-          } else if (route.name === "WishlistScreen") {
+          } else if (route.name === "Wishlist") {
             iconName = "heart";
           }
 
@@ -72,7 +72,7 @@ function BottomTab({ navigation }) {
       })}
     >
       <Tab.Screen
-        name="HomeScreen"
+        name="Home"
         component={HomeScreen}
         options={{
           headerTitle: (props) => (
@@ -100,7 +100,7 @@ function BottomTab({ navigation }) {
         }}
       />
       <Tab.Screen
-        name="RandomActivityScreen"
+        name="Generate Activity"
         component={RandomActivityScreen}
         options={{
           headerTitle: (props) => (
@@ -128,7 +128,7 @@ function BottomTab({ navigation }) {
         }}
       />
       <Tab.Screen
-        name="WishlistScreen"
+        name="Wishlist"
         component={WishlistScreen}
         options={{
           headerTitle: (props) => (

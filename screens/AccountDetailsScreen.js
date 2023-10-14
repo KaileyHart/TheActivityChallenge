@@ -47,34 +47,42 @@ export default function AccountDetailsScreen({ navigation }) {
 
       <Text style={styles.title}>Edit Account Details</Text>
 
-      <Text>Username</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={setTxtUsername}
-        value={txtUsername}
-        placeholder="Username"
-      />
+      <View style={styles.inputContainer}> 
 
-      <Text>Email</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={setTxtEmail}
-        value={txtEmail}
-        placeholder="Email"
-      />
+        <Text>Username</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setTxtUsername}
+          value={txtUsername}
+          placeholder="Username"
+        />
 
-      <button style={styles.blackButton} onClick={() => navigation.navigate("ForgotPasswordScreen")}>
-      RESET PASSWORD
-      </button>
+        <Text>Email</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setTxtEmail}
+          value={txtEmail}
+          placeholder="Email"
+        />
+      
+      </View>
 
-      {/* Maybe just show a modal that says saved? */}
-      <button style={styles.blackButton} onClick={() => updateUserProfile()}>
-        SAVE
-      </button>
+      <View style={styles.buttonContainer}> 
 
-      <button style={styles.blackButton} onClick={() => navigation.goBack()}>
-        CANCEL
-      </button>
+        <button style={styles.blackButton} onClick={() => navigation.navigate("ForgotPasswordScreen")}>
+        RESET PASSWORD
+        </button>
+
+        {/* Maybe just show a modal that says saved? */}
+        <button style={styles.blackButton} onClick={() => updateUserProfile()}>
+          SAVE
+        </button>
+
+        <button style={styles.blackButton} onClick={() => navigation.goBack()}>
+          CANCEL
+        </button>
+
+      </View>
       
     </View>
   );
@@ -105,8 +113,15 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     borderRadius: "20px",
     padding: "10px",
-    marginTop: "25px",
+    marginTop: "10px",
     marginBottom: "10px",
     width: "90%",
   },
+  inputContainer: {
+    height: "50%"
+  },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "column",
+  }
 });
