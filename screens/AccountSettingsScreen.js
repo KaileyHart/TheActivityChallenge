@@ -13,7 +13,7 @@ export default function AccountSettingsScreen({ navigation }) {
 
         <Text style={styles.title}>Account Settings</Text>
 
-        <button style={styles.blackButton}onClick={() => navigation.navigate("AccountDetailsScreen")}>
+        <button style={styles.blackButton} onClick={() => navigation.navigate("AccountDetailsScreen")}>
           EDIT ACCOUNT DETAILS
         </button>
 
@@ -21,9 +21,9 @@ export default function AccountSettingsScreen({ navigation }) {
           LOG OUT
         </button>
 
-        <button style={styles.blackButton} onClick={() => navigation.navigate("Home")}>
+        {/* <button style={styles.blackButton} onClick={() => navigation.navigate("Home")}>
           HELP
-        </button>
+        s</button> */}
 
         <button style={styles.blackButton} onClick={() => navigation.navigate("DeleteAccountScreen")}>
           DELETE ACCOUNT

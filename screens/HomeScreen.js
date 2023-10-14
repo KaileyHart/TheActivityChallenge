@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { View } from "../components/Themed";
-import Search from "../components/Search";
+import { Text, View } from "../components/Themed";
+// import Search from "../components/Search";
 import ActivityCard from "../components/ActivityCard";
 import { Typography } from "@mui/material";
 import { ScrollView } from "react-native-gesture-handler";
@@ -11,20 +11,25 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function HomeScreen({ navigation }) {
 
   return (
-    <View style={styles.container}>
+    <View style={styles.screenContainer}>
 
       <ScrollView>
 
-        <View style={styles.searchContainer}>
+        {/* // TODO: Create a working search input */}
+        {/* <View style={styles.searchContainer}>
 
           <Search/>
 
           <button style={styles.searchButton}>Search</button>
 
-        </View>
+        </View> */}
 
         {/* // TODO: Create Filter */}
         {/* <Text>Filter Button</Text> */}
+
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>All Activities</Text>
+        </View>
 
         <Typography style={styles.cardListHeader}>
           <Ionicons name="musical-notes" size={15} color="white" />
@@ -66,13 +71,15 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screenContainer: {
     flex: 1,
   },
   titleContainer: {
     display: "flex",
     justifyContent: "left",
-    margin: 25,
+    marginLeft: 25,
+    marginTop: 15,
+    marginBottom: 15
   },
   title: {
     fontSize: 20,
