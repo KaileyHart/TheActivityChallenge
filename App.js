@@ -6,7 +6,6 @@ import Navigation from "./navigation";
 import { useColorScheme } from "react-native";
 // import style from './Index.module.css';
 
-// TODO: Add authentication code here? -- 09/15/2023 KH
 
 export default function App() {
   // const isLoadingComplete = useLoadedAssets();

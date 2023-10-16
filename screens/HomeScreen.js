@@ -2,10 +2,10 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Text, View } from "../components/Themed";
-// import Search from "../components/Search";
-import ActivityCard from "../components/ActivityCard";
 import { Typography } from "@mui/material";
 import { ScrollView } from "react-native-gesture-handler";
+// import Search from "../components/Search";
+import ActivityCard from "../components/ActivityCard";
 
 
 export default function HomeScreen({ navigation }) {
