@@ -27,6 +27,7 @@ export default function ActivityCard(props) {
   const activityPrice = props.price !== "" && props.price !== undefined && props.price !== null ? props.price : "";
   const activityKidFriendliness = props.kidFriendly !== "" && props.kidFriendly !== undefined && props.kidFriendly !== null ? props.kidFriendly : "";
   const activityDuration = props.duration !== "" && props.duration !== undefined && props.duration !== null ? props.duration : "";
+  const randomActivityData = props.randomActivityData !== "" && props.randomActivityData !== undefined && props.randomActivityData !== null ? props.randomActivityData : false;
   const activitySaved = props.activitySaved !== "" && props.activitySaved !== undefined && props.activitySaved !== null ? props.activitySaved : false;
 
   const navigation = useNavigation();
@@ -54,15 +55,15 @@ export default function ActivityCard(props) {
       let newArrayByDuration = [];
       let newArrayBySaved = [];
 
-      if (activityType !== "" &&activityType !== undefined &&activityType !== null) {
+      if (activityType !== "" && activityType !== undefined && activityType !== null) {
 
         newArrayByType = activityDataList.filter((activityData) => activityData.type === activityType);
 
-      } else if (activityPrice !== "" &&activityPrice !== undefined &&activityPrice !== null) {
+      } else if (activityPrice !== "" && activityPrice !== undefined && activityPrice !== null) {
 
         newArrayByPrice = activityDataList.filter((activityData) => activityData.price == activityPrice);
 
-      } else if (activityKidFriendliness !== "" &&activityKidFriendliness !== undefined &&activityKidFriendliness !== null) {
+      } else if (activityKidFriendliness !== "" && activityKidFriendliness !== undefined && activityKidFriendliness !== null) {
 
         // ? For some reason this doesn't work.
         // newArrayByKidFriendliness = activityDataList.filter(activityData => activityData.kidFriendly == activityKidFriendliness);
@@ -72,7 +73,7 @@ export default function ActivityCard(props) {
 
         newArrayByDuration = activityDataList.filter((activityData) => activityData.duration == activityDuration);
 
-      } else if (activitySaved == true) {
+      }  else if (activitySaved == true) {
 
         setScrollHorizontal(false);
 
@@ -116,13 +117,17 @@ export default function ActivityCard(props) {
 
         newActivitiesArray = [...newArrayBySaved];
 
+      } else if (randomActivityData !== "" && randomActivityData !== undefined && randomActivityData !== null) {
+
+        newActivitiesArray = [randomActivityData];
+
       };
 
-      setActivities([...newActivitiesArray]);
+      setActivities(newActivitiesArray);
 
     };
    
-  }, [existingWishlistActivities, activityDataList, activitySaved]);
+  }, [existingWishlistActivities, randomActivityData, activityDataList, activitySaved]);
 
 
   useEffect(() => {
