@@ -199,7 +199,7 @@ export default function Navigation({ navigation }) {
                 headerRight: () => (
                   <button
                     style={styles.logoButton}
-                    onClick={() => navigation.navigate("ActivityDetailScreen")}
+                    onClick={() => navigation.navigate("BottomTab", {screen: "AccountSettingsScreen"})}
                   >
                     <Ionicons
                       style={styles.userAccountIcon}

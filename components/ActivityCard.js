@@ -279,6 +279,8 @@ export default function ActivityCard(props) {
                   }
                 </Typography>
 
+                <img height="auto" width="250px" src={activity.imagePath}/>
+
                 <Typography variant="body2">
                   <strong>Type: </strong>
                   {activity.type}
