@@ -277,37 +277,14 @@ export default function ActivityCard(props) {
                     </button>
   
                   }
+
                 </Typography>
 
-                <Typography variant="body2">
-                  <strong>Type: </strong>
-                  {activity.type}
-                </Typography>
+                {activity.imagePath ? 
 
-                <Typography variant="body2">
-                  <strong>Participants: </strong>
-                  {activity.participants}
-                </Typography>
+                  <img style={styles.cardImage} src={activity.imagePath} />
 
-                <Typography variant="body2">
-                  <strong>Price: </strong>
-                  {activity.price}
-                </Typography>
-
-                <Typography variant="body2">
-                  <strong>kidFriendly: </strong>
-                  {activity.kidFriendly === true ? "Yes" : "No"}
-                </Typography>
-
-                <Typography variant="body2">
-                  <strong>Accessibility: </strong>
-                  {activity.accessibility}
-                </Typography>
-
-                <Typography variant="body2">
-                  <strong>Duration: </strong>
-                  {activity.duration}
-                </Typography>
+                : null}
 
               </CardContent>
 
@@ -337,6 +314,14 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "40%",
+  },
+  cardImage: {
+    width: "100%",
+    height: "200px",
+    objectFit: "cover",
+    alignItems: "center",
+    borderRadius: "5px",
+    paddingTop: "8px"
   },
   card: {
     maxWidth: "300px",

@@ -33,35 +33,66 @@ export default function HomeScreen({ navigation }) {
 
         <Typography style={styles.cardListHeader}>
           <Ionicons name="musical-notes" size={15} color="white" />
-          <strong> Relaxing Activities</strong>
+          <strong> Relaxing</strong>
         </Typography>
         <View>
           <ActivityCard type="relaxation" />
         </View>
 
         <Typography style={styles.cardListHeader}>
-          <Ionicons name="wallet" size={15} color="white" />
-          <strong> Free Activities</strong>
-        </Typography>
-        <View>
-          <ActivityCard price="0.0" />
-        </View>
-
-        <Typography style={styles.cardListHeader}>
           <Ionicons name="happy" size={15} color="white" />
-          <strong> Kid Friendly Activities</strong>
+          <strong> Kid Friendly</strong>
         </Typography>
         <View>
           <ActivityCard kidFriendly="true" />
         </View>
 
         <Typography style={styles.cardListHeader}>
-          <Ionicons name="today" size={15} color="white" />
-          <strong> Multiple Day Activities</strong>
+          <Ionicons name="fast-food" size={15} color="white" />
+          <strong> Cooking</strong>
         </Typography>
+        <View>
+          <ActivityCard type="cooking" />
+        </View>
 
+        <Typography style={styles.cardListHeader}>
+          <Ionicons name="today" size={15} color="white" />
+          <strong> Multiple Day</strong>
+        </Typography>
         <View>
           <ActivityCard duration="days" />
+        </View>
+
+        <Typography style={styles.cardListHeader}>
+          <Ionicons name="wallet" size={15} color="white" />
+          <strong> Free</strong>
+        </Typography>
+        <View>
+          <ActivityCard price="0.0" />
+        </View>
+
+        <Typography style={styles.cardListHeader}>
+          <Ionicons name="build" size={15} color="white" />
+          <strong> Busywork</strong>
+        </Typography>
+        <View>
+          <ActivityCard type="busywork" />
+        </View>
+
+        <Typography style={styles.cardListHeader}>
+          <Ionicons name="school-outline" size={15} color="white" />
+          <strong> Educational</strong>
+        </Typography>
+        <View>
+          <ActivityCard type="education" />
+        </View>
+
+        <Typography style={styles.cardListHeader}>
+          <Ionicons name="people" size={15} color="white" />
+          <strong> Social</strong>
+        </Typography>
+        <View>
+          <ActivityCard type="social" />
         </View>
 
       </ScrollView>

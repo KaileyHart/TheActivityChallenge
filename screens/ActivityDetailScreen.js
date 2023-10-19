@@ -6,7 +6,6 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function ActivityDetailScreen({ route }) {
 
   // TODO: Add Wishlist button
-  // TODO: Add an image
 
   const {activity} = route.params;
 
@@ -17,7 +16,15 @@ export default function ActivityDetailScreen({ route }) {
 
         <View>
 
-        <Text style={styles.title}>{activity.activity}</Text>
+        <View style={styles.titleContainer}>
+
+          <Text style={styles.title}>{activity.activity}</Text>
+
+        </View>
+
+
+        <img style={styles.cardImage} src={activity.imagePath} />
+
         <p>This type of activity is <strong>{activity.type}</strong>. It has {activity.accessibility} and it can take {activity.duration} to complete. It's {activity.kidFriendly === true ? "" : "not"} great to complete with kids. It's availability score is {activity.availability}. You need at least {activity.participants > 1 ? `${activity.participants} people` : `${activity.participants} person`} to complete this activity. It's typical cost is {activity.price}.</p>
           
         </View>
@@ -43,6 +50,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  cardImage: {
+    width: "100%",
+    height: "250px",
+    objectFit: "cover",
+    textAlign: "center",
+    borderRadius: "5px",
+    paddingTop: "8px"
   },
   blackButton: {
     backgroundColor: "black",
