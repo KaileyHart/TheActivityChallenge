@@ -92,11 +92,5 @@ const styles = StyleSheet.create({
     marginTop: "25px",
     marginBottom: "10px",
     width: "90%",
-  },
-  card: {
-    display: "flex",
-    flex: 1,
-    height: "auto",
-    margin: "10px",
-  },
+  }
 });
