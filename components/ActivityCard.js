@@ -29,6 +29,7 @@ export default function ActivityCard(props) {
   const activityDuration = props.duration !== "" && props.duration !== undefined && props.duration !== null ? props.duration : "";
   const randomActivityData = props.randomActivityData !== "" && props.randomActivityData !== undefined && props.randomActivityData !== null ? props.randomActivityData : false;
   const activitySaved = props.activitySaved !== "" && props.activitySaved !== undefined && props.activitySaved !== null ? props.activitySaved : false;
+  const searchData = props.searchData !== "" && props.searchData !== undefined && props.searchData !== null ? props.searchData : "";
 
   const navigation = useNavigation();
 
@@ -132,6 +133,38 @@ export default function ActivityCard(props) {
 
   useEffect(() => {
 
+    if (activityDataList !== "" || activityDataList !== undefined || activityDataList !== null) {
+
+      // * Example data
+      // "activity": "Bake pastries for you and your neighbor",
+      // "availability": 0.3,
+      // "type": "cooking",
+      // "participants": 1,
+      // "price": 0.4,
+      // "accessibility": "Minor challenges",
+      // "duration": "hours",
+      // "kidFriendly": true,
+      // "imagePath": "https://plus.unsplash.com/premium_photo-1666353534120-7540056d6b4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmFraW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+      // "link": "",
+      // "key": "8125168"
+
+      let combinedResults = [...activityDataList];
+
+      if (searchData !== "" && searchData !== undefined && searchData !== null) {
+
+        combinedResults = combinedResults.filter((data) => formatLowerCase(data.activity).includes(formatSearchInput(searchData)) || formatLowerCase(data.type).includes(formatSearchInput(searchData)) || formatLowerCase(data.duration).includes(formatSearchInput(searchData)) || formatLowerCase(data.accessibility).includes(formatSearchInput(searchData)) || formatLowerCase(data.kidFriendly).includes(formatSearchInput(searchData)) );
+
+      };
+
+      setActivities(combinedResults);
+
+    };
+
+  }, [searchData, activityDataList]);
+
+
+  useEffect(() => {
+
     onAuthStateChanged(auth, (user) => {
 
       setUser(user);
@@ -151,6 +184,70 @@ export default function ActivityCard(props) {
     };
 
   }, [user]);
+  
+
+  // TODO: Put in a utility file
+  const formatSearchInput = (value) => {
+
+    let formattedSearchInput = "";
+
+    if (value !== "" || value !== undefined || value !== null) {
+
+      formattedSearchInput = formatTrim(value).toLowerCase();
+
+    };
+
+    return formattedSearchInput;
+
+  };
+
+
+  // TODO: Put in a utility file
+  const formatToString = (value) => {
+
+    let toStringValue = "";
+
+    if (value !== "" || value !== undefined || value !== null) {
+
+      toStringValue = value.toString();
+
+    };
+
+    return toStringValue;
+
+  };
+
+
+  // TODO: Put in a utility file
+  const formatLowerCase = (value) => {
+
+    let lowerCaseValue = "";
+
+    if (value !== "" || value !== undefined || value !== null) {
+
+      lowerCaseValue = formatToString(value).toLowerCase();
+
+    };
+
+    return lowerCaseValue;
+
+  };
+
+
+  // TODO: Put in a utility file
+  const formatTrim = (value) => {
+
+    let trimValue = "";
+
+    if (value !== "" || value !== undefined || value !== null) {
+
+      trimValue = formatToString(value).toLowerCase();
+
+    };
+
+    return trimValue;
+
+  };
 
 
   const updateUserWishlist = async (user, wishlistID, actionType) => {
