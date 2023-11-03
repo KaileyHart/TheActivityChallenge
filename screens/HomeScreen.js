@@ -1,28 +1,35 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, {useState, useEffect} from "react";
+import { StyleSheet, TextInput } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Text, View } from "../components/Themed";
 import { Typography } from "@mui/material";
 import { ScrollView } from "react-native-gesture-handler";
-// import Search from "../components/Search";
 import ActivityCard from "../components/ActivityCard";
 
-
 export default function HomeScreen({ navigation }) {
+
+  const [searchData, setSearchData] = useState("");
 
   return (
     <View style={styles.screenContainer}>
 
       <ScrollView>
 
-        {/* // TODO: Create a working search input */}
-        {/* <View style={styles.searchContainer}>
+         <View style={styles.searchContainer}>
 
-          <Search/>
+          <TextInput style={styles.searchInput} onChangeText={setSearchData} value={searchData} placeholder="Search..." />
 
-          <button style={styles.searchButton}>Search</button>
+          <button style={styles.searchButton} onClick={() => {setSearchData("")}}>Clear Search</button>
 
-        </View> */}
+        </View>
+
+        {searchData !== "" ?
+
+          <View>
+            <ActivityCard searchData={searchData} />
+          </View>
+
+        : null}
 
         {/* // TODO: Create Filter */}
         {/* <Text>Filter Button</Text> */}
@@ -143,4 +150,11 @@ const styles = StyleSheet.create({
     fontSize: "30",
     backgroundColor: "black",
   },
+  searchInput: {
+    borderWidth: 1,
+    padding: "15px",
+    borderBottomLeftRadius: 10,
+    borderTopLeftRadius: 10,
+    width: "85%",
+  }
 });
