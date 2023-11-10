@@ -5,6 +5,7 @@ import { Card, CardContent, Typography } from "@mui/material";
 import activityDataJSON from "/assets/json/activities.json";
 import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import imagePlaceholder from "../assets/images/no-image-found-placeholder.svg";
 
 import { useNavigation } from '@react-navigation/native';
 import { firebase_auth, firebase_db } from "../FirebaseConfig";
@@ -347,7 +348,7 @@ export default function ActivityCard(props) {
   return (
     <View style={scrollHorizontal === true ? styles.horizontalCards : styles.verticalCards}>
 
-      {activities !== "" || activities !== undefined || activities !== null ? (
+      {activities.length !== 0 ? 
 
         <ScrollView horizontal={scrollHorizontal}>
 
@@ -378,10 +379,10 @@ export default function ActivityCard(props) {
                 </Typography>
 
                 {activity.imagePath ? 
-
                   <img style={styles.cardImage} src={activity.imagePath} />
-
-                : null}
+                : 
+                  <img style={styles.cardImage} src={imagePlaceholder} />
+                }
 
               </CardContent>
 
@@ -391,7 +392,29 @@ export default function ActivityCard(props) {
 
         </ScrollView>
 
-      ) : null}
+      : 
+
+        <ScrollView horizontal={scrollHorizontal}>
+    
+          <Card style={styles.card}>
+        
+            <CardContent>
+
+              <Typography variant="body1" style={styles.activityName}>
+                <Text><strong>Uh oh! No Results Found.</strong></Text>
+              </Typography>
+
+              <p>Try searching for something else.</p>
+
+              <img style={styles.cardImage} src="https://images.unsplash.com/photo-1453227588063-bb302b62f50b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+
+            </CardContent>
+
+          </Card>
+
+        </ScrollView>
+
+      }
 
     </View>
   );

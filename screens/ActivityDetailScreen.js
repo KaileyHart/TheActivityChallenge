@@ -136,7 +136,7 @@ export default function ActivityDetailScreen({ route }) {
 
           <Text style={styles.title}>{activity.activity}</Text>
 
-          { existingWishlistActivities.includes((activity.key)) ? 
+          {existingWishlistActivities.includes((activity.key)) ? 
 
             <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "remove");}}>
               <Ionicons style={styles.icon} name="heart"></Ionicons>
@@ -146,9 +146,7 @@ export default function ActivityDetailScreen({ route }) {
 
             <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "add");}}>
               <Ionicons style={styles.icon} name="heart-outline"></Ionicons>  
-            </button>
-
-          }
+            </button>}
 
         </View>
 
