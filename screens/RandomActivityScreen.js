@@ -1,31 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Button } from "react-native";
+import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
+import activityDataJSON from "/assets/json/activities.json";
 import ActivityCard from "../components/ActivityCard";
-import axios from "axios";
 
 export default function RandomActivityScreen({ navigation }) {
 
-  const [randomActivity, setRandomActivity] = useState("");
+  const [activityDataList, setActivityDataList] = useState([]);
+  const [randomActivity, setRandomActivity] = useState({});
+
 
   useEffect(() => {
 
-    generateRandomActivity();
+    if (Object.keys(activityDataJSON).length !== 0 && Object.keys(activityDataJSON.activityData).length !== 0) {
+
+      let newActivityDataList = [...activityDataJSON.activityData];
+     
+      generateRandomActivity(newActivityDataList);
+
+      setActivityDataList(newActivityDataList);
+
+    };
 
   }, []);
 
 
-  const generateRandomActivity = () => {
+  const generateRandomActivity = (newActivityDataList) => {
 
-    setRandomActivity("");
+    if (newActivityDataList !== "" || newActivityDataList !== undefined || newActivityDataList !== null) {
 
-    axios
-      .get("https://www.boredapi.com/api/activity")
-      .then((result) => {
-        setRandomActivity(result.data);
-        console.log(result.data);
-      })
-      .catch((error) => console.log(error));
+      let randomIndex = Math.floor(Math.random() * newActivityDataList.length);
+
+      let activity = newActivityDataList[randomIndex]
+
+      setRandomActivity(activity);
+
+    };
+
   };
 
 
@@ -38,7 +49,7 @@ export default function RandomActivityScreen({ navigation }) {
 
       <View style={styles.cardContainer}>
 
-        <button style={styles.blackButton} onClick={() => generateRandomActivity()}>
+        <button style={styles.blackButton} onClick={() => generateRandomActivity(activityDataList)}>
           GENERATE ACTIVITY
         </button>
 

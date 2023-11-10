@@ -1,13 +1,129 @@
 import React, { useState, useEffect } from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import { ScrollView } from "react-native-gesture-handler";
 
+import { firebase_auth, firebase_db } from "../FirebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, updateDoc, getDoc, arrayUnion, arrayRemove} from "firebase/firestore";
+
 export default function ActivityDetailScreen({ route }) {
 
-  // TODO: Add Wishlist button
+  const [existingWishlistActivities, setExistingWishlistActivities] = useState([]);
+  const [user, setUser] = useState({});
+  const [docRef, setDocRef] = useState("");
+
+  const auth = firebase_auth;
+  const db = firebase_db;
 
   const {activity} = route.params;
+
+  useEffect(() => {
+
+    onAuthStateChanged(auth, (user) => {
+
+      setUser(user);
+      setDocRef(doc(db, "users", user.uid));
+
+    });
+
+  }, []);
+
+
+  const updateUserWishlist = async (user, wishlistID, actionType) => {
+
+    if (actionType === "add") {
+
+      try { 
+        
+        updateDoc(docRef, {
+          wishlistActivities: arrayUnion(`${wishlistID}`)
+          })
+          .then(docRef => {
+            console.log("A New Document Field has been added to an existing document");
+          })
+          .catch(error => {
+              console.log("Error:", error);
+          });
+
+          let newExistingWishlistActivities = [...existingWishlistActivities];
+
+          newExistingWishlistActivities.push(wishlistID);
+
+          setExistingWishlistActivities(newExistingWishlistActivities);
+
+          readUserWishlist(user);
+        
+      } catch (error) {
+
+        console.log("Error: ", error);
+
+      };
+
+    } else if (actionType === "remove") {
+
+      try { 
+        
+        updateDoc(docRef, {
+          wishlistActivities: arrayRemove(`${wishlistID}`)
+          })
+          .then(docRef => {
+            console.log("An existing document field has been removed");
+          })
+          .catch(error => {
+              console.log("Error:", error);
+          });
+
+          let newExistingWishlistActivities = [...existingWishlistActivities];
+
+          newExistingWishlistActivities.filter((activity) => {
+            return activity !== wishlistID;
+          });
+
+          setExistingWishlistActivities(newExistingWishlistActivities);
+
+          readUserWishlist(user);
+        
+      } catch (error) {
+
+        console.log("Error: ", error);
+
+      };
+
+    };
+
+  };
+
+
+  const readUserWishlist = async (user) => {
+
+    try {
+
+      if (docRef) {
+
+        const docSnap = await getDoc(docRef);
+      
+        if (docSnap.exists()) {
+
+          setExistingWishlistActivities(docSnap.data().wishlistActivities);
+
+        } else {
+
+          console.log("This document does not exist");
+
+        };
+
+      };
+
+    } catch (error) {
+
+      console.log("Error: ", error);
+
+    };
+
+  };
+
 
   return (
     <View style={styles.screenContainer}>
@@ -20,8 +136,21 @@ export default function ActivityDetailScreen({ route }) {
 
           <Text style={styles.title}>{activity.activity}</Text>
 
-        </View>
+          { existingWishlistActivities.includes((activity.key)) ? 
 
+            <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "remove");}}>
+              <Ionicons style={styles.icon} name="heart"></Ionicons>
+            </button>
+            
+            : 
+
+            <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "add");}}>
+              <Ionicons style={styles.icon} name="heart-outline"></Ionicons>  
+            </button>
+
+          }
+
+        </View>
 
         <img style={styles.cardImage} src={activity.imagePath} />
 
@@ -44,8 +173,12 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     display: "flex",
-    justifyContent: "left",
-    margin: 25,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "10px",
+    marginTop: 25,
+    marginBottom: 25,
   },
   title: {
     fontSize: 20,
@@ -53,10 +186,10 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: "100%",
-    height: "250px",
+    height: "50%",
     objectFit: "cover",
     textAlign: "center",
-    borderRadius: "5px",
+    borderRadius: "10px",
     paddingTop: "8px"
   },
   blackButton: {
@@ -68,5 +201,15 @@ const styles = StyleSheet.create({
     marginTop: "25px",
     marginBottom: "10px",
     width: "90%",
+  }, 
+  heartButton: {
+    backgroundColor: "white",
+    border: "none",
+    height: "40px",
+    width: "40px"
   },
+  icon: {
+    fontSize: "20px",
+    alignItems: "flex-start"
+  }
 });

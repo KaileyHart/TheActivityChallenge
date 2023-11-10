@@ -417,11 +417,11 @@ const styles = StyleSheet.create({
     height: "200px",
     objectFit: "cover",
     alignItems: "center",
-    borderRadius: "5px",
-    paddingTop: "8px"
+    borderRadius: "10px",
+    marginTop: "8px"
   },
   card: {
-    maxWidth: "300px",
+    maxWidth: "320px",
     height: "auto",
     margin: "10px",
   },
