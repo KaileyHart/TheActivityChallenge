@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import {
-  DarkTheme,
-  DefaultTheme,
-  NavigationContainer,
-} from "@react-navigation/native";
+import {DarkTheme, DefaultTheme, NavigationContainer} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// import { Text, View } from "../components/Themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { firebase_auth } from "../FirebaseConfig";
@@ -40,12 +35,11 @@ const Tab = createBottomTabNavigator();
 // ? Do we really have to repeat the header options for every screen? -- 09/15/2023 KH
 
 function BottomTab({ navigation }) {
+
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
+    <Tab.Navigator screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-
           if (route.name === "Home") {
             iconName = "home";
           } else if (route.name === "Generate Activity") {
@@ -157,21 +151,26 @@ function BottomTab({ navigation }) {
       />
     </Tab.Navigator>
   );
+
 }
 
 export default function Navigation({ navigation }) {
+
   const [user, setUser] = useState({});
 
   useEffect(() => {
+
     onAuthStateChanged(firebase_auth, (user) => {
       setUser(user);
-      console.log(user);
     });
+
   }, []);
 
   return (
     <NavigationContainer>
+
       <Stack.Navigator>
+
         {user ? (
           <Stack.Group>
             <Stack.Screen
@@ -331,6 +330,7 @@ export default function Navigation({ navigation }) {
           </Stack.Group>
         )}
       </Stack.Navigator>
+
     </NavigationContainer>
   );
 }
