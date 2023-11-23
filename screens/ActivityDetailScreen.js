@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet, Share } from "react-native";
 import { Text, View } from "../components/Themed";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -18,6 +18,13 @@ export default function ActivityDetailScreen({ route }) {
   const db = firebase_db;
 
   const {activity} = route.params;
+
+  let url = "";
+  let title = activity.activity;
+  let message = activity.description;
+  let image = activity.imagePath;
+
+  const options = {url, title, message, image}
 
   useEffect(() => {
 
@@ -124,6 +131,21 @@ export default function ActivityDetailScreen({ route }) {
 
   };
 
+  // * https://reactnative.dev/docs/share
+  const shareActivity = async () => {
+
+    try {
+
+      await Share.share({url: url, title: activity.title, message:activity.description, image: activity.imagePath});
+
+    } catch (error) {
+
+      Alert.alert(error.message);
+
+    };
+
+  };
+
 
   return (
     <View style={styles.screenContainer}>
@@ -157,6 +179,10 @@ export default function ActivityDetailScreen({ route }) {
         </View>
 
       </ScrollView>
+
+      <button style={styles.blackButton} onClick={() => shareActivity()}>
+        Share Activity
+      </button>
 
     </View>
   );
