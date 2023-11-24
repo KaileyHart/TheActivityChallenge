@@ -3,10 +3,14 @@ import { StyleSheet } from "react-native";
 import {DarkTheme, DefaultTheme, NavigationContainer} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { firebase_auth } from "../FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
+
+import personCircleOutlineIcon from "../assets/icons/person-circle-outline.svg";
+import homeIcon from "../assets/icons/home-outline.svg";
+import tabBarheartOutlineIcon from "../assets/icons/tab-bar-heart-outline.svg";
+import randomIcon from "../assets/icons/shuffle-outline.svg";
 
 // * Auth Screens
 import SplashScreen from "../screens/SplashScreen";
@@ -41,19 +45,15 @@ function BottomTab({ navigation }) {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === "Home") {
-            iconName = "home";
+            iconName = homeIcon;
           } else if (route.name === "Generate Activity") {
-            iconName = "shuffle-outline";
+            iconName = randomIcon;
           } else if (route.name === "Wishlist") {
-            iconName = "heart";
+            iconName = tabBarheartOutlineIcon;
           }
 
           return (
-            <Ionicons
-              name={iconName}
-              size={size}
-              color={focused ? "#A0A0A0" : "white"}
-            />
+            <img style={focused ? styles.tabBarActive : styles.tabBar}  src={iconName} />
           );
         },
         tabBarActiveTintColor: "#A0A0A0",
@@ -81,14 +81,8 @@ function BottomTab({ navigation }) {
             backgroundColor: "black",
           },
           headerRight: () => (
-            <button
-              style={styles.logoButton}
-              onClick={() => navigation.navigate("AccountSettingsScreen")}
-            >
-              <Ionicons
-                style={styles.userAccountIcon}
-                name="person-circle-outline"
-              ></Ionicons>
+            <button style={styles.logoButton} onClick={() => navigation.navigate("AccountSettingsScreen")}>
+              <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
             </button>
           ),
         }}
@@ -109,14 +103,8 @@ function BottomTab({ navigation }) {
             backgroundColor: "black",
           },
           headerRight: () => (
-            <button
-              style={styles.logoButton}
-              onClick={() => navigation.navigate("AccountSettingsScreen")}
-            >
-              <Ionicons
-                style={styles.userAccountIcon}
-                name="person-circle-outline"
-              ></Ionicons>
+            <button style={styles.logoButton} onClick={() => navigation.navigate("AccountSettingsScreen")}>
+              <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
             </button>
           ),
         }}
@@ -137,14 +125,8 @@ function BottomTab({ navigation }) {
             backgroundColor: "black",
           },
           headerRight: () => (
-            <button
-              style={styles.logoButton}
-              onClick={() => navigation.navigate("AccountSettingsScreen")}
-            >
-              <Ionicons
-                style={styles.userAccountIcon}
-                name="person-circle-outline"
-              ></Ionicons>
+            <button style={styles.logoButton} onClick={() => navigation.navigate("AccountSettingsScreen")}>
+              <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
             </button>
           ),
         }}
@@ -196,14 +178,8 @@ export default function Navigation({ navigation }) {
                 },
                 headerTintColor: "white",
                 headerRight: () => (
-                  <button
-                    style={styles.logoButton}
-                    onClick={() => navigation.navigate("BottomTab", {screen: "AccountSettingsScreen"})}
-                  >
-                    <Ionicons
-                      style={styles.userAccountIcon}
-                      name="person-circle-outline"
-                    ></Ionicons>
+                  <button style={styles.logoButton}onClick={() => navigation.navigate("BottomTab", {screen: "AccountSettingsScreen"})}>
+                    <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
                   </button>
                 ),
               }}
@@ -225,14 +201,8 @@ export default function Navigation({ navigation }) {
                 },
                 headerTintColor: "white",
                 headerRight: () => (
-                  <button
-                    style={styles.logoButton}
-                    onClick={() => navigation.navigate("AccountSettingsScreen")}
-                  >
-                    <Ionicons
-                      style={styles.userAccountIcon}
-                      name="person-circle-outline"
-                    ></Ionicons>
+                  <button style={styles.logoButton} onClick={() => navigation.navigate("AccountSettingsScreen")}>
+                    <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
                   </button>
                 ),
               }}
@@ -254,14 +224,8 @@ export default function Navigation({ navigation }) {
                 },
                 headerTintColor: "white",
                 headerRight: () => (
-                  <button
-                    style={styles.logoButton}
-                    onClick={() => navigation.navigate("AccountDetailsScreen")}
-                  >
-                    <Ionicons
-                      style={styles.userAccountIcon}
-                      name="person-circle-outline"
-                    ></Ionicons>
+                  <button style={styles.logoButton} onClick={() => navigation.navigate("AccountDetailsScreen")}>
+                    <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
                   </button>
                 ),
               }}
@@ -283,18 +247,8 @@ export default function Navigation({ navigation }) {
                 },
                 headerTintColor: "white",
                 headerRight: () => (
-                  <button
-                    style={styles.logoButton}
-                    onClick={() =>
-                      navigation.navigate("DeleteAccountScreen", {
-                        owner: "Michaś",
-                      })
-                    }
-                  >
-                    <Ionicons
-                      style={styles.userAccountIcon}
-                      name="person-circle-outline"
-                    ></Ionicons>
+                  <button style={styles.logoButton} onClick={() => navigation.navigate("DeleteAccountScreen")}>
+                    <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
                   </button>
                 ),
               }}
@@ -352,7 +306,8 @@ const styles = StyleSheet.create({
   },
   userAccountIcon: {
     color: "white",
-    fontSize: 30,
+    height: "30px",
+    width: "30px"
   },
   logoButton: {
     backgroundColor: "black",
@@ -360,4 +315,12 @@ const styles = StyleSheet.create({
     border: "none",
     cursor: "pointer",
   },
+  tabBarActive: {
+    height: "25px",
+    width: "25px",
+  },
+  tabBar: {
+    height: "25px",
+    width: "25px",
+  }
 });

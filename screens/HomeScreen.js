@@ -1,10 +1,18 @@
 import React, {useState, useEffect} from "react";
 import { StyleSheet, TextInput } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { Text, View } from "../components/Themed";
-import { Typography } from "@mui/material";
 import { ScrollView } from "react-native-gesture-handler";
 import ActivityCard from "../components/ActivityCard";
+
+import MusicNoteIcon from "../assets/icons/musical-notes.svg";
+import happyFaceIcon from "../assets/icons/happy.svg";
+import fastFoodIcon from "../assets/icons/fast-food.svg";
+import calendarIcon from "../assets/icons/today.svg";
+import walletIcon from "../assets/icons/wallet.svg";
+import busyWorkIcon from "../assets/icons/build.svg";
+import schoolCapIcon from "../assets/icons/school.svg";
+import peopleIcon from "../assets/icons/people.svg";
+
 
 export default function HomeScreen({ navigation }) {
 
@@ -38,66 +46,66 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.title}>All Activities</Text>
         </View>
 
-        <Typography style={styles.cardListHeader}>
-          <Ionicons name="musical-notes" size={15} color="white" />
+        <Text style={styles.cardListHeader}>
+          <img style={styles.iconStyles} src={MusicNoteIcon} />
           <strong> Relaxing</strong>
-        </Typography>
+        </Text>
         <View>
           <ActivityCard type="relaxation" />
         </View>
 
-        <Typography style={styles.cardListHeader}>
-          <Ionicons name="happy" size={15} color="white" />
+        <Text style={styles.cardListHeader}>
+          <img style={styles.iconStyles} src={happyFaceIcon} />
           <strong> Kid Friendly</strong>
-        </Typography>
+        </Text>
         <View>
           <ActivityCard kidFriendly="true" />
         </View>
 
-        <Typography style={styles.cardListHeader}>
-          <Ionicons name="fast-food" size={15} color="white" />
+        <Text style={styles.cardListHeader}>
+          <img style={styles.iconStyles} src={fastFoodIcon} />
           <strong> Cooking</strong>
-        </Typography>
+        </Text>
         <View>
           <ActivityCard type="cooking" />
         </View>
 
-        <Typography style={styles.cardListHeader}>
-          <Ionicons name="today" size={15} color="white" />
+        <Text style={styles.cardListHeader}>
+          <img style={styles.iconStyles} src={calendarIcon} />
           <strong> Multiple Day</strong>
-        </Typography>
+        </Text>
         <View>
           <ActivityCard duration="days" />
         </View>
 
-        <Typography style={styles.cardListHeader}>
-          <Ionicons name="wallet" size={15} color="white" />
+        <Text style={styles.cardListHeader}>
+          <img style={styles.iconStyles} src={walletIcon} />
           <strong> Free</strong>
-        </Typography>
+        </Text>
         <View>
           <ActivityCard price="0.0" />
         </View>
 
-        <Typography style={styles.cardListHeader}>
-          <Ionicons name="build" size={15} color="white" />
+        <Text style={styles.cardListHeader}>
+          <img style={styles.iconStyles} src={busyWorkIcon} />
           <strong> Busywork</strong>
-        </Typography>
+        </Text>
         <View>
           <ActivityCard type="busywork" />
         </View>
 
-        <Typography style={styles.cardListHeader}>
-          <Ionicons name="school-outline" size={15} color="white" />
+        <Text style={styles.cardListHeader}>
+          <img style={styles.iconStyles} src={schoolCapIcon} />
           <strong> Educational</strong>
-        </Typography>
+        </Text>
         <View>
           <ActivityCard type="education" />
         </View>
 
-        <Typography style={styles.cardListHeader}>
-          <Ionicons name="people" size={15} color="white" />
+        <Text style={styles.cardListHeader}>
+          <img style={styles.iconStyles} src={peopleIcon} />
           <strong> Social</strong>
-        </Typography>
+        </Text>
         <View>
           <ActivityCard type="social" />
         </View>
@@ -149,6 +157,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: "30",
     backgroundColor: "black",
+    display: "flex",
+    alignItems: "center"
   },
   searchInput: {
     borderWidth: 1,
@@ -156,5 +166,9 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderTopLeftRadius: 10,
     width: "85%",
+  },
+  iconStyles: {
+    height: "15px",
+    width: "15px"
   }
 });

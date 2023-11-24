@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { Text, View } from "../components/Themed";
+
+import logoIcon from "../assets/icons/images.svg";
 
 export default function SplashScreen({ navigation }) {
   
@@ -12,7 +13,7 @@ export default function SplashScreen({ navigation }) {
         <Text style={styles.title}>
           THE ACTIVITY
           <br />
-          CHALLENGE <Ionicons style={styles.icon} name="images"></Ionicons>
+          CHALLENGE <img style={styles.iconStyles} src={logoIcon} />
         </Text>
 
         <button style={styles.blackButton} onClick={() => navigation.navigate("SignUpScreen")}>
@@ -39,9 +40,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+    display: "flex",
+    alignItems: "flex-end"
   },
-  icon: {
-    fontSize: "19px",
+  iconStyles: {
+    height: "25px",
+    widht: "25px"
   },
   separator: {
     marginVertical: 30,

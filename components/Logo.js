@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
-import Ionicons from "@expo/vector-icons/Ionicons";
+
+import logoIcon from "../assets/icons/images-outline.svg";
 
 export default function Logo({ navigation }) {
 
@@ -10,7 +11,7 @@ export default function Logo({ navigation }) {
       <Text style={styles.logo}>
         THE ACTIVITY
         <br />
-        CHALLENGE <Ionicons style={styles.icon} name="images"></Ionicons>
+        CHALLENGE <img style={styles.iconStyles} src={logoIcon} />
       </Text>
 
     </View>
@@ -31,10 +32,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 14,
     fontWeight: "bold",
+    display: "flex",
+    alignItems: "flex-end"
   },
-  userAccountIcon: {
+  iconStyles: {
     color: "white",
-    fontSize: 30,
+    height: "18px",
+    width: "18px",
   },
   profileButton: {
     backgroundColor: "black",

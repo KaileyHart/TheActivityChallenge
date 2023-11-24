@@ -1,10 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { Text, View } from "../components/Themed";
 import ActivityCard from "../components/ActivityCard";
 import { Typography } from "@mui/material";
 import { ScrollView } from "react-native-gesture-handler";
+
+import whiteHeartIcon from "../assets/icons/heart-white.svg";
 
 export default function WishlistScreen({ navigation }) {
 
@@ -19,7 +20,7 @@ export default function WishlistScreen({ navigation }) {
 
         <Typography style={styles.cardListHeader}>
 
-          <Ionicons name="heart" size={15} color="white" />
+          <img style={styles.iconStyles} src={whiteHeartIcon} />
           <strong> Your Saved Activities</strong>
 
         </Typography>
@@ -69,6 +70,8 @@ const styles = StyleSheet.create({
   },
   cardListHeaderIcon: {
     color: "white",
+    display: "flex",
+    alignItems: "center"
   },
   cardListHeader: {
     padding: "10px",
@@ -77,5 +80,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: "30",
     backgroundColor: "black",
-  },
+  },  
+  iconStyles: {
+    height: "15px",
+    width: "15px"
+  }
 });

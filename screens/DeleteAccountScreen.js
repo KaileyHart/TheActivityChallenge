@@ -2,23 +2,24 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import { firebase_auth } from "../FirebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
-import { deleteUser, reauthenticateWithCredential  } from "firebase/auth";
-import { recentLoginRequired } from "firebase/auth";
+import { getAuth, onAuthStateChanged, deleteUser, reauthenticateWithCredential, recentLoginRequired , reauthenticateAndRetrieveDataWithCredential, signInWithPopup } from "firebase/auth";
 
 
 export default function DeleteAccountScreen({ navigation }) {
 
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
+
+  const auth = firebase_auth;
+  const user = auth.currentUser;
 
   // TODO: This is repeated code. -- 10/01/2023 KH
-  useEffect(() => {
+  // useEffect(() => {
 
-    onAuthStateChanged(firebase_auth, (user) => {
-      setUser(user);
-    });
+  //   onAuthStateChanged(firebase_auth, (user) => {
+  //     setUser(user);
+  //   });
 
-  }, []);
+  // }, []);
 
 
   const deleteUserAccount = async () => {
@@ -33,32 +34,36 @@ export default function DeleteAccountScreen({ navigation }) {
 
       // * I'm not sure if this is working correctly. -- 10/01/2023 KH
       // * https://firebase.google.com/docs/auth/web/manage-users#re-authenticate_a_user -- 10/01/2023 KH
-      if (recentLoginRequired === true) {
 
-        alert("Error deleting user: " + error.message);
-        console.log('Error deleting user:', error);
 
-        const credential = promptForCredentials();
 
-        reauthenticateWithCredential(user, credential).then(() => {
+        // const credential = promptForCredentials();
 
-          // console.log("Reauthenticated");
+        // reauthenticateWithCredential(user).then(() => {
 
-        }).catch((error) => {
+        //   // console.log("Reauthenticated");
 
-          console.log("error", error);
+        // }).catch((error) => {
 
+        //   alert("Error deleting user: " + error.message);
+        //   console.log('Error deleting user:', error);
+
+        // });
+
+        alert('You need to sign in again to delete your account.');
+
+        firebase.auth().reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(email, password)).then(function(user) {
+          // The user has been reauthenticated
+          console.log("User reauthenticated:", user);
+        }).catch(function(error) {
+          // There was an error reauthenticating the user
+          console.error("Error reauthenticating user:", error);
         });
 
-      } else {
-
         alert("Error deleting user: " + error.message);
         console.log('Error deleting user:', error);
 
-      };
-
     });
-
   };
 
   return (
