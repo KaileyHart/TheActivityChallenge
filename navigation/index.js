@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import {DarkTheme, DefaultTheme, NavigationContainer} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -53,7 +53,7 @@ function BottomTab({ navigation }) {
           }
 
           return (
-            <img style={focused ? styles.tabBarActive : styles.tabBar}  src={iconName} />
+            <Image style={focused ? styles.tabBarActive : styles.tabBar}  source={iconName} />
           );
         },
         tabBarActiveTintColor: "#A0A0A0",
@@ -82,7 +82,7 @@ function BottomTab({ navigation }) {
           },
           headerRight: () => (
             <button style={styles.logoButton} onClick={() => navigation.navigate("AccountSettingsScreen")}>
-              <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
+              <Image style={styles.userAccountIcon} source={personCircleOutlineIcon} />
             </button>
           ),
         }}
@@ -104,7 +104,7 @@ function BottomTab({ navigation }) {
           },
           headerRight: () => (
             <button style={styles.logoButton} onClick={() => navigation.navigate("AccountSettingsScreen")}>
-              <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
+              <Image style={styles.userAccountIcon} source={personCircleOutlineIcon} />
             </button>
           ),
         }}
@@ -126,7 +126,7 @@ function BottomTab({ navigation }) {
           },
           headerRight: () => (
             <button style={styles.logoButton} onClick={() => navigation.navigate("AccountSettingsScreen")}>
-              <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
+              <Image style={styles.userAccountIcon} source={personCircleOutlineIcon} />
             </button>
           ),
         }}
@@ -179,7 +179,7 @@ export default function Navigation({ navigation }) {
                 headerTintColor: "white",
                 headerRight: () => (
                   <button style={styles.logoButton}onClick={() => navigation.navigate("BottomTab", {screen: "AccountSettingsScreen"})}>
-                    <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
+                    <Image style={styles.userAccountIcon} source={personCircleOutlineIcon} />
                   </button>
                 ),
               }}
@@ -202,7 +202,7 @@ export default function Navigation({ navigation }) {
                 headerTintColor: "white",
                 headerRight: () => (
                   <button style={styles.logoButton} onClick={() => navigation.navigate("AccountSettingsScreen")}>
-                    <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
+                    <Image style={styles.userAccountIcon} source={personCircleOutlineIcon} />
                   </button>
                 ),
               }}
@@ -225,7 +225,7 @@ export default function Navigation({ navigation }) {
                 headerTintColor: "white",
                 headerRight: () => (
                   <button style={styles.logoButton} onClick={() => navigation.navigate("AccountDetailsScreen")}>
-                    <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
+                    <Image style={styles.userAccountIcon} source={personCircleOutlineIcon} />
                   </button>
                 ),
               }}
@@ -248,7 +248,7 @@ export default function Navigation({ navigation }) {
                 headerTintColor: "white",
                 headerRight: () => (
                   <button style={styles.logoButton} onClick={() => navigation.navigate("DeleteAccountScreen")}>
-                    <img style={styles.userAccountIcon} src={personCircleOutlineIcon} />
+                    <Image style={styles.userAccountIcon} source={personCircleOutlineIcon} />
                   </button>
                 ),
               }}

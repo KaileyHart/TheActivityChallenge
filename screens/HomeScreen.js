@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import { StyleSheet, TextInput } from "react-native";
+import React, {useState} from "react";
+import { StyleSheet, TextInput, TouchableOpacity, Image} from "react-native";
 import { Text, View } from "../components/Themed";
 import { ScrollView } from "react-native-gesture-handler";
 import ActivityCard from "../components/ActivityCard";
@@ -27,7 +27,7 @@ export default function HomeScreen({ navigation }) {
 
           <TextInput style={styles.searchInput} onChangeText={setSearchData} value={searchData} placeholder="Search..." />
 
-          <button style={styles.searchButton} onClick={() => {setSearchData("")}}>Clear Search</button>
+          <TouchableOpacity style={styles.searchButton} onPress={() => {setSearchData("")}}><Text style={styles.searchButtonText}>Clear Search</Text></TouchableOpacity>
 
         </View>
 
@@ -47,7 +47,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <Text style={styles.cardListHeader}>
-          <img style={styles.iconStyles} src={MusicNoteIcon} />
+          <Image style={styles.iconStyles} source={MusicNoteIcon} />
           <strong> Relaxing</strong>
         </Text>
         <View>
@@ -55,7 +55,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <Text style={styles.cardListHeader}>
-          <img style={styles.iconStyles} src={happyFaceIcon} />
+          <Image style={styles.iconStyles} source={happyFaceIcon} />
           <strong> Kid Friendly</strong>
         </Text>
         <View>
@@ -63,7 +63,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <Text style={styles.cardListHeader}>
-          <img style={styles.iconStyles} src={fastFoodIcon} />
+          <Image style={styles.iconStyles} source={fastFoodIcon} />
           <strong> Cooking</strong>
         </Text>
         <View>
@@ -71,7 +71,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <Text style={styles.cardListHeader}>
-          <img style={styles.iconStyles} src={calendarIcon} />
+          <Image style={styles.iconStyles} source={calendarIcon} />
           <strong> Multiple Day</strong>
         </Text>
         <View>
@@ -79,7 +79,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <Text style={styles.cardListHeader}>
-          <img style={styles.iconStyles} src={walletIcon} />
+          <Image style={styles.iconStyles} source={walletIcon} />
           <strong> Free</strong>
         </Text>
         <View>
@@ -87,7 +87,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <Text style={styles.cardListHeader}>
-          <img style={styles.iconStyles} src={busyWorkIcon} />
+          <Image style={styles.iconStyles} source={busyWorkIcon} />
           <strong> Busywork</strong>
         </Text>
         <View>
@@ -95,7 +95,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <Text style={styles.cardListHeader}>
-          <img style={styles.iconStyles} src={schoolCapIcon} />
+          <Image style={styles.iconStyles} source={schoolCapIcon} />
           <strong> Educational</strong>
         </Text>
         <View>
@@ -103,7 +103,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <Text style={styles.cardListHeader}>
-          <img style={styles.iconStyles} src={peopleIcon} />
+          <Image style={styles.iconStyles} source={peopleIcon} />
           <strong> Social</strong>
         </Text>
         <View>
@@ -145,7 +145,10 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,
     backgroundColor: "black",
+  },
+  searchButtonText: {
     color: "white",
+    padding: "10px"
   },
   cardListHeaderIcon: {
     color: "white",
@@ -155,14 +158,14 @@ const styles = StyleSheet.create({
     marginTop: "10px",
     marginBottom: "10px",
     color: "white",
-    fontSize: "30",
+    fontSize: 18,
     backgroundColor: "black",
     display: "flex",
     alignItems: "center"
   },
   searchInput: {
     borderWidth: 1,
-    padding: "15px",
+    padding: 15,
     borderBottomLeftRadius: 10,
     borderTopLeftRadius: 10,
     width: "85%",

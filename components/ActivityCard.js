@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import { Text, View } from "../components/Themed";
-import { Card, CardContent, Typography } from "@mui/material";
-import activityDataJSON from "/assets/json/activities.json";
+import { Card, CardContent } from "@mui/material";
+import activityDataJSON from "../assets/json/activities.json";
 import { ScrollView } from "react-native-gesture-handler";
-import imagePlaceholder from "../assets/images/no-image-found-placeholder.svg";
 import { useNavigation } from '@react-navigation/native';
 import { firebase_auth, firebase_db } from "../FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, updateDoc, getDoc, arrayUnion, arrayRemove} from "firebase/firestore";
 
+import imagePlaceholder from "../assets/images/no-image-found-placeholder.svg";
 import heartOutlineIcon from "../assets/icons/heart-outline.svg";
 import heartIcon from "../assets/icons/heart.svg";
 
@@ -368,13 +368,13 @@ export default function ActivityCard(props) {
                 {existingWishlistActivities.includes((activity.key)) ? 
 
                   <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "remove");}}>
-                    <img style={styles.iconStyles} src={heartIcon} />
+                    <Image style={styles.iconStyles} source={heartIcon} />
                   </button>
                   
                   : 
 
                   <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "add");}}>
-                    <img style={styles.iconStyles} src={heartOutlineIcon} />
+                    <Image style={styles.iconStyles} source={heartOutlineIcon} />
                   </button>
 
                 }
@@ -382,9 +382,9 @@ export default function ActivityCard(props) {
               </View>
 
               {activity.imagePath ? 
-                <img style={styles.cardImage} src={activity.imagePath} />
+                <Image style={styles.cardImage} source={activity.imagePath} />
               : 
-                <img style={styles.cardImage} src={imagePlaceholder} />
+                <Image style={styles.cardImage} source={imagePlaceholder} />
               }
 
             </CardContent> 
@@ -409,7 +409,7 @@ export default function ActivityCard(props) {
 
             <p>Try searching for something else.</p>
 
-            <img style={styles.cardImage} src="https://images.unsplash.com/photo-1453227588063-bb302b62f50b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+            <Image style={styles.cardImage} src="https://images.unsplash.com/photo-1453227588063-bb302b62f50b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
 
           </CardContent>
 
@@ -443,7 +443,7 @@ const styles = StyleSheet.create({
     height: "200px",
     objectFit: "cover",
     alignItems: "center",
-    borderRadius: "10px",
+    borderRadius: 10,
     marginTop: "8px"
   },
   card: {
@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
     width: "35px"
   },
   iconStyles: {
-    fontSize: "20px",
+    fontSize: 20,
     alignItems: "flex-start"
   }
 });

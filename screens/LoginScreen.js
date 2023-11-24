@@ -127,14 +127,14 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     color: "white",
     fontWeight: 700,
-    borderRadius: "20px",
+    borderRadius: 20,
     padding: "10px",
     marginTop: "25px",
     marginBottom: "10px",
     width: "90%",
   },
   infoText: {
-    fontSize: "12px",
+    fontSize: 12,
     width: "90%",
   },
   signInContainer: {

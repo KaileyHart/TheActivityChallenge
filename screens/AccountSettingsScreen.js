@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     color: "white",
     fontWeight: 700,
-    borderRadius: "20px",
+    borderRadius: 20,
     padding: "10px",
     marginTop: "25px",
     marginBottom: "10px",

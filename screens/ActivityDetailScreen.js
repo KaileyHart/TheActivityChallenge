@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Alert, StyleSheet, Share } from "react-native";
+import { Alert, StyleSheet, Share, Image} from "react-native";
 import { Text, View } from "../components/Themed";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -223,18 +223,18 @@ export default function ActivityDetailScreen({ route }) {
           {existingWishlistActivities.includes((activity.key)) ? 
 
             <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "remove");}}>
-              <img style={styles.iconStyles} src={heartIcon} />
+              <Image style={styles.iconStyles} source={heartIcon} />
             </button>
             
             : 
 
             <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "add");}}>
-              <img style={styles.iconStyles} src={heartOutlineIcon} />
+              <Image style={styles.iconStyles} source={heartOutlineIcon} />
             </button>}
 
         </View>
 
-        <img style={styles.cardImage} src={activity.imagePath} />
+        <Image style={styles.cardImage} source={activity.imagePath} />
 
         <p>This type of activity is <strong>{activity.type}</strong>. It has {activity.accessibility} and it can take {activity.duration} to complete. It's {activity.kidFriendly === true ? "" : "not"} great to complete with kids. It's availability score is {activity.availability}. You need at least {activity.participants > 1 ? `${activity.participants} people` : `${activity.participants} person`} to complete this activity. It's typical cost is {activity.price}.</p>
           
@@ -286,14 +286,14 @@ const styles = StyleSheet.create({
     height: "50%",
     objectFit: "cover",
     textAlign: "center",
-    borderRadius: "10px",
+    borderRadius: 10,
     paddingTop: "8px"
   },
   blackButton: {
     backgroundColor: "black",
     color: "white",
     fontWeight: 700,
-    borderRadius: "20px",
+    borderRadius:20,
     padding: "10px",
     marginTop: "25px",
     marginBottom: "10px",
@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
     width: "38px"
   },
   iconStyles: {
-    fontSize: "20px",
+    fontSize: 20,
     alignItems: "flex-start"
   }
 });

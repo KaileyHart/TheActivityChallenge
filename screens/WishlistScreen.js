@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import { Text, View } from "../components/Themed";
 import ActivityCard from "../components/ActivityCard";
 import { Typography } from "@mui/material";
@@ -20,7 +20,7 @@ export default function WishlistScreen({ navigation }) {
 
         <Typography style={styles.cardListHeader}>
 
-          <img style={styles.iconStyles} src={whiteHeartIcon} />
+          <Image style={styles.iconStyles} source={whiteHeartIcon} />
           <strong> Your Saved Activities</strong>
 
         </Typography>
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     marginTop: "10px",
     marginBottom: "10px",
     color: "white",
-    fontSize: "30",
+    fontSize: 18,
     backgroundColor: "black",
   },  
   iconStyles: {
