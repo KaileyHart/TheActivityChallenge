@@ -168,6 +168,8 @@ export default function ActivityDetailScreen({ route }) {
 
       const { status } = await Calendar.requestCalendarPermissionsAsync();
 
+      // console.log("status", status);
+
       if (status === 'granted') {
         //console.log('Permissions granted. Fetching available calendars...')
         const calendars = await Calendar.getCalendarsAsync(Calendar.EntityTypes.EVENT)
@@ -283,7 +285,7 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: "100%",
-    height: "50%",
+    minHeight: "300px",
     objectFit: "cover",
     textAlign: "center",
     borderRadius: 10,
@@ -297,7 +299,7 @@ const styles = StyleSheet.create({
     padding: "10px",
     marginTop: "25px",
     marginBottom: "10px",
-    width: "90%",
+    width: "100%",
   }, 
   heartButton: {
     backgroundColor: "white",
@@ -306,7 +308,8 @@ const styles = StyleSheet.create({
     width: "38px"
   },
   iconStyles: {
-    fontSize: 20,
+    height: "25px",
+    width: "25px",
     alignItems: "flex-start"
   }
 });

@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   iconStyles: {
     height: "25px",
-    widht: "25px"
+    width: "25px"
   },
   separator: {
     marginVertical: 30,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     borderRadius: 20,
     padding: "10px",
-    width: "90%",
+    width: "100%",
   },
   loginButton: {
     fontWeight: 700,

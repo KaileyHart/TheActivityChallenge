@@ -70,8 +70,6 @@ const styles = StyleSheet.create({
   },
   cardListHeaderIcon: {
     color: "white",
-    display: "flex",
-    alignItems: "center"
   },
   cardListHeader: {
     padding: "10px",
@@ -80,6 +78,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     backgroundColor: "black",
+    display: "flex",
+    alignItems: "center"
   },  
   iconStyles: {
     height: "15px",

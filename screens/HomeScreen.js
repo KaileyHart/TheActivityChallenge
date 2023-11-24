@@ -23,6 +23,10 @@ export default function HomeScreen({ navigation }) {
 
       <ScrollView>
 
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>All Activities</Text>
+        </View>
+
          <View style={styles.searchContainer}>
 
           <TextInput style={styles.searchInput} onChangeText={setSearchData} value={searchData} placeholder="Search..." />
@@ -41,10 +45,6 @@ export default function HomeScreen({ navigation }) {
 
         {/* // TODO: Create Filter */}
         {/* <Text>Filter Button</Text> */}
-
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>All Activities</Text>
-        </View>
 
         <Text style={styles.cardListHeader}>
           <Image style={styles.iconStyles} source={MusicNoteIcon} />
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     marginTop: "20px",
   },
   searchButton: {
-    padding: "10px",
+    padding: "5px",
     border: "1px solid",
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,

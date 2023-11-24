@@ -41,16 +41,7 @@ export default function LoginScreen({ navigation }) {
 
       <View style={styles.mainContainer}>
 
-        {/*<Input
-          style={styles.input}
-          onChangeText={setTxtEmail}
-          value={txtEmail}
-          placeholder="Email"
-          autoCapitalize="none"
-          label="Email"
-        /> */}
-
-        {/* <label>Email</label> */}
+        <Text style={styles.inputText}>Email</Text>
         <TextInput
           style={styles.input}
           onChangeText={setTxtEmail}
@@ -59,7 +50,7 @@ export default function LoginScreen({ navigation }) {
           autoCapitalize="none"
         />
 
-        {/* <label>Password</label> */}
+        <Text style={styles.inputText}>Password</Text>
         <TextInput
           style={styles.input}
           onChangeText={setTxtPassword}
@@ -112,7 +103,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "left",
     justifyContent: "center",
   },
   input: {
@@ -121,7 +112,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 20,
-    width: "90%",
+    width: "100%",
+  },
+  inputText: {
+    marginLeft: "20px"
   },
   blackButton: {
     backgroundColor: "black",
@@ -131,11 +125,18 @@ const styles = StyleSheet.create({
     padding: "10px",
     marginTop: "25px",
     marginBottom: "10px",
-    width: "90%",
+    marginLeft: "8px",
+    marginRight: "8px",
+    width: "100%",
   },
   infoText: {
     fontSize: 12,
-    width: "90%",
+    width: "100%",
+    marginLeft: "8px",
+    marginRight: "8px",
+  },
+  inputText: {
+    marginLeft: "20px"
   },
   signInContainer: {
     display: "flex",

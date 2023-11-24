@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Image } from "react-native";
-import {DarkTheme, DefaultTheme, NavigationContainer} from "@react-navigation/native";
+import { NavigationContainer} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -155,33 +155,18 @@ export default function Navigation({ navigation }) {
 
         {user ? (
           <Stack.Group>
-            <Stack.Screen
-              name="BottomTab"
-              component={BottomTab}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ActivityDetailScreen"
-              component={ActivityDetailScreen}
-              user={user}
+            <Stack.Screen name="BottomTab" component={BottomTab} options={{ headerShown: false }} />
+            <Stack.Screen name="ActivityDetailScreen" component={ActivityDetailScreen} user={user}
               options={{
                 headerTitle: (props) => (
-                  <button
-                    style={styles.logoButton}
-                    onClick={() => navigation.navigate("HomeScreen")}
-                  >
+                  <button style={styles.logoButton} onClick={() => navigation.navigate("HomeScreen")}>
                     <Logo {...props} />
                   </button>
                 ),
                 headerStyle: {
                   backgroundColor: "black",
                 },
-                headerTintColor: "white",
-                headerRight: () => (
-                  <button style={styles.logoButton}onClick={() => navigation.navigate("BottomTab", {screen: "AccountSettingsScreen"})}>
-                    <Image style={styles.userAccountIcon} source={personCircleOutlineIcon} />
-                  </button>
-                ),
+                headerTintColor: "white"
               }}
             />
             <Stack.Screen
@@ -189,22 +174,14 @@ export default function Navigation({ navigation }) {
               component={AccountSettingsScreen}
               options={{
                 headerTitle: (props) => (
-                  <button
-                    style={styles.logoButton}
-                    onClick={() => navigation.navigate("HomeScreen")}
-                  >
+                  <button style={styles.logoButton} onClick={() => navigation.navigate("HomeScreen")}>
                     <Logo {...props} />
                   </button>
                 ),
                 headerStyle: {
                   backgroundColor: "black",
                 },
-                headerTintColor: "white",
-                headerRight: () => (
-                  <button style={styles.logoButton} onClick={() => navigation.navigate("AccountSettingsScreen")}>
-                    <Image style={styles.userAccountIcon} source={personCircleOutlineIcon} />
-                  </button>
-                ),
+                headerTintColor: "white"
               }}
             />
             <Stack.Screen
@@ -212,22 +189,14 @@ export default function Navigation({ navigation }) {
               component={AccountDetailsScreen}
               options={{
                 headerTitle: (props) => (
-                  <button
-                    style={styles.logoButton}
-                    onClick={() => navigation.navigate("HomeScreen")}
-                  >
+                  <button style={styles.logoButton} onClick={() => navigation.navigate("HomeScreen")}>
                     <Logo {...props} />
                   </button>
                 ),
                 headerStyle: {
                   backgroundColor: "black",
                 },
-                headerTintColor: "white",
-                headerRight: () => (
-                  <button style={styles.logoButton} onClick={() => navigation.navigate("AccountDetailsScreen")}>
-                    <Image style={styles.userAccountIcon} source={personCircleOutlineIcon} />
-                  </button>
-                ),
+                headerTintColor: "white"
               }}
             />
             <Stack.Screen
@@ -235,22 +204,14 @@ export default function Navigation({ navigation }) {
               component={DeleteAccountScreen}
               options={{
                 headerTitle: (props) => (
-                  <button
-                    style={styles.logoButton}
-                    onClick={() => navigation.navigate("HomeScreen")}
-                  >
+                  <button style={styles.logoButton} onClick={() => navigation.navigate("HomeScreen")}>
                     <Logo {...props} />
                   </button>
                 ),
                 headerStyle: {
                   backgroundColor: "black",
                 },
-                headerTintColor: "white",
-                headerRight: () => (
-                  <button style={styles.logoButton} onClick={() => navigation.navigate("DeleteAccountScreen")}>
-                    <Image style={styles.userAccountIcon} source={personCircleOutlineIcon} />
-                  </button>
-                ),
+                headerTintColor: "white"
               }}
             />
             <Stack.Screen

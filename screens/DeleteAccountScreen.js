@@ -69,10 +69,16 @@ export default function DeleteAccountScreen({ navigation }) {
   return (
     <View style={styles.screenContainer}>
 
-      <Text>We are sorry to see you go. Are you sure you want to delete your acocunt?</Text>
+      <View style={styles.textContainer}> 
+
+        <Text>We are sorry to see you go. Are you sure you want to delete your acocunt?</Text>
+
+        <br/>
       
-      <Text>You will not be able to access your account again if you proceed. All of
+        <Text>You will not be able to access your account again if you proceed. All of
         your saved information will be lost.</Text>
+
+      </View>
 
       <button style={styles.blackButton} onClick={() => deleteUserAccount()}>
         DELETE ACCOUNT
@@ -89,6 +95,10 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: "25px",
   },
+  textContainer: {
+    display: "flex",
+    flexDirection: "column",
+  },
   blackButton: {
     backgroundColor: "black",
     color: "white",
@@ -97,6 +107,6 @@ const styles = StyleSheet.create({
     padding: "10px",
     marginTop: "25px",
     marginBottom: "10px",
-    width: "90%",
+    width: "100%",
   },
 });

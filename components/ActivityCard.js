@@ -440,6 +440,7 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: "100%",
+    minWidth: "200px",
     height: "200px",
     objectFit: "cover",
     alignItems: "center",
@@ -472,7 +473,8 @@ const styles = StyleSheet.create({
     width: "35px"
   },
   iconStyles: {
-    fontSize: 20,
+    height: "18px",
+    width: "18px",
     alignItems: "flex-start"
   }
 });
