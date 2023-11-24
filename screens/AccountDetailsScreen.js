@@ -105,17 +105,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 20,
-    width: "90%",
+    width: "100%",
   },
   blackButton: {
     backgroundColor: "black",
     color: "white",
     fontWeight: 700,
-    borderRadius: "20px",
+    borderRadius: 20,
     padding: "10px",
     marginTop: "10px",
     marginBottom: "10px",
-    width: "90%",
+    width: "100%",
   },
   inputContainer: {
     height: "50%"

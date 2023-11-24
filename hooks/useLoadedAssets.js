@@ -1,6 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import Ionicons from "@expo/vector-icons/Ionicons";
-import * as Font from "expo-font";
+import {useState, useEffect} from 'react';
 import * as SplashScreen from "expo-splash-screen";
 
 export function useLoadedAssets() {
@@ -12,8 +10,6 @@ export function useLoadedAssets() {
       try {
         SplashScreen.preventAutoHideAsync();
 
-        // Load fonts
-        await Font.loadAsync(Ionicons.font);
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         console.warn(e);

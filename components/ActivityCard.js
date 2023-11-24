@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import { Text, View } from "../components/Themed";
-import { Card, CardContent, Typography } from "@mui/material";
-import activityDataJSON from "/assets/json/activities.json";
+import { Card, CardContent } from "@mui/material";
+import activityDataJSON from "../assets/json/activities.json";
 import { ScrollView } from "react-native-gesture-handler";
-import Ionicons from "@expo/vector-icons/Ionicons";
-
 import { useNavigation } from '@react-navigation/native';
 import { firebase_auth, firebase_db } from "../FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, updateDoc, getDoc, arrayUnion, arrayRemove} from "firebase/firestore";
+
+import imagePlaceholder from "../assets/images/no-image-found-placeholder.svg";
+import heartOutlineIcon from "../assets/icons/heart-outline.svg";
+import heartIcon from "../assets/icons/heart.svg";
 
 export default function ActivityCard(props) {
 
@@ -347,51 +349,75 @@ export default function ActivityCard(props) {
   return (
     <View style={scrollHorizontal === true ? styles.horizontalCards : styles.verticalCards}>
 
-      {activities !== "" || activities !== undefined || activities !== null ? (
+    {activities.length !== 0 ? 
 
-        <ScrollView horizontal={scrollHorizontal}>
+      <ScrollView horizontal={scrollHorizontal}>
 
-          {activities.map((activity) => (
+        {activities.map((activity, index) => (
+      
+          <Card key={index} style={styles.card}>
         
-            <Card key={activity.key} style={styles.card}>
-          
-              <CardContent>
+            <CardContent>
 
-                <Typography variant="body1" style={styles.activityName}>
+              <View style={styles.activityName}> 
 
-                  <Text onClick={() => navigation.navigate('ActivityDetailScreen', {activity: activity})}><strong>{activity.activity}</strong></Text>
+                <Text onClick={() => navigation.navigate('ActivityDetailScreen', {activity: activity})}>
+                  <strong>{activity.activity}</strong>
+                </Text>  
 
-                  {existingWishlistActivities.includes((activity.key)) ? 
+                {existingWishlistActivities.includes((activity.key)) ? 
 
-                    <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "remove");}}>
-                      <Ionicons style={styles.icon} name="heart"></Ionicons>
-                    </button>
-                    
-                    : 
+                  <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "remove");}}>
+                    <Image style={styles.iconStyles} source={heartIcon} />
+                  </button>
+                  
+                  : 
+
+                  <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "add");}}>
+                    <Image style={styles.iconStyles} source={heartOutlineIcon} />
+                  </button>
+
+                }
+
+              </View>
+
+              {activity.imagePath ? 
+                <Image style={styles.cardImage} source={activity.imagePath} />
+              : 
+                <Image style={styles.cardImage} source={imagePlaceholder} />
+              }
+
+            </CardContent> 
+
+          </Card>
+
+        ))}
+
+      </ScrollView>
+
+    : 
+
+      <ScrollView horizontal={scrollHorizontal}>
   
-                    <button style={styles.heartButton} onClick={() => { updateUserWishlist(user, activity.key, "add");}}>
-                      <Ionicons style={styles.icon} name="heart-outline"></Ionicons>  
-                    </button>
-  
-                  }
+        <Card style={styles.card}>
+      
+          <CardContent>
 
-                </Typography>
+            <View style={styles.activityName}> 
+              <Text><strong>Uh oh! No Results Found.</strong></Text>
+            </View>
 
-                {activity.imagePath ? 
+            <p>Try searching for something else.</p>
 
-                  <img style={styles.cardImage} src={activity.imagePath} />
+            <Image style={styles.cardImage} src="https://images.unsplash.com/photo-1453227588063-bb302b62f50b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
 
-                : null}
+          </CardContent>
 
-              </CardContent>
+        </Card> 
 
-            </Card>
+      </ScrollView>
 
-          ))}
-
-        </ScrollView>
-
-      ) : null}
+    }
 
     </View>
   );
@@ -414,10 +440,11 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: "100%",
+    minWidth: "200px",
     height: "200px",
     objectFit: "cover",
     alignItems: "center",
-    borderRadius: "10px",
+    borderRadius: 10,
     marginTop: "8px"
   },
   card: {
@@ -434,6 +461,7 @@ const styles = StyleSheet.create({
   },
   activityName: {
     display: "flex",
+    flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     gap: "10px"
@@ -441,11 +469,12 @@ const styles = StyleSheet.create({
   heartButton: {
     backgroundColor: "white",
     border: "none",
-    height: "40px",
-    width: "40px"
+    height: "35px",
+    width: "35px"
   },
-  icon: {
-    fontSize: "20px",
+  iconStyles: {
+    height: "18px",
+    width: "18px",
     alignItems: "flex-start"
   }
 });

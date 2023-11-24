@@ -4,7 +4,7 @@ import { Text, View } from "../components/Themed";
 import { firebase_auth, firebase_db } from "../FirebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
-import { setDoc, doc, addDoc, collection } from "firebase/firestore"; 
+import { setDoc, doc } from "firebase/firestore"; 
 
 export default function SignUpScreen({ navigation }) {
 
@@ -62,7 +62,7 @@ export default function SignUpScreen({ navigation }) {
 
       <View style={styles.mainContainer}>
 
-        {/* <Text>Username</Text> */}
+        <Text style={styles.inputText}>Username</Text>
         <TextInput
           style={styles.input}
           onChangeText={setTxtUsername}
@@ -71,7 +71,7 @@ export default function SignUpScreen({ navigation }) {
           label="Username"
         />
 
-        {/* <Text>Email</Text> */}
+        <Text style={styles.inputText}>Email</Text>
         <TextInput
           style={styles.input}
           onChangeText={setTxtEmail}
@@ -80,7 +80,7 @@ export default function SignUpScreen({ navigation }) {
           autoCapitalize="none"
         />
 
-        {/* <Text>Password</Text> */}
+        <Text style={styles.inputText}>Password</Text>
         <TextInput
           style={styles.input}
           onChangeText={setTxtPassword}
@@ -89,13 +89,6 @@ export default function SignUpScreen({ navigation }) {
           autoCapitalize="none"
           secureTextEntry={true}
         />
-
-        {/* <TextInput
-          style={styles.input}
-          onChangeText={setDateBirthday}
-          value={dateBirthday}
-          placeholder="Birthday (Optional)"
-        /> */}
 
         <button style={styles.blackButton} onClick={signUp}>
           CREATE ACCOUNT
@@ -144,7 +137,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "left",
     justifyContent: "center",
   },
   input: {
@@ -153,21 +146,28 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 20,
-    width: "90%",
+    width: "100%",
+  },
+  inputText: {
+    marginLeft: "20px"
   },
   blackButton: {
     backgroundColor: "black",
     color: "white",
     fontWeight: 700,
-    borderRadius: "20px",
+    borderRadius: 20,
     padding: "10px",
     marginTop: "25px",
     marginBottom: "10px",
-    width: "90%",
+    marginLeft: "8px",
+    marginRight: "8px",
+    width: "100%",
   },
   infoText: {
-    fontSize: "12px",
-    width: "90%",
+    fontSize: 12,
+    width: "100%",
+    marginLeft: "8px",
+    marginRight: "8px",
   },
   signInContainer: {
     display: "flex",

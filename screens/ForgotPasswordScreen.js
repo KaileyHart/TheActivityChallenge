@@ -42,7 +42,7 @@ export default function ForgotPasswordScreen({ navigation }) {
 
       <View style={styles.mainContainer}>
 
-        <label>Email</label>
+        <Text style={styles.inputText}>Email</Text>
         <TextInput
           style={styles.input}
           onChangeText={setTxtEmail}
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    alignItems: "center",
+    textAlign: "left",
     justifyContent: "center",
   },
   input: {
@@ -96,21 +96,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 20,
-    width: "90%",
+    width: "100%",
+  },
+  inputText: {
+    marginLeft: "20px"
   },
   blackButton: {
     backgroundColor: "black",
     color: "white",
     fontWeight: 700,
-    borderRadius: "20px",
+    borderRadius: 20,
     padding: "10px",
     marginTop: "25px",
     marginBottom: "10px",
-    width: "90%",
+    width: "100%",
   },
   infoText: {
-    fontSize: "12px",
-    width: "90%",
+    fontSize: 12,
+    width: "100%",
   },
   signInContainer: {
     display: "flex",
