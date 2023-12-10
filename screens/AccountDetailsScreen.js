@@ -6,20 +6,21 @@ import { onAuthStateChanged, updateProfile } from "firebase/auth";
 
 export default function AccountDetailsScreen({ navigation }) {
 
+  const auth = firebase_auth;
+  const user = auth.currentUser;
+
   const [txtUsername, setTxtUsername] = useState("");
   const [txtEmail, setTxtEmail] = useState("");
-  const [user, setUser] = useState({});
 
   // TODO: This is repeated code. -- 10/01/2023 KH
   useEffect(() => {
 
     onAuthStateChanged(firebase_auth, (user) => {
-      setUser(user);
       setTxtUsername(user.displayName);
       setTxtEmail(user.email);
     });
 
-  }, []);
+  }, [user]);
 
 
   const updateUserProfile = async () => {
@@ -41,6 +42,7 @@ export default function AccountDetailsScreen({ navigation }) {
     };
 
   };
+
 
   return (
     <View style={styles.screenContainer}>

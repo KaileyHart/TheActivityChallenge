@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { StyleSheet, TextInput, TouchableOpacity, Image} from "react-native";
-import { Text, View } from "../components/Themed";
 import { ScrollView } from "react-native-gesture-handler";
+import { Text, View } from "../components/Themed";
 import ActivityCard from "../components/ActivityCard";
 
 import MusicNoteIcon from "../assets/icons/musical-notes.svg";
@@ -12,7 +12,6 @@ import walletIcon from "../assets/icons/wallet.svg";
 import busyWorkIcon from "../assets/icons/build.svg";
 import schoolCapIcon from "../assets/icons/school.svg";
 import peopleIcon from "../assets/icons/people.svg";
-
 
 export default function HomeScreen({ navigation }) {
 
@@ -51,7 +50,7 @@ export default function HomeScreen({ navigation }) {
           <strong> Relaxing</strong>
         </Text>
         <View>
-          <ActivityCard type="relaxation" />
+          <ActivityCard activityProp={{type: "relaxation"}} />
         </View>
 
         <Text style={styles.cardListHeader}>
@@ -59,7 +58,7 @@ export default function HomeScreen({ navigation }) {
           <strong> Kid Friendly</strong>
         </Text>
         <View>
-          <ActivityCard kidFriendly="true" />
+          <ActivityCard activityProp={{kidFriendly: true}} />
         </View>
 
         <Text style={styles.cardListHeader}>
@@ -67,7 +66,7 @@ export default function HomeScreen({ navigation }) {
           <strong> Cooking</strong>
         </Text>
         <View>
-          <ActivityCard type="cooking" />
+          <ActivityCard activityProp={{type: "cooking"}} />
         </View>
 
         <Text style={styles.cardListHeader}>
@@ -75,7 +74,7 @@ export default function HomeScreen({ navigation }) {
           <strong> Multiple Day</strong>
         </Text>
         <View>
-          <ActivityCard duration="days" />
+          <ActivityCard activityProp={{duration: "days"}} />
         </View>
 
         <Text style={styles.cardListHeader}>
@@ -83,7 +82,7 @@ export default function HomeScreen({ navigation }) {
           <strong> Free</strong>
         </Text>
         <View>
-          <ActivityCard price="0.0" />
+          <ActivityCard activityProp={{price: "0.0"}}  />
         </View>
 
         <Text style={styles.cardListHeader}>
@@ -91,7 +90,7 @@ export default function HomeScreen({ navigation }) {
           <strong> Busywork</strong>
         </Text>
         <View>
-          <ActivityCard type="busywork" />
+          <ActivityCard activityProp={{type: "busywork"}} />
         </View>
 
         <Text style={styles.cardListHeader}>
@@ -99,7 +98,7 @@ export default function HomeScreen({ navigation }) {
           <strong> Educational</strong>
         </Text>
         <View>
-          <ActivityCard type="education" />
+          <ActivityCard activityProp={{type: "education"}} />
         </View>
 
         <Text style={styles.cardListHeader}>
@@ -107,7 +106,7 @@ export default function HomeScreen({ navigation }) {
           <strong> Social</strong>
         </Text>
         <View>
-          <ActivityCard type="social" />
+          <ActivityCard activityProp={{type: "social"}} />
         </View>
 
       </ScrollView>

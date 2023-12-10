@@ -69,3 +69,4 @@ database/
 
 # Firebase
 FirebaseConfig.js
+.firebase/*

@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Image } from "react-native";
-import { Text, View } from "../components/Themed";
-import { Card, CardContent } from "@mui/material";
-import activityDataJSON from "../assets/json/activities.json";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from '@react-navigation/native';
+import { Text, View } from "../components/Themed";
+import { Card, CardContent } from "@mui/material";
+import { formatLowerCase, formatSearchInput } from "../utilities/sharedFunctions";
+
 import { firebase_auth, firebase_db } from "../FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, updateDoc, getDoc, arrayUnion, arrayRemove} from "firebase/firestore";
+
+import activityDataJSON from "../assets/json/activities.json";
 
 import imagePlaceholder from "../assets/images/no-image-found-placeholder.svg";
 import heartOutlineIcon from "../assets/icons/heart-outline.svg";
@@ -15,25 +18,32 @@ import heartIcon from "../assets/icons/heart.svg";
 
 export default function ActivityCard(props) {
 
+  const navigation = useNavigation();
+
+  const auth = firebase_auth;
+  const user = auth.currentUser;
+  const db = firebase_db;
+
   const [activityDataList, setActivityDataList] = useState([]);
   const [activities, setActivities] = useState([]);
-  const [user, setUser] = useState({});
   const [docRef, setDocRef] = useState("");
   const [existingWishlistActivities, setExistingWishlistActivities] = useState([]);
   const [scrollHorizontal, setScrollHorizontal] = useState(true);
 
-  const auth = firebase_auth;
-  const db = firebase_db;
-
-  const activityType = props.type !== "" && props.type !== undefined && props.type !== null ? props.type : "";
-  const activityPrice = props.price !== "" && props.price !== undefined && props.price !== null ? props.price : "";
-  const activityKidFriendliness = props.kidFriendly !== "" && props.kidFriendly !== undefined && props.kidFriendly !== null ? props.kidFriendly : "";
-  const activityDuration = props.duration !== "" && props.duration !== undefined && props.duration !== null ? props.duration : "";
+  const activityProp = props.activityProp !== "" && props.activityProp !== undefined && props.activityProp !== null ? props.activityProp : "";
   const randomActivityData = props.randomActivityData !== "" && props.randomActivityData !== undefined && props.randomActivityData !== null ? props.randomActivityData : false;
-  const activitySaved = props.activitySaved !== "" && props.activitySaved !== undefined && props.activitySaved !== null ? props.activitySaved : false;
   const searchData = props.searchData !== "" && props.searchData !== undefined && props.searchData !== null ? props.searchData : "";
 
-  const navigation = useNavigation();
+  useEffect(() => {
+
+    onAuthStateChanged(auth, (user) => {
+
+      setDocRef(doc(db, "users", user.uid));
+
+    });
+
+  }, [user]);
+
 
   useEffect(() => {
 
@@ -43,42 +53,32 @@ export default function ActivityCard(props) {
 
     };
 
-  }, []);
+  }, [randomActivityData]);
 
 
   useEffect(() => {
 
-    // TODO: There is probably a way to do this without creating separate arrays for each activity type. 
+    if (activityProp.activitySaved === true) {
+      
+      setScrollHorizontal(false);
+
+    };
+
+  }, [activityProp]);
+
+
+  useEffect(() => {
+ 
     if (activityDataList !== "" || activityDataList !== undefined || activityDataList !== null) {
 
       let newActivitiesArray = [];
-      let newArrayByType = [];
-      let newArrayByPrice = [];
-      let newArrayByKidFriendliness = [];
-      let newArrayByDuration = [];
-      let newArrayBySaved = [];
+      let activityFilter = [];
 
-      if (activityType !== "" && activityType !== undefined && activityType !== null) {
+      if (activityProp !== "" && activityProp !== undefined && activityProp !== null) {
 
-        newArrayByType = activityDataList.filter((activityData) => activityData.type === activityType);
+        activityFilter = activityDataList.filter((activityData) => activityData.type === activityProp.type ||activityData.price == activityProp.price || activityData.kidFriendly === activityProp.kidFriendly || activityData.duration == activityProp.duration);
 
-      } else if (activityPrice !== "" && activityPrice !== undefined && activityPrice !== null) {
-
-        newArrayByPrice = activityDataList.filter((activityData) => activityData.price == activityPrice);
-
-      } else if (activityKidFriendliness !== "" && activityKidFriendliness !== undefined && activityKidFriendliness !== null) {
-
-        // ? For some reason this doesn't work.
-        // newArrayByKidFriendliness = activityDataList.filter(activityData => activityData.kidFriendly == activityKidFriendliness);
-        newArrayByKidFriendliness = activityDataList.filter((activityData) => activityData.kidFriendly == true);
-
-      } else if (activityDuration !== "" && activityDuration !== undefined && activityDuration !== null) {
-
-        newArrayByDuration = activityDataList.filter((activityData) => activityData.duration == activityDuration);
-
-      }  else if (activitySaved == true) {
-
-        setScrollHorizontal(false);
+      } else if (activityProp.activitySaved === true) {
 
         if (existingWishlistActivities) {
 
@@ -88,7 +88,7 @@ export default function ActivityCard(props) {
 
               if (activityDataList[j].key == existingWishlistActivities[i]) {
 
-                newArrayBySaved.push(activityDataList[j]);
+                activityFilter.push(activityDataList[j]);
 
               };
 
@@ -100,25 +100,9 @@ export default function ActivityCard(props) {
 
       };
 
-      if (newArrayByType.length > 0) {
+      if (activityFilter.length > 0) {
 
-        newActivitiesArray = [...newArrayByType];
-
-      } else if (newArrayByPrice.length > 0) {
-
-        newActivitiesArray = [...newArrayByPrice];
-
-      } else if (newArrayByKidFriendliness.length > 0) {
-
-        newActivitiesArray = [...newArrayByKidFriendliness];
-
-      } else if (newArrayByDuration.length > 0) {
-
-        newActivitiesArray = [...newArrayByDuration];
-
-      } else if (newArrayBySaved.length > 0) {
-
-        newActivitiesArray = [...newArrayBySaved];
+        newActivitiesArray = [...activityFilter];
 
       } else if (randomActivityData !== "" && randomActivityData !== undefined && randomActivityData !== null) {
 
@@ -130,9 +114,10 @@ export default function ActivityCard(props) {
 
     };
    
-  }, [existingWishlistActivities, randomActivityData, activityDataList, activitySaved]);
+  }, [existingWishlistActivities, randomActivityData, activityDataList]);
 
 
+  // * Search data
   useEffect(() => {
 
     if (activityDataList !== "" || activityDataList !== undefined || activityDataList !== null) {
@@ -167,18 +152,6 @@ export default function ActivityCard(props) {
 
   useEffect(() => {
 
-    onAuthStateChanged(auth, (user) => {
-
-      setUser(user);
-      setDocRef(doc(db, "users", user.uid));
-
-    });
-
-  }, []);
-
-
-  useEffect(() => {
-
     if (user !== "" || user !== undefined || user !== null) {
 
       readUserWishlist();
@@ -186,70 +159,6 @@ export default function ActivityCard(props) {
     };
 
   }, [user]);
-  
-
-  // TODO: Put in a utility file
-  const formatSearchInput = (value) => {
-
-    let formattedSearchInput = "";
-
-    if (value !== "" || value !== undefined || value !== null) {
-
-      formattedSearchInput = formatTrim(value).toLowerCase();
-
-    };
-
-    return formattedSearchInput;
-
-  };
-
-
-  // TODO: Put in a utility file
-  const formatToString = (value) => {
-
-    let toStringValue = "";
-
-    if (value !== "" || value !== undefined || value !== null) {
-
-      toStringValue = value.toString();
-
-    };
-
-    return toStringValue;
-
-  };
-
-
-  // TODO: Put in a utility file
-  const formatLowerCase = (value) => {
-
-    let lowerCaseValue = "";
-
-    if (value !== "" || value !== undefined || value !== null) {
-
-      lowerCaseValue = formatToString(value).toLowerCase();
-
-    };
-
-    return lowerCaseValue;
-
-  };
-
-
-  // TODO: Put in a utility file
-  const formatTrim = (value) => {
-
-    let trimValue = "";
-
-    if (value !== "" || value !== undefined || value !== null) {
-
-      trimValue = formatToString(value).toLowerCase();
-
-    };
-
-    return trimValue;
-
-  };
 
 
   const updateUserWishlist = async (user, wishlistID, actionType) => {
@@ -361,7 +270,7 @@ export default function ActivityCard(props) {
 
               <View style={styles.activityName}> 
 
-                <Text onClick={() => navigation.navigate('ActivityDetailScreen', {activity: activity})}>
+                <Text onClick={() => navigation.navigate("ActivityDetailScreen", {activity: activity})}>
                   <strong>{activity.activity}</strong>
                 </Text>  
 
