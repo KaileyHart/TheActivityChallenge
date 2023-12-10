@@ -7,20 +7,8 @@ import { getAuth, onAuthStateChanged, deleteUser, reauthenticateWithCredential, 
 
 export default function DeleteAccountScreen({ navigation }) {
 
-  // const [user, setUser] = useState({});
-
   const auth = firebase_auth;
   const user = auth.currentUser;
-
-  // TODO: This is repeated code. -- 10/01/2023 KH
-  // useEffect(() => {
-
-  //   onAuthStateChanged(firebase_auth, (user) => {
-  //     setUser(user);
-  //   });
-
-  // }, []);
-
 
   const deleteUserAccount = async () => {
 

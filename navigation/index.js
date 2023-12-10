@@ -25,9 +25,7 @@ import ActivityDetailScreen from "../screens/ActivityDetailScreen";
 import AccountSettingsScreen from "../screens/AccountSettingsScreen";
 import AccountDetailsScreen from "../screens/AccountDetailsScreen";
 import DeleteAccountScreen from "../screens/DeleteAccountScreen";
-import NotFoundScreen from "../screens/NotFoundScreen";
 
-// ? Is it okay for a component to be in both stack groups? -- 10/01/2023 KH
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 
 // * General Components

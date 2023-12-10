@@ -15,32 +15,31 @@ import heartIcon from "../assets/icons/heart.svg";
 
 export default function ActivityDetailScreen({ route }) {
 
-  const [existingWishlistActivities, setExistingWishlistActivities] = useState([]);
-  const [user, setUser] = useState({});
-  const [docRef, setDocRef] = useState("");
-
   const auth = firebase_auth;
+  const user = auth.currentUser;
   const db = firebase_db;
 
   const {activity} = route.params;
+
+  const [existingWishlistActivities, setExistingWishlistActivities] = useState([]);
+  const [docRef, setDocRef] = useState("");
 
   let url = "";
   let title = activity.activity;
   let message = activity.description;
   let image = activity.imagePath;
 
-  const options = {url, title, message, image}
+  // const options = {url, title, message, image};
 
   useEffect(() => {
 
     onAuthStateChanged(auth, (user) => {
 
-      setUser(user);
       setDocRef(doc(db, "users", user.uid));
 
     });
 
-  }, []);
+  }, [user]);
 
 
   const updateUserWishlist = async (user, wishlistID, actionType) => {
@@ -49,15 +48,9 @@ export default function ActivityDetailScreen({ route }) {
 
       try { 
         
-        updateDoc(docRef, {
-          wishlistActivities: arrayUnion(`${wishlistID}`)
-          })
-          .then(docRef => {
-            console.log("A New Document Field has been added to an existing document");
-          })
-          .catch(error => {
-              console.log("Error:", error);
-          });
+        updateDoc(docRef, {wishlistActivities: arrayUnion(`${wishlistID}`)})
+          .then(docRef => {console.log("A New Document Field has been added to an existing document");})
+          .catch(error => {console.log("Error:", error);});
 
           let newExistingWishlistActivities = [...existingWishlistActivities];
 
@@ -77,15 +70,9 @@ export default function ActivityDetailScreen({ route }) {
 
       try { 
         
-        updateDoc(docRef, {
-          wishlistActivities: arrayRemove(`${wishlistID}`)
-          })
-          .then(docRef => {
-            console.log("An existing document field has been removed");
-          })
-          .catch(error => {
-              console.log("Error:", error);
-          });
+        updateDoc(docRef, {wishlistActivities: arrayRemove(`${wishlistID}`)})
+          .then(docRef => {console.log("An existing document field has been removed");})
+          .catch(error => {console.log("Error:", error);});
 
           let newExistingWishlistActivities = [...existingWishlistActivities];
 

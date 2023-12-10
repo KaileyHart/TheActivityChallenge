@@ -1,18 +1,12 @@
-import "react-native-gesture-handler";
-import { StatusBar } from "expo-status-bar";
+import { useColorScheme } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 import Navigation from "./navigation";
-import { useColorScheme, setColorScheme } from "react-native";
 
 
 export default function App() {
 
   const colorScheme = useColorScheme();
-
-  // * Force light mode. 
-  if (colorScheme === 'dark') {
-    setColorScheme('light');
-  };
 
   return (
     <SafeAreaProvider>

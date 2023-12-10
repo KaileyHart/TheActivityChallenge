@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Image } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { Typography } from "@mui/material";
 import { Text, View } from "../components/Themed";
 import ActivityCard from "../components/ActivityCard";
-import { Typography } from "@mui/material";
-import { ScrollView } from "react-native-gesture-handler";
 
 import whiteHeartIcon from "../assets/icons/heart-white.svg";
 
@@ -14,21 +14,17 @@ export default function WishlistScreen({ navigation }) {
 
       <ScrollView>
 
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Wishlist Activities</Text>
-      </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Wishlist Activities</Text>
+        </View>
 
-        <Typography style={styles.cardListHeader}>
-
+        <Text style={styles.cardListHeader}>
           <Image style={styles.iconStyles} source={whiteHeartIcon} />
           <strong> Your Saved Activities</strong>
-
-        </Typography>
+        </Text>
 
         <View>
-
-          <ActivityCard activitySaved={true} />
-
+          <ActivityCard activityProp={{activitySaved: true}} />
         </View>
 
       </ScrollView>

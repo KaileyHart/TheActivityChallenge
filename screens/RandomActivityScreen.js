@@ -59,7 +59,7 @@ export default function RandomActivityScreen({ navigation }) {
 
             <View style={styles.cardContainer}>
 
-              <ActivityCard type="random" randomActivityData={randomActivity}/>
+              <ActivityCard randomActivityData={randomActivity}/>
 
             </View>
 
