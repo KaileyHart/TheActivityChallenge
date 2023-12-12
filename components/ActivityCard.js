@@ -55,7 +55,7 @@ export default function ActivityCard(props) {
 
     };
 
-  }, [user]);
+  }, [user, existingWishlistActivities]);
 
 
   useEffect(() => {
@@ -136,7 +136,7 @@ export default function ActivityCard(props) {
 
     };
    
-  }, [activityDataList, activityProp]);
+  }, [activityDataList, activityProp, randomActivityData]);
 
 
   // * Search data
