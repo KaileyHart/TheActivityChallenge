@@ -42,6 +42,12 @@ export default function ActivityCard(props) {
 
     });
 
+    if (user !== "" || user !== undefined || user !== null) {
+
+      readUserWishlist();
+
+    };
+
   }, [user]);
 
 
@@ -148,17 +154,6 @@ export default function ActivityCard(props) {
     };
 
   }, [searchData, activityDataList]);
-
-
-  useEffect(() => {
-
-    if (user !== "" || user !== undefined || user !== null) {
-
-      readUserWishlist();
-
-    };
-
-  }, [user]);
 
 
   const updateUserWishlist = async (user, wishlistID, actionType) => {
