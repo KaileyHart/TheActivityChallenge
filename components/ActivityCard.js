@@ -21,8 +21,9 @@ export default function ActivityCard(props) {
   const navigation = useNavigation();
 
   const auth = firebase_auth;
-  const user = auth.currentUser;
   const db = firebase_db;
+
+  const [user, setUser] = useState({});
 
   const [activityDataList, setActivityDataList] = useState([]);
   const [activities, setActivities] = useState([]);
@@ -38,11 +39,23 @@ export default function ActivityCard(props) {
 
     onAuthStateChanged(auth, (user) => {
 
+      setUser(user);
       setDocRef(doc(db, "users", user.uid));
-
+     
     });
 
-  }, [user]);
+  }, []);
+
+
+  useEffect(() => {
+
+    if (user !== "" || user !== undefined || user !== null) {
+
+      readUserWishlist(user);
+
+    };
+
+  }, [user, existingWishlistActivities]);
 
 
   useEffect(() => {
@@ -53,18 +66,47 @@ export default function ActivityCard(props) {
 
     };
 
-  }, [randomActivityData]);
+  }, []);
 
 
   useEffect(() => {
 
+    let newActivitiesArray = [];
+    let savedActivityFilter = [];
+    
     if (activityProp.activitySaved === true) {
       
       setScrollHorizontal(false);
+      
+      if (existingWishlistActivities) {
+
+        for (let i = 0; existingWishlistActivities.length > i; i++) {
+
+          for (let j = 0; activityDataList.length > j; j++) {
+
+            if (activityDataList[j].key == existingWishlistActivities[i]) {
+
+              savedActivityFilter.push(activityDataList[j]);
+
+            };
+
+          };
+
+        };
+
+      };
+
+      if (savedActivityFilter.length > 0) {
+
+        newActivitiesArray = [...savedActivityFilter];
+
+        setActivities(newActivitiesArray);
+
+      };
 
     };
 
-  }, [activityProp]);
+  }, [activityProp, existingWishlistActivities, activityDataList]);
 
 
   useEffect(() => {
@@ -77,27 +119,7 @@ export default function ActivityCard(props) {
       if (activityProp !== "" && activityProp !== undefined && activityProp !== null) {
 
         activityFilter = activityDataList.filter((activityData) => activityData.type === activityProp.type ||activityData.price == activityProp.price || activityData.kidFriendly === activityProp.kidFriendly || activityData.duration == activityProp.duration);
-
-      } else if (activityProp.activitySaved === true) {
-
-        if (existingWishlistActivities) {
-
-          for (let i = 0; existingWishlistActivities.length > i; i++) {
-
-            for (let j = 0; activityDataList.length > j; j++) {
-
-              if (activityDataList[j].key == existingWishlistActivities[i]) {
-
-                activityFilter.push(activityDataList[j]);
-
-              };
-
-            };
-
-          };
-
-        };
-
+ 
       };
 
       if (activityFilter.length > 0) {
@@ -114,7 +136,7 @@ export default function ActivityCard(props) {
 
     };
    
-  }, [existingWishlistActivities, randomActivityData, activityDataList]);
+  }, [activityDataList, activityProp, randomActivityData]);
 
 
   // * Search data
@@ -147,18 +169,7 @@ export default function ActivityCard(props) {
 
     };
 
-  }, [searchData, activityDataList]);
-
-
-  useEffect(() => {
-
-    if (user !== "" || user !== undefined || user !== null) {
-
-      readUserWishlist();
-
-    };
-
-  }, [user]);
+  }, [searchData]);
 
 
   const updateUserWishlist = async (user, wishlistID, actionType) => {
