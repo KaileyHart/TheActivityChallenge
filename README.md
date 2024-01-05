@@ -1,37 +1,18 @@
-# Navigation Example
+# The Activity Challenge
 
-<p>
-  <!-- iOS -->
-  <a href="https://itunes.apple.com/app/apple-store/id982107779">
-    <img alt="Supports Expo iOS" longdesc="Supports Expo iOS" src="https://img.shields.io/badge/iOS-4630EB.svg?style=flat-square&logo=APPLE&labelColor=999999&logoColor=fff" />
-  </a>
-  <!-- Android -->
-  <a href="https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=blankexample">
-    <img alt="Supports Expo Android" longdesc="Supports Expo Android" src="https://img.shields.io/badge/Android-4630EB.svg?style=flat-square&logo=ANDROID&labelColor=A4C639&logoColor=fff" />
-  </a>
-  <!-- Web -->
-  <a href="https://docs.expo.dev/workflow/web/">
-    <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
-  </a>
-</p>
+## Description
+This cross-browser mobile application uses [React Native](https://reactnative.dev/), [Firebase](https://firebase.google.com/), and the [BoredAPI](https://www.boredapi.com/) to help users find something to do when they are bored, when they want to try something new, or they cannot decide what to do. A secure login and sign up page was created using Firebase Authentication. User data is stored using Firebase Firestore. The activity data comes from the BoredAPI. 
 
-## 🚀 How to use
 
-- Install packages with `yarn` or `npm install`.
-- Run `yarn start` or `npm run start` to start the bundler.
-- Open the project in a React runtime to try it:
-  - iOS: [Client iOS](https://itunes.apple.com/app/apple-store/id982107779)
-  - Android: [Client Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=blankexample)
-  - Web: Any web browser
-- When it's time to customize your runtime, refer to the ["Adding custom native code"](https://docs.expo.dev/workflow/customizing/) guide!
+## Features
+- Create an account
+- Edit their account information
+- Reset their password
+- Delete their account
+- Search through hundreds of unique activities
+- Generate random activities with a click of a button
+- Add an activity to their wishlist page
+- Share the activity with others
 
-## Publishing
-
-- Deploy the native app to the App store and Play store using this guide: [Deployment](https://docs.expo.dev/distribution/app-stores/).
-- Deploy the website using this guide: [Web deployment](https://docs.expo.dev/distribution/publishing-websites/).
-
-## 📝 Notes
-
-- Learn more about [Universal React](https://docs.expo.dev/).
-- See what API and components are [available in the React runtimes](https://docs.expo.dev/versions/latest/).
-- Find out more about developing apps and websites: [Official guides](https://docs.expo.dev/guides/).
+## Deployment
+This application was deployed using Firebase Hosting and is located at [https://theactivitychallenge.web.app](https://theactivitychallenge.web.app).
